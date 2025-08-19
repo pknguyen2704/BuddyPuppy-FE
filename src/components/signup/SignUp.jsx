@@ -1,39 +1,86 @@
 import React from "react";
+import "./SignUp.css";
 import logo1 from "../../assets/logo 1.png";
-import googleIcon from "../../assets/google.png";
 import { useNavigate } from "react-router-dom";
-import "../login/LogIn.css";
-
 export const SignUp = () => {
     const navigate = useNavigate();
     return (
-        // Form giống với LogIn.jsx nhưng có tiêu đề "Sign up" và nút "Next" 
-        <div className="login-page">
-            {/* Sidebar logo */}
-            <div className="sidebar">
-                <div className="logo">
-                    <img src={logo1} onClick={() => navigate("/")} alt="Buddy Puppy" />
-                </div>
-            </div>
+        <div className="if-page">
+            {/* Sidebar / Topbar brand */}
 
-            {/* Signup form */}
-            <div className="login-container">
-                <h2>Sign up</h2>
+            {/* Nội dung */}
+            <div className="if-content">
+                <form className="if-form" onSubmit={(e) => e.preventDefault()}>
+                    <div className="if-logo">
+                        <img src={logo1} alt="Buddy Puppy Logo" onClick={() => navigate("/")} />
+                    </div>
+                    <div className="if-signup">
+                        <h2 className="if-title">Sign Up</h2>
+                        <label className="if-field">
+                            <input type="text" placeholder="Username" />
+                        </label>
+                        <label className="if-field">
+                            <input type="password" placeholder="Password" />
+                        </label>
+                        <label className="if-field">
+                            <input type="password" placeholder="Confirm Password" />
+                        </label>
+                    </div>
+                    <div className="if-grid">
+                        {/* Child info */}
+                        <section className="if-section">
+                            <h2 className="if-section-title">Child’s Information</h2>
+                            <label className="if-field">
+                                <input type="text" placeholder="Full name" />
+                            </label>
+                            <div className="if-row">
+                                <label className="if-field">
+                                    <input type="text" placeholder="Gender" />
+                                </label>
+                                <label className="if-field">
+                                    <input type="date" placeholder="Date of Birth" />
+                                </label>
+                            </div>
 
-                <input type="text" placeholder="Username" className="input-field" />
-                <input type="password" placeholder="Password" className="input-field" />
+                            <label className="if-field">
 
-                <button className="login-btn2" onClick={() => navigate("/signup2")}>Next</button>
+                                <input type="text" placeholder="School" />
+                            </label>
+                        </section>
 
-                <p className="signup-text">
-                    Already Have An Account? <a onClick={() => navigate("/login")}>Log In</a>
-                </p>
+                        {/* Guardian info */}
+                        <section className="if-section">
+                            <h2 className="if-section-title">Guardian Information</h2>
 
-                <div className="divider"><span>Or</span></div>
+                            <label className="if-field">
+                                <input type="text" placeholder="Full name" />
+                            </label>
 
-                <button className="google-btn">
-                    <img src={googleIcon} alt="Google" /> Log In With Google
-                </button>
+                            <div className="if-row">
+                                <label className="if-field">
+
+                                    <input type="text" placeholder="Gender" />
+                                </label>
+                                <label className="if-field">
+                                    <input type="date" />
+                                </label>
+                            </div>
+
+                            <label className="if-field">
+                                <input type="email" placeholder="Email" />
+                            </label>
+
+                            <label className="if-field">
+                                <input type="tel" placeholder="Phone number" />
+                            </label>
+                        </section>
+                    </div>
+
+                    {/* Nút */}
+                    <div className="if-actions">
+                        <button type="submit" className="if-btn">Create Account</button>
+                    </div>
+                </form>
             </div>
         </div>
     );

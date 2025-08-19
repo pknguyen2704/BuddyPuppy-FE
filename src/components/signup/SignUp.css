@@ -3,7 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    --colortheme: #FCEF91;
+    --colorhover: #E6521F;
     --text: #1f2937;
     --muted: #6b7280;
     --line: #e5e7eb;
@@ -29,29 +30,8 @@ body {
     min-height: 100svh;
     /* luôn đủ cao theo viewport (mobile an toàn với thanh URL) */
     display: flex;
-    background:
-        linear-gradient(90deg, var(--brand) 0 240px, #fff 240px 100%);
+    background: var(--colortheme);
 }
-
-/* ====== Sidebar (desktop) / Topbar (mobile) ====== */
-.if-brand {
-    flex: 1;
-    display: flex;
-    background-color: #FFE1CC;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 2rem;
-    max-width: 15%;
-}
-
-.if-logo {
-    display: flex;
-    flex-direction: column;
-    width: 140px;
-    height: auto;
-    align-items: center;
-}
-
 
 /* ====== Nội dung ====== */
 .if-content {
@@ -68,9 +48,39 @@ body {
     width: min(100%, 980px);
     background: #fff;
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: 40px;
     padding: clamp(16px, 3vw, 28px);
     box-shadow: 0 1px 2px rgba(0, 0, 0, .03);
+    position: relative;
+}
+
+.if-form .if-logo {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.if-logo img {
+    width: 120px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.if-signup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+}
+
+.if-signup .if-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Lưới 2 cột (desktop) → 1 cột (tablet/mobile) */
@@ -78,6 +88,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: clamp(16px, 2.4vw, 28px);
+    margin-top: 10px;
 }
 
 .if-section {
@@ -91,6 +102,9 @@ body {
 .if-section-title {
     font-size: 20px;
     margin: 4px 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Hàng 2 ô nhỏ trong 1 section */
@@ -131,7 +145,7 @@ body {
     height: 42px;
     border: none;
     border-radius: 999px;
-    background: #FFE1CC;
+    background: var(--colortheme);
     box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .06);
     font-weight: 700;
     cursor: pointer;
@@ -142,7 +156,7 @@ body {
 }
 
 .if-btn:hover {
-    background: #ffccaa;
+    background: var(--colorhover);
 }
 
 /* ====== Responsive ====== */
@@ -163,25 +177,7 @@ body {
         min-height: 100svh;
     }
 
-    .if-brand {
-        min-width: 100vw;
-        width: 100%;
-        min-height: auto;
-        height: 64px;
-        border-right: none;
-        border-bottom: 1px solid #f2d8c9;
-        position: sticky;
-        top: 0;
-        z-index: 5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #FFE1CC;
-    }
 
-    .if-brand-inner {
-        padding: 8px 14px
-    }
 
     .if-title {
         font-size: 22px

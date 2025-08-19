@@ -8,31 +8,28 @@ export const LogIn = () => {
     const navigate = useNavigate();
     return (
         <div className="login-page">
-            {/* Sidebar logo */}
-            <div className="sidebar">
-                <div className="logo">
-                    <img src={logo1} onClick={() => navigate("/")} alt="Buddy Puppy" />
-                </div>
-            </div>
 
             {/* Login form */}
             <div className="login-container">
-                <h2>Log In</h2>
+                <div className="logo">
+                    <img src={logo1} onClick={() => navigate("/")} alt="Buddy Puppy" />
+                </div>
+                <h2>Login</h2>
 
                 <input type="text" placeholder="Username" className="input-field" />
                 <input type="password" placeholder="Password" className="input-field" />
 
-                <button className="login-btn2">Log In</button>
+                <button className="login-btn2">Login</button>
 
                 <p className="signup-text">
                     Don’t Have An Account? <a onClick={() => navigate("/signup1")}>Sign Up</a>
                 </p>
 
-                <div className="divider"><span>Or</span></div>
+                {/* <div className="divider"><span>Or</span></div>
 
                 <button className="google-btn">
                     <img src={googleIcon} alt="Google" /> Log In With Google
-                </button>
+                </button> */}
             </div>
         </div>
     );

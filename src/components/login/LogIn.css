@@ -9,34 +9,7 @@
     display: flex;
     min-height: 100vh;
     font-family: "Montserrat", sans-serif;
-}
-
-/* Sidebar */
-.sidebar {
-    flex: 1;
-    background-color: #ffe1cc;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 2rem;
-    max-width: 15%;
-}
-
-.sidebar .logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.sidebar img {
-    width: 140px;
-    height: auto;
-}
-
-.sidebar h1 {
-    font-size: clamp(20px, 3vw, 32px);
-    color: #ff4d00;
-    line-height: 1.2;
+    background-color: var(--colortheme);
 }
 
 /* Form container */
@@ -49,12 +22,32 @@
     padding: clamp(20px, 5vw, 80px);
     max-width: 600px;
     margin: auto;
+    position: relative;
+    border-radius: 40px;
 }
 
 .login-container h2 {
     font-size: clamp(20px, 2.5vw, 28px);
     margin-bottom: 1.5rem;
 }
+
+.login-container .logo {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.logo img {
+    width: 120px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+
 
 .input-field {
     width: 100%;
@@ -68,7 +61,7 @@
 .login-btn2 {
     width: 100%;
     padding: 0.8rem;
-    background-color: #ffe1cc;
+    background-color: var(--colortheme);
     border: none;
     font-weight: bold;
     cursor: pointer;
@@ -79,7 +72,7 @@
 }
 
 .login-btn2:hover {
-    background-color: #ffccaa;
+    background-color: var(--colorhover);
 }
 
 .signup-text {
@@ -133,16 +126,7 @@
 /* Responsive: trên mobile sidebar ẩn đi */
 @media (max-width: 768px) {
     .login-page {
-        flex-direction: column;
+        background-color: #fff;
     }
 
-    .sidebar {
-        min-width: 100vw;
-        height: auto;
-        padding: 1rem;
-        justify-content: center;
-        align-items: center;
-        /* Căn giữa logo */
-        text-align: center;
-    }
 }

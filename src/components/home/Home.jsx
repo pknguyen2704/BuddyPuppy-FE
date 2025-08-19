@@ -6,9 +6,9 @@ import "./Home.css";
 export const Home = () => {
     const navigate = useNavigate();
     return (
-        <div className="container">
+        <div className="home-page">
             <header className="header">
-                <img src={logo1} alt="Buddy Puppy Logo" className="logo" />
+                <img src={logo1} alt="Buddy Puppy Logo" className="logo1" />
                 <div className="button-group">
                     <div className="btn login-btn" onClick={() => navigate('/login')}>Log In</div>
                     <div className="btn register-btn" onClick={() => navigate('/signup1')}>Sign up</div>

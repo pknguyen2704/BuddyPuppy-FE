@@ -4,37 +4,42 @@ body,
 #root {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    --colorbtn: #fb9e3a;
+    --colorfont: #ea2f14;
 }
 
-/* Container chính */
-.container {
+.home-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding: 2vh 5vw;
-    box-sizing: border-box;
-    width: 100%;
     font-family: "Montserrat", sans-serif;
-    background-color: #ffe1cc;
+    background-color: var(--colortheme);
 }
 
 /* Header: Logo + Nút */
-.header {
+.home-page .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     position: sticky;
+    top: 0;
+    background-color: #ffea00;
+    padding: 1vh;
 }
 
 
-.logo {
-    width: 100px;
+.logo1 {
+    margin-left: 5vw;
+    width: 120px;
     height: auto;
 }
 
 /* Nhóm nút */
 .button-group {
     display: flex;
+    margin-left: auto;
+    margin-right: 5vw;
     gap: 20px;
 }
 
@@ -54,14 +59,18 @@ body,
     white-space: nowrap;
 }
 
+.btn:hover {
+    color: var(--colorhover);
+}
+
 .login-btn {
-    background-color: #ffffff;
-    color: #184bff;
+    background-color: var(--colorbtn);
+    color: var(--colorfont);
 }
 
 .register-btn {
-    background-color: #184bff;
-    color: #e8edff;
+    background-color: var(--colorbtn);
+    color: var(--colorfont);
 }
 
 /* Nội dung chính */
