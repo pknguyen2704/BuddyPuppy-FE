@@ -1,0 +1,132 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--colortheme);
+}
+
+/* Form container */
+.login-container {
+    flex: 2;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(20px, 5vw, 80px);
+    max-width: 600px;
+    margin: auto;
+    position: relative;
+    border-radius: 40px;
+}
+
+.login-container h2 {
+    font-size: clamp(20px, 2.5vw, 28px);
+    margin-bottom: 1.5rem;
+}
+
+.login-container .logo {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.logo img {
+    width: 120px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+
+
+.input-field {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.login-btn2 {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--colortheme);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+    transition: background 0.2s;
+    color: #000;
+}
+
+.login-btn2:hover {
+    background-color: var(--colorhover);
+}
+
+.signup-text {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.signup-text a {
+    color: #184bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Divider */
+.divider {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.divider span {
+    background: white;
+    padding: 0 1rem;
+    position: relative;
+    top: -0.8rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Google button */
+.google-btn {
+    width: 100%;
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #fff;
+    font-size: 0.95rem;
+}
+
+.google-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Responsive: trên mobile sidebar ẩn đi */
+@media (max-width: 768px) {
+    .login-page {
+        background-color: #fff;
+    }
+
+}

@@ -1,0 +1,98 @@
+/* Reset và font */
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    --colorbtn: #fb9e3a;
+    --colorfont: #ea2f14;
+}
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--colortheme);
+}
+
+/* Header: Logo + Nút */
+.home-page .header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #ffea00;
+    padding: 1vh;
+}
+
+
+.logo1 {
+    margin-left: 5vw;
+    width: 120px;
+    height: auto;
+}
+
+/* Nhóm nút */
+.button-group {
+    display: flex;
+    margin-left: auto;
+    margin-right: 5vw;
+    gap: 20px;
+}
+
+.btn {
+    text-decoration: none;
+    height: 5vh;
+    min-width: 60px;
+    min-height: 30px;
+    padding: 0 2vw;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    color: var(--colorhover);
+}
+
+.login-btn {
+    background-color: var(--colorbtn);
+    color: var(--colorfont);
+}
+
+.register-btn {
+    background-color: var(--colorbtn);
+    color: var(--colorfont);
+}
+
+/* Nội dung chính */
+.main-content {
+    flex: 1;
+    display: flex;
+    padding: 10vh 3vh;
+    align-items: center top;
+    justify-content: flex-start;
+}
+
+/* Box landing page */
+.landing-box {
+    background: white;
+    width: 30vw;
+    min-width: 200px;
+    padding: 2vh 4vw;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    border-radius: 6px;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+}
