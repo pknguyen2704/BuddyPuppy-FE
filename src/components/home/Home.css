@@ -1,0 +1,89 @@
+/* Reset và font */
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+}
+
+/* Container chính */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 2vh 5vw;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    background-color: #ffe1cc;
+}
+
+/* Header: Logo + Nút */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+}
+
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+/* Nhóm nút */
+.button-group {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    text-decoration: none;
+    height: 5vh;
+    min-width: 60px;
+    min-height: 30px;
+    padding: 0 2vw;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.login-btn {
+    background-color: #ffffff;
+    color: #184bff;
+}
+
+.register-btn {
+    background-color: #184bff;
+    color: #e8edff;
+}
+
+/* Nội dung chính */
+.main-content {
+    flex: 1;
+    display: flex;
+    padding: 10vh 3vh;
+    align-items: center top;
+    justify-content: flex-start;
+}
+
+/* Box landing page */
+.landing-box {
+    background: white;
+    width: 30vw;
+    min-width: 200px;
+    padding: 2vh 4vw;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    border-radius: 6px;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+}

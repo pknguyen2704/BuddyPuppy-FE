@@ -1,0 +1,148 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    flex: 1;
+    background-color: #ffe1cc;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 15%;
+}
+
+.sidebar .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar img {
+    width: 140px;
+    height: auto;
+}
+
+.sidebar h1 {
+    font-size: clamp(20px, 3vw, 32px);
+    color: #ff4d00;
+    line-height: 1.2;
+}
+
+/* Form container */
+.login-container {
+    flex: 2;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(20px, 5vw, 80px);
+    max-width: 600px;
+    margin: auto;
+}
+
+.login-container h2 {
+    font-size: clamp(20px, 2.5vw, 28px);
+    margin-bottom: 1.5rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.login-btn2 {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #ffe1cc;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+    transition: background 0.2s;
+    color: #000;
+}
+
+.login-btn2:hover {
+    background-color: #ffccaa;
+}
+
+.signup-text {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.signup-text a {
+    color: #184bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Divider */
+.divider {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.divider span {
+    background: white;
+    padding: 0 1rem;
+    position: relative;
+    top: -0.8rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Google button */
+.google-btn {
+    width: 100%;
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #fff;
+    font-size: 0.95rem;
+}
+
+.google-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Responsive: trên mobile sidebar ẩn đi */
+@media (max-width: 768px) {
+    .login-page {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        min-width: 100vw;
+        height: auto;
+        padding: 1rem;
+        justify-content: center;
+        align-items: center;
+        /* Căn giữa logo */
+        text-align: center;
+    }
+}
