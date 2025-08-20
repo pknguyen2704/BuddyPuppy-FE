@@ -1,0 +1,191 @@
+.div-1 button {
+  position: absolute !important;
+  top: 13.5% !important;
+  left: 70%;
+}
+
+.div-2 button {
+  position: absolute !important;
+  top: 25% !important;
+  left: 70%;
+}
+
+.div-3 button {
+  position: absolute !important;
+  top: 15% !important;
+  left: 65%;
+}
+
+.div-4 button {
+  position: absolute !important;
+  top: 12% !important;
+  left: 68%;
+}
+
+.div-5 .bt-1 {
+  position: absolute !important;
+  top: -1.5% !important;
+  left: 41%;
+}
+
+.div-5 .bt-2 {
+  position: absolute !important;
+  top: -1% !important;
+  left: 75%;
+}
+
+.div-5 .bt-3 {
+  position: absolute !important;
+  top: 49% !important;
+  left: 42%;
+}
+
+.div-5 .bt-4 {
+  position: absolute !important;
+  top: 49% !important;
+  left: 77%;
+}
+
+.div-6 .bt-1 {
+  position: absolute !important;
+  top: -1.5% !important;
+  left: 41%;
+}
+
+.div-6 .bt-2 {
+  position: absolute !important;
+  top: -1% !important;
+  left: 75%;
+}
+
+.div-6 .bt-3 {
+  position: absolute !important;
+  top: 49% !important;
+  left: 42%;
+}
+
+.div-6 .bt-4 {
+  position: absolute !important;
+  top: 49% !important;
+  left: 77%;
+}
+
+.div-7 button {
+  position: absolute !important;
+  top: 15% !important;
+  left: 67%;
+}
+
+@media (min-width: 1401px) {
+  .div-1 button {
+    top: 13.5%;
+    left: 70%;
+  }
+
+  .div-2 button {
+    top: 25%;
+    left: 75%;
+  }
+}
+
+@media (min-width: 1201px) {
+  .div-1 button {
+    top: 13.5%;
+    left: 73%;
+  }
+
+  .div-2 button {
+    top: 25%;
+    left: 70%;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .div-1 button {
+    top: 8%;
+    left: 78%;
+  }
+
+  .div-2 button {
+    top: 25%;
+    left: 75%;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 601px) {
+  .div-1 button {
+    top: 9%;
+    left: 77%;
+  }
+
+  .div-2 button {
+    top: 25%;
+    left: 75%;
+  }
+}
+
+@media (max-width: 600px) {
+  .div-1 button {
+    top: 5% !important;
+    left: 76%;
+  }
+
+  .div-2 button {
+    top: 10%;
+    left: 65%;
+  }
+
+  .div-5 .bt-1 {
+    position: absolute !important;
+    top: -3% !important;
+    left: 30%;
+  }
+
+  .div-5 .bt-2 {
+    position: absolute !important;
+    top: -1% !important;
+    left: 75%;
+  }
+
+  .div-5 .bt-3 {
+    position: absolute !important;
+    top: 49% !important;
+    left: 30%;
+  }
+
+  .div-5 .bt-4 {
+    position: absolute !important;
+    top: 49% !important;
+    left: 77%;
+  }
+
+  .div-6 .bt-1 {
+    position: absolute !important;
+    top: -3% !important;
+    left: 30%;
+  }
+
+  .div-6 .bt-2 {
+    position: absolute !important;
+    top: 1% !important;
+    left: 75%;
+  }
+
+  .div-6 .bt-3 {
+    position: absolute !important;
+    top: 49% !important;
+    left: 30%;
+  }
+
+  .div-6 .bt-4 {
+    position: absolute !important;
+    top: 49% !important;
+    left: 77%;
+  }
+
+  .div-7 button {
+    position: absolute !important;
+    top: 23% !important;
+    left: 67%;
+  }
+}
