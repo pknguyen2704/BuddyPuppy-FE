@@ -6,5 +6,8 @@ export const ENDPOINTS = {
         login: '/auth/login',
         register: '/auth/register',
         logout: '/auth/logout',
+    },
+    tts: {
+        ttsFunction: '/textToSpeech/speak',
     }
 };
