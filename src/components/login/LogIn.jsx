@@ -43,7 +43,7 @@ export const LogIn = () => {
                     <button className="login-btn2">Login</button>
                 </form>
                 <p className="signup-text">
-                    Don’t Have An Account? <a onClick={() => navigate("/signup1")}>Sign Up</a>
+                    Don’t Have An Account? <a onClick={() => navigate("/signup")}>Sign Up</a>
                 </p>
 
                 {/* <div className="divider"><span>Or</span></div>

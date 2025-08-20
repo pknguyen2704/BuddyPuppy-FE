@@ -1,0 +1,157 @@
+.home-screen {
+    background: #f8ec7d;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hs-container {
+    background: #e6d86f;
+    border-radius: 24px;
+    padding: 32px 40px;
+    width: 90vw;
+    height: 95vh;
+    min-width: 1050px;
+    min-height: 700px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    position: relative;
+    overflow: hidden;
+}
+
+.hs-container-btn {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    display: flex;
+    gap: 16px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px 16px;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.hs-motifications,
+.hs-music,
+.hs-avatar {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.hs-container-text-hello {
+    position: absolute;
+    left: 200px;
+    bottom: 450px;
+    max-width: 300px;
+    z-index: 2;
+}
+
+.hs-hello {
+    background: #d3d3d3;
+    color: var(--colorfont);
+    font-size: 2rem;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 12px 24px;
+    display: inline-block;
+}
+
+.hs-container-character {
+    position: absolute;
+    left: 50px;
+    bottom: 150px;
+    z-index: 2;
+}
+
+.hs-character {
+    width: 300px;
+    height: auto;
+}
+
+.hs-main-content {
+    position: relative;
+    top: 50%;
+    left: 70%;
+    width: 40vw;
+    height: 45vh;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.hs-container-text-title {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.hs-title {
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.hs-subtitle {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+.hs-utilities {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    /* căn giữa cả nhóm */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5vw;
+    /* khoảng cách giữa 2 thẻ */
+}
+
+/* Mỗi thẻ giữ nguyên style của bạn */
+.hs-container-util {
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .07);
+    width: 200px;
+}
+
+.hs-util-image {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    gap: 20px
+}
+
+.hs-util-title {
+    color: #222;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    margin-top: 0;
+}
