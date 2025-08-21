@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./SocialStory2.css";
+import "./SocialStory3.css";
 
 import { ttsFunction } from "~/service/ttsService";
 import { Volume2, ArrowLeft, ArrowRight } from "lucide-react";
-import image1 from "~/assets/SocialStory2/S2-image1.jpg";
-import image2 from "~/assets/SocialStory2/S2-image2.jpg";
-import image3 from "~/assets/SocialStory2/S2-image3.jpg";
-import image4 from "~/assets/SocialStory2/S2-image4.jpg";
-import image5 from "~/assets/SocialStory2/S2-image6.jpg";
-import image6 from "~/assets/SocialStory2/S2-image5.jpg";
-import image7 from "~/assets/SocialStory2/S2-image7.jpg";
-import image8 from "~/assets/SocialStory2/S2-image8.jpg";
-import image9 from "~/assets/SocialStory2/S2-image9.jpg";
+import image1 from "~/assets/SocialStory3/S3-image1.jpg";
+import image2 from "~/assets/SocialStory3/S3-image2.jpg";
+import image3 from "~/assets/SocialStory3/S3-image3.jpg";
+import image4 from "~/assets/SocialStory3/S3-image4.jpg";
+import image5 from "~/assets/SocialStory3/S3-image6.jpg";
+import image6 from "~/assets/SocialStory3/S3-image5.jpg";
+import image7 from "~/assets/SocialStory3/S3-image7.jpg";
+import image8 from "~/assets/SocialStory3/S3-image8.jpg";
+import image9 from "~/assets/SocialStory3/S3-image9.jpg";
+import image7 from "~/assets/SocialStory3/S3-image10.jpg";
+import image8 from "~/assets/SocialStory3/S3-image11.jpg";
+import image9 from "~/assets/SocialStory3/S3-image12.jpg";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-export const SocialStory2 = () => {
+export const SocialStory3 = () => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(0);
 
