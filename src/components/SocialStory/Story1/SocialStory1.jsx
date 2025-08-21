@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./SocialStory.css";
+import "./SocialStory1.css";
 
-import { ttsFunction } from "../../service/ttsService";
+import { ttsFunction } from "~/service/ttsService";
 import { Volume2, ArrowLeft, ArrowRight } from "lucide-react";
 import image1 from "~/assets/SocialStory1/S1-image1.png";
 import image2 from "~/assets/SocialStory1/S1-image2.png";
@@ -14,7 +14,7 @@ import image7 from "~/assets/SocialStory1/S1-image7.png";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-export const SocialStory = () => {
+export const SocialStory1 = () => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(0);
 
