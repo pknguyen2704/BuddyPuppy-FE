@@ -13,9 +13,9 @@ import image6 from "~/assets/SocialStory3/S3-image5.jpg";
 import image7 from "~/assets/SocialStory3/S3-image7.jpg";
 import image8 from "~/assets/SocialStory3/S3-image8.jpg";
 import image9 from "~/assets/SocialStory3/S3-image9.jpg";
-import image7 from "~/assets/SocialStory3/S3-image10.jpg";
-import image8 from "~/assets/SocialStory3/S3-image11.jpg";
-import image9 from "~/assets/SocialStory3/S3-image12.jpg";
+import image10 from "~/assets/SocialStory3/S3-image10.jpg";
+import image11 from "~/assets/SocialStory3/S3-image11.jpg";
+import image12 from "~/assets/SocialStory3/S3-image12.jpg";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,33 +24,26 @@ export const SocialStory3 = () => {
     const [direction, setDirection] = useState(0);
 
     const dataText = [
-        { text: "When my family members and friends see me, they say hi, hello, or they wave.", gender: "female" },
-        { text: "When they say hi or wave, I should say hi or wave back.", gender: "male" },
-        { text: "Hey there!", gender: "male" },
-        { text: "Hi, buddy!", gender: "male"},
-        { text: "How’s it going?", gender: "male" },
-        { text: "What's up?", gender: "male" },
-        { text: "When I say “hi” to my friends, I can say ...", gender: "female" },
-        { text: "Hi Mom! Hi Dad!", gender: "female" },
-        { text: "Hi, Grandma! Hi, Grandpa!", gender: "female" },
-        { text: "Hello, everyone!", gender: "female" },
-        { text: "Hi, brother! Hi, sister!", gender: "female" },
-        { text: "When I say hi to my family, I can say ...", gender: "male" },
-        { text: "Good morning!", gender: "male" },
-        { text: "Hello, Sir/Ma’am", gender: "male" },
-        { text: "Nice to meet you", gender: "male" },
-        { text: "When I say “hi” to an adult, I can say ...", gender: "female" },
-        { text: "When they are leaving, they say bye, or wave.", gender: "female" },
-        { text: "When they say bye or way, I should say bye or wave back", gender: "male" },
-        { text: "Goodbye!", gender: "male" },
-        { text: "See you!", gender: "male" },
-        { text: "So long!", gender: "male" },
-        { text: "Later!", gender: "male" },
-        { text: "I can say ...", gender: "female" },
-        { text: "Now I know how to say “hi” and “goodbye” to people.", gender: "female" },
+        { text: "I want to go to the potty !", gender: "female" },
+        { text: "When my tummy feels like I need to pee or poop, I need to say ...", gender: "male" },
+        { text: "May I go to the potty, please?", gender: "male" },
+        { text: "When my bracelet shakes and lights up, I need to say...", gender: "female"},
+        { text: "May I go to the potty, please?", gender: "female" },
+        { text: "Pee and poop do not go in your underwear. That is gross.", gender: "male" },
+        { text: "First, when I get to the potty:", gender: "male" },
+        { text: "I need to pull my pants and panties down", gender: "male" },
+        { text: "Pee and poop go into the potty !", gender: "male" },
+        { text: "Next, I sit on the potty and go pee and poop.", gender: "female" },
+        { text: "When I am done, I use toilet paper to wipe my bottom all clean.", gender: "male" },
+        { text: "Then, I need to flush the toilet.", gender: "male" },
+        { text: "Next, I put my panties and pants back up.", gender: "male" },
+        { text: "Last, I wash my hands...", gender: "male" },
+        { text: "... until they're all clean !", gender: "female" },
+        { text: "I did it ! I can pee and poop in the potty.", gender: "female" },
+
     ];
 
-    const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9];
+    const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12];
 
     const prevImage = () => {
         if (index > 0) {
@@ -117,8 +110,14 @@ export const SocialStory3 = () => {
                             <div className="position-relative w-100 text-center div-2">
                                 <img src={image2} alt="story-2" className="img-fluid rounded" />
                                 <button
-                                    className="btn btn-light rounded-circle position-absolute m-3"
+                                    className="btn btn-light rounded-circle position-absolute m-3 bt-1"
                                     onClick={() => onSound(1)}
+                                >
+                                    <Volume2 />
+                                </button>
+                                <button
+                                    className="btn btn-light rounded-circle position-absolute m-3 bt-2"
+                                    onClick={() => onSound(2)}
                                 >
                                     <Volume2 />
                                 </button>
@@ -131,31 +130,13 @@ export const SocialStory3 = () => {
                                 <img src={image3} alt="story-3" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-1"
-                                    onClick={() => onSound(2)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-2"
                                     onClick={() => onSound(3)}
                                 >
                                     <Volume2 />
                                 </button>
                                 <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-3"
+                                    className="btn btn-light rounded-circle position-absolute m-3 bt-2"
                                     onClick={() => onSound(4)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-4"
-                                    onClick={() => onSound(5)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-5"
-                                    onClick={() => onSound(6)}
                                 >
                                     <Volume2 />
                                 </button>
@@ -168,64 +149,26 @@ export const SocialStory3 = () => {
                                 <img src={image4} alt="story-4" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-1"
-                                    onClick={() => onSound(7)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-2"
-                                    onClick={() => onSound(8)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-3"
-                                    onClick={() => onSound(9)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-4"
-                                    onClick={() => onSound(10)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-5"
-                                    onClick={() => onSound(11)}
+                                    onClick={() => onSound(5)}
                                 >
                                     <Volume2 />
                                 </button>
                             </div>
                         )}
 
-                        
-
                         {/* Slide 5 */}
                         {index === 4 && (
-                            <div className="position-relative w-100 text-center div-6">
-                                <img src={image6} alt="story-5" className="img-fluid rounded" />
+                            <div className="position-relative w-100 text-center div-5">
+                                <img src={image5} alt="story-5" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-1"
-                                    onClick={() => onSound(12)}
+                                    onClick={() => onSound(6)}
                                 >
                                     <Volume2 />
-                                </button>
+                                </button> 
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-2"
-                                    onClick={() => onSound(13)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-3"
-                                    onClick={() => onSound(14)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-4"
-                                    onClick={() => onSound(15)}
+                                    onClick={() => onSound(7)}
                                 >
                                     <Volume2 />
                                 </button>
@@ -234,11 +177,11 @@ export const SocialStory3 = () => {
 
                         {/* Slide 6 */}
                         {index === 5 && (
-                            <div className="position-relative w-100 text-center div-5">
-                                <img src={image5} alt="story-6" className="img-fluid rounded" />
+                            <div className="position-relative w-100 text-center div-6">
+                                <img src={image6} alt="story-6" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3"
-                                    onClick={() => onSound(16)}
+                                    onClick={() => onSound(8)}
                                 >
                                     <Volume2 />
                                 </button>
@@ -251,7 +194,7 @@ export const SocialStory3 = () => {
                                 <img src={image7} alt="story-7" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute me-3"
-                                    onClick={() => onSound(17)}
+                                    onClick={() => onSound(9)}
                                 >
                                     <Volume2 />
                                 </button>
@@ -262,31 +205,7 @@ export const SocialStory3 = () => {
                                 <img src={image8} alt="story-8" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-1"
-                                    onClick={() => onSound(18)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-2"
-                                    onClick={() => onSound(19)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-3"
-                                    onClick={() => onSound(20)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-4"
-                                    onClick={() => onSound(21)}
-                                >
-                                    <Volume2 />
-                                </button>
-                                <button
-                                    className="btn btn-light rounded-circle position-absolute m-3 bt-5"
-                                    onClick={() => onSound(22)}
+                                    onClick={() => onSound(10)}
                                 >
                                     <Volume2 />
                                 </button>
@@ -297,7 +216,46 @@ export const SocialStory3 = () => {
                                 <img src={image9} alt="story-9" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute me-3"
-                                    onClick={() => onSound(23)}
+                                    onClick={() => onSound(11)}
+                                >
+                                    <Volume2 />
+                                </button>
+                            </div>
+                        )}
+                        {index === 9 && (
+                            <div className="position-relative w-100 text-center div-10">
+                                <img src={image10} alt="story-9" className="img-fluid rounded" />
+                                <button
+                                    className="btn btn-light rounded-circle position-absolute me-3"
+                                    onClick={() => onSound(12)}
+                                >
+                                    <Volume2 />
+                                </button>
+                            </div>
+                        )}
+                        {index === 10 && (
+                            <div className="position-relative w-100 text-center div-11">
+                                <img src={image11} alt="story-9" className="img-fluid rounded" />
+                                <button
+                                    className="btn btn-light rounded-circle position-absolute me-3 bt-1"
+                                    onClick={() => onSound(13)}
+                                >
+                                    <Volume2 />
+                                </button>
+                                <button
+                                    className="btn btn-light rounded-circle position-absolute me-3 bt-2"
+                                    onClick={() => onSound(14)}
+                                >
+                                    <Volume2 />
+                                </button>
+                            </div>
+                        )}
+                        {index === 11 && (
+                            <div className="position-relative w-100 text-center div-12">
+                                <img src={image12} alt="story-9" className="img-fluid rounded" />
+                                <button
+                                    className="btn btn-light rounded-circle position-absolute me-3"
+                                    onClick={() => onSound(15)}
                                 >
                                     <Volume2 />
                                 </button>
