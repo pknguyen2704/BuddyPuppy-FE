@@ -6,6 +6,7 @@ import { SignUp } from "./components/signup/SignUp"
 import { SocialStory1 } from './components/SocialStory/Story1/SocialStory1'
 import { SocialStory2 } from './components/SocialStory/Story2/SocialStory2'
 import { SocialStory3 } from './components/SocialStory/Story3/SocialStory3'
+import { Phase1 } from './components/pecs/Phase1.jsx'
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
       <Route path="/SocialStory1" element={<SocialStory1 />} />
       <Route path="/SocialStory2" element={<SocialStory2 />} />
       <Route path="/SocialStory3" element={<SocialStory3 />} />
+
+      <Route path="/phase1" element={<Phase1 />} />
 
     </Routes>
   )

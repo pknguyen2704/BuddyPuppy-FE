@@ -1,0 +1,26 @@
+.container-phase {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* tránh lộ màu trắng ở viền */
+}
+
+.phase-background {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* ĐỂ .card tuyệt đối theo khung này */
+}
+
+.phase-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* giữ tỉ lệ ảnh nền */
+    display: block;
+    pointer-events: none;
+    /* tránh cản bắt sự kiện kéo */
+}
