@@ -3,18 +3,17 @@ import { DndContext } from '@dnd-kit/core';
 import bg from '~/assets/Pecs/bg.png';
 import pig from '~/assets/Pecs/pig.png';
 import boy from '~/assets/Pecs/boy.png';
-
 import { DraggableCard } from './Card/Card';
 import { DroppableCharacter } from './Character/Character';
 import './Phase.css';
 import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 
-export const Phase1 = () => {
+export const Phase3 = () => {
     const frameRef = useRef(null);
     const [parent, setParent] = useState(null);
     const [effect, setEffect] = useState(false);
     const [animate, setAnimate] = useState(false);
-
+    const [findAnimal, setFindAnimal] = useState('bear');
 
     function playSoundNTimes(src, n) {
         let count = 0;
@@ -27,6 +26,7 @@ export const Phase1 = () => {
                 audio.play();
             }
         });
+
         audio.play();
     }
 
@@ -34,7 +34,9 @@ export const Phase1 = () => {
     // set vị trí ban đầu của các thẻ
     const [pos, setPos] = useState({
         char: { xPct: 70, yPct: 50 },
-        pig: { xPct: 30, yPct: 40 },
+        animal1: { xPct: 50, yPct: 70 },
+        animal2: { xPct: 40, yPct: 70 },
+        bear: { xPct: 60, yPct: 70 }
     });
 
     const clamp = (v) => Math.max(0, Math.min(100, v));
@@ -45,21 +47,31 @@ export const Phase1 = () => {
 
         // Nếu thả vào droppable thì xóa luôn
         if (over) {
-            setParent(over.id);
-            playSoundNTimes(soundEffect, 3);
+            const draggedCard = cards.find(c => c.id === active.id);
 
-            // bật hiệu ứng
-            setEffect(true);
+            if (draggedCard.id === findAnimal) {
+                setParent(over.id);
+                playSoundNTimes(soundEffect, 3);
 
-            // sau 1s (bằng thời gian animation) thì tắt effect
-            setTimeout(() => {
-                setEffect(false);
-            }, 1000);
+                // bật hiệu ứng
+                setEffect(true);
+
+                // sau 1s (bằng thời gian animation) thì tắt effect
+                setTimeout(() => {
+                    setEffect(false);
+                }, 1000);
+            }
+            else{
+                alert('Sai roi!')
+            }
+
         }
     }
 
     const cards = [
-        { id: "pig", src: pig, caption: "Pig", pos: pos.pig },
+        { id: "animal1", src: pig, caption: "animal1", pos: pos.animal1 },
+        { id: "animal2", src: pig, caption: "animal2", pos: pos.animal2 },
+        { id: "bear", src: pig, caption: "bear", pos: pos.bear },
     ];
 
     const character = (
@@ -78,6 +90,13 @@ export const Phase1 = () => {
         <div className="container-phase">
             <div className="phase-background" ref={frameRef}>
                 <img src={bg} alt="Phase Background" className="phase-image" />
+                <h3
+                    style={{
+                        position: 'absolute',
+                        top: '20%',
+                        left: '45%'
+                    }}
+                >Find the bear!</h3>
                 <DndContext onDragEnd={handleDragEnd}>
                     {/* Chỉ hiện card nếu chưa drop */}
                     {!parent
