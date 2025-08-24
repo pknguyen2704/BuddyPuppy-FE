@@ -9,5 +9,9 @@ export const ENDPOINTS = {
     },
     tts: {
         ttsFunction: '/textToSpeech/speak',
+    },
+    pecs: {
+        getAll: 'pecs/getAll',
+        getOne: 'pecs/getOne',
     }
 };
