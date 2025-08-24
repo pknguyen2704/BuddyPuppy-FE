@@ -8,6 +8,8 @@ import { DroppableCharacter } from './Character/Character';
 import './Phase.css';
 import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 
+import { BoxChat } from './BoxChat/BoxChat';
+
 export const Phase3 = () => {
     const frameRef = useRef(null);
     const [parent, setParent] = useState(null);
@@ -61,7 +63,7 @@ export const Phase3 = () => {
                     setEffect(false);
                 }, 1000);
             }
-            else{
+            else {
                 alert('Sai roi!')
             }
 
@@ -90,13 +92,11 @@ export const Phase3 = () => {
         <div className="container-phase">
             <div className="phase-background" ref={frameRef}>
                 <img src={bg} alt="Phase Background" className="phase-image" />
-                <h3
-                    style={{
-                        position: 'absolute',
-                        top: '20%',
-                        left: '45%'
-                    }}
-                >Find the bear!</h3>
+                <BoxChat
+                    posX={650}
+                    posY={150}
+                    text={'Find the bear!'}
+                />
                 <DndContext onDragEnd={handleDragEnd}>
                     {/* Chỉ hiện card nếu chưa drop */}
                     {!parent

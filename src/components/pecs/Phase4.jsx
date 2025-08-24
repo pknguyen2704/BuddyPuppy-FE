@@ -3,20 +3,21 @@ import { DndContext } from '@dnd-kit/core';
 import bg from '~/assets/Pecs/bg.png';
 import pig from '~/assets/Pecs/pig.png';
 import boy from '~/assets/Pecs/boy.png';
-import { DraggableCard } from './Card/Card';
-import { DroppableCharacter } from './Character/Character';
-import './Phase.css';
 import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 
+import './Phase.css';
+
+import { DraggableCard } from './Card/Card';
+import { DraggableText } from './wordCard/wordCard';
+import { DroppableCharacter } from './Character/Character';
 import { BoxChat } from './BoxChat/BoxChat';
 
-export const Phase2 = () => {
+export const Phase4 = () => {
     const frameRef = useRef(null);
-    const [parent, setParent] = useState(null);
+    const [parentCard, setparentCard] = useState(null);
+    const [parentText, setparentText] = useState(null);
     const [effect, setEffect] = useState(false);
-    const [animate, setAnimate] = useState(false);
-    const [findAnimal, setFindAnimal] = useState('bear');
-
+    const [textAnimal, setTextAnimal] = useState('....... .......');
 
     function playSoundNTimes(src, n) {
         let count = 0;
@@ -33,7 +34,6 @@ export const Phase2 = () => {
         audio.play();
     }
 
-
     // set vị trí ban đầu của các thẻ
     const [pos, setPos] = useState({
         char: { xPct: 70, yPct: 50 },
@@ -47,33 +47,9 @@ export const Phase2 = () => {
         bear: { xPct: 30, yPct: 40 }
     });
 
-    const clamp = (v) => Math.max(0, Math.min(100, v));
-
-    // Xử lý kéo thả
-    function handleDragEnd({ active, over }) {
-        if (!frameRef.current || !active) return;
-
-        // Nếu thả vào droppable thì xóa luôn
-        if (over) {
-            const draggedCard = cards.find(c => c.id === active.id);
-
-            if (draggedCard.id === findAnimal) {
-                setParent(over.id);
-                playSoundNTimes(soundEffect, 3);
-
-                // bật hiệu ứng
-                setEffect(true);
-
-                // sau 1s (bằng thời gian animation) thì tắt effect
-                setTimeout(() => {
-                    setEffect(false);
-                }, 1000);
-            }
-            else {
-                alert('Sai roi!')
-            }
-        }
-    }
+    const [posText, setPosText] = useState({
+        text1: { xPct: 30, yPct: 70 },
+    })
 
     const cards = [
         { id: "animal1", src: pig, caption: "animal1", pos: pos.animal1 },
@@ -85,6 +61,41 @@ export const Phase2 = () => {
         { id: "animal7", src: pig, caption: "animal7", pos: pos.animal7 },
         { id: "bear", src: pig, caption: "bear", pos: pos.bear },
     ];
+
+    const texts = [
+        { id: "word1", text: "I want", pos: posText.text1 },
+    ];
+
+    // xử lý khi thả
+    function handleDragEnd({ active, over }) {
+        if (!frameRef.current || !active) return;
+        if (!over) return;
+
+        // Nếu là card chữ
+        const draggedText = texts.find(t => t.id === active.id);
+        if (draggedText) {
+            setparentText(over.id);
+            setTextAnimal(draggedText.text + " .......");
+            return;
+        }
+        if(!parentText){
+            alert("Start with 'I want'")
+            return
+        }
+        // Nếu là card ảnh
+        const draggedCard = cards.find(c => c.id === active.id);
+        if (draggedCard) {
+            setTextAnimal("I want " + draggedCard.id);
+            setparentCard(over.id);
+            playSoundNTimes(soundEffect, 3);
+
+            setEffect(true);
+            setTimeout(() => setEffect(false), 1000);
+            return;
+        }
+
+
+    }
 
     const character = (
         <DroppableCharacter
@@ -102,40 +113,63 @@ export const Phase2 = () => {
         <div className="container-phase">
             <div className="phase-background" ref={frameRef}>
                 <img src={bg} alt="Phase Background" className="phase-image" />
-                <BoxChat
-                    posX={650}
-                    posY={100}
-                    text={'Find the bear!'}
-                />
+
                 <DndContext onDragEnd={handleDragEnd}>
-                    {/* Chỉ hiện card nếu chưa drop */}
-                    {!parent
-                        ? cards.map((c) => (
+                    {/* render ảnh */}
+                    {!parentCard &&
+                        cards.map((c) => (
                             <DraggableCard
                                 key={c.id}
                                 id={c.id}
                                 src={c.src}
                                 caption={c.caption}
-                                style={{ left: `${c.pos.xPct}%`, top: `${c.pos.yPct}%` }}
-                                animate={false} // <-- đúng prop
+                                style={{
+                                    left: `${c.pos.xPct}%`,
+                                    top: `${c.pos.yPct}%`
+                                }}
+                                animate={false}
                             />
                         ))
-                        : null}
+                    }
+
+                    {/* render chữ */}
+                    {!parentText &&
+                        texts.map((t) => (
+                            <DraggableText
+                                key={t.id}
+                                id={t.id}
+                                text={t.text}
+                                style={{
+                                    left: `${t.pos.xPct}%`,
+                                    top: `${t.pos.yPct}%`
+                                }}
+                            />
+                        ))
+                    }
 
                     {character}
 
+                    {/* hiệu ứng khi đúng */}
                     {effect &&
                         cards.map((c) => (
                             <div
                                 key={`ghost-${c.id}`}
                                 className="card animate ghost"
-                                style={{ left: `${pos.char.xPct}%`, top: `${pos.char.yPct}%`, position: 'absolute' }}
+                                style={{
+                                    left: `${pos.char.xPct}%`,
+                                    top: `${pos.char.yPct}%`,
+                                    position: 'absolute'
+                                }}
                             >
                                 <div className="caption">{c.caption}</div>
                                 <img src={c.src} alt={c.caption} draggable="false" />
                             </div>
-                        ))}
+                        ))
+                    }
                 </DndContext>
+
+                {/* chat hiển thị câu */}
+                <BoxChat posX={950} posY={330} text={textAnimal} />
             </div>
         </div>
     );
