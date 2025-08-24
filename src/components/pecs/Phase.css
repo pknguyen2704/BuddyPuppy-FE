@@ -54,11 +54,110 @@
     align-items: center;
     row-gap: 10%;
 }
-.popup-content button{
+
+.popup-content button {
     width: 20%;
     background-color: rgb(185, 185, 2);
     border: none;
     border-radius: 20px;
     color: white;
 
+}
+
+
+/* stage phải full màn hình để phase-background có khung 100% */
+.stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.stage.dimmed {
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity .12s ease;
+}
+
+/* OVERLAY: làm mờ phần phía sau overlay */
+.screen-dim {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    /* dưới modal */
+    background: rgba(0, 0, 0, .15);
+    /* nhạt để không tối quá */
+    backdrop-filter: blur(2px);
+    /* mờ nền phía sau overlay */
+}
+
+/* Cụm nút vẫn bám góc phải của stage */
+.setting-phase {
+    position: absolute;
+    top: max(8px, env(safe-area-inset-top));
+    right: max(8px, env(safe-area-inset-right));
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    z-index: 10;
+    /* đủ cao so với nền */
+    pointer-events: none;
+    right: 4vw;
+}
+
+.setting-phase .btn-icon {
+    width: clamp(28px, 4vw, 44px);
+    height: auto;
+    cursor: pointer;
+    pointer-events: auto;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .2));
+    transition: transform .12s ease;
+}
+
+.setting-phase .btn-icon:active {
+    transform: scale(.95);
+}
+
+/* Modal ở trên tất cả */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    /* thật cao để thắng mọi thứ */
+    display: flex;
+}
+
+/* Đặt thứ tự vẽ rõ ràng giữa 2 lớp con */
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+    z-index: 1;
+    /* dưới nội dung */
+    pointer-events: auto;
+    /* click để đóng */
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 40vh;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, .25);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    /* trên backdrop */
+    pointer-events: auto;
+    align-items: center;
+}
+
+/* Phòng khi có filter từ đâu đó vẫn ảnh hưởng: */
+.modal,
+.modal * {
+    filter: none !important;
 }

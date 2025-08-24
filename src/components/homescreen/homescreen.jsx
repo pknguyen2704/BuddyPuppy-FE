@@ -8,6 +8,9 @@ import "./homescreen.css";
 import { useNavigate } from "react-router-dom";
 
 export const HomeScreen = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div className="home-screen">
             <div className="hs-container">
@@ -30,7 +33,7 @@ export const HomeScreen = () => {
                     </div>
                     <div className="hs-utilities">
                         <div className="hs-container-util">
-                            <img src={study} alt="Study" className="hs-util-image" />
+                            <img src={study} alt="Study" className="hs-util-image" onClick={() => navigate("/phase1")} />
                             <h1 className="hs-util-title">STUDY WITH PUPPY</h1>
                         </div>
                         <div className="hs-container-util">
