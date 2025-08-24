@@ -11,7 +11,7 @@ export const ENDPOINTS = {
         ttsFunction: '/textToSpeech/speak',
     },
     pecs: {
-        getAll: 'pecs/getAll',
-        getOne: 'pecs/getOne',
+        getAll: 'pecs/all-animals',
+        getOne: 'pecs/one-animal',
     }
 };
