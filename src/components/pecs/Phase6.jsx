@@ -1,43 +1,67 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import bg from '~/assets/Pecs/bg.png';
 import pig from '~/assets/Pecs/pig.png';
 import boy from '~/assets/Pecs/boy.png';
-import soundEffect from '~/assets/Pecs/pig-sound.mp3';
-
-import './Phase.css';
-
+import instruction from '~/assets/Pecs/instruction.png';
+import exit from '~/assets/Pecs/exit.png';
+import { createPortal } from 'react-dom';
 import { DraggableCard } from './Card/Card';
-import { DraggableText } from './wordCard/wordCard';
 import { DroppableCharacter } from './Character/Character';
+import { DraggableText } from './wordCard/wordCard';
+import './Phase.css';
+import { playSoundNTimes } from './Sound/Sound';
+import soundEffect from '~/assets/Pecs/pig-sound.mp3';
+import { useNavigate } from 'react-router-dom';
 import { BoxChat } from './BoxChat/BoxChat';
 
 export const Phase6 = () => {
     const frameRef = useRef(null);
+    const modalRef = useRef(null);
     const [parentCard, setparentCard] = useState(null);
     const [parentText, setparentText] = useState(null);
     const [effect, setEffect] = useState(false);
     const [textAnimal, setTextAnimal] = useState('....... .......');
     const textQuestion = 'What do you see?';
+    const [showInstruction, setShowInstruction] = useState(true);
+    const navigate = useNavigate();
 
     const [showPopup, setShowPopup] = useState(false);
 
     let indexQuestion = 0;
 
-    function playSoundNTimes(src, n) {
-        let count = 0;
-        const audio = new Audio(src);
+    useEffect(() => {
+        const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, []);
 
-        audio.addEventListener("ended", () => {
-            count++;
-            if (count < n) {
-                audio.currentTime = 0; // tua về đầu
-                audio.play();
-            }
-        });
+    // Click ở bất kỳ đâu ngoài popup -> đóng
+    useEffect(() => {
+        if (!showInstruction) return;
+        const onClickAnywhere = (e) => {
+            if (!modalRef.current) return;
+            if (!modalRef.current.contains(e.target)) setShowInstruction(false);
+        };
+        document.addEventListener("mousedown", onClickAnywhere);
+        return () => document.removeEventListener("mousedown", onClickAnywhere);
+    }, [showInstruction]);
+    const openInstruction = () => setShowInstruction(true);
+    const closeInstruction = () => setShowInstruction(false);
 
-        audio.play();
+    useEffect(() => {
+        if (showInstruction) {
+            const prev = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+            return () => { document.body.style.overflow = prev; };
+        }
+    }, [showInstruction]);
+
+    function ModalPortal({ children }) {
+        return createPortal(children, document.body);
     }
+
+
 
     // set vị trí ban đầu của các thẻ
     const [pos, setPos] = useState({
@@ -134,72 +158,99 @@ export const Phase6 = () => {
                     </div>
                 </div>
             )}
+            <div className={`stage ${showInstruction ? "dimmed" : ""}`} aria-hidden={showInstruction}>
+                <div className="phase-background" ref={frameRef}>
+                    <img src={bg} alt="Phase Background" className="phase-image" />
 
-            <div className="phase-background" ref={frameRef}>
-                <img src={bg} alt="Phase Background" className="phase-image" />
+                    <DndContext onDragEnd={handleDragEnd}>
+                        {/* render ảnh */}
+                        {!parentCard &&
+                            cards.map((c) => (
+                                <DraggableCard
+                                    key={c.id}
+                                    id={c.id}
+                                    src={c.src}
+                                    caption={c.caption}
+                                    style={{
+                                        left: `${c.pos.xPct}%`,
+                                        top: `${c.pos.yPct}%`
+                                    }}
+                                    animate={false}
+                                />
+                            ))
+                        }
 
-                <DndContext onDragEnd={handleDragEnd}>
-                    {/* render ảnh */}
-                    {!parentCard &&
-                        cards.map((c) => (
-                            <DraggableCard
-                                key={c.id}
-                                id={c.id}
-                                src={c.src}
-                                caption={c.caption}
-                                style={{
-                                    left: `${c.pos.xPct}%`,
-                                    top: `${c.pos.yPct}%`
-                                }}
-                                animate={false}
-                            />
-                        ))
-                    }
+                        {/* render chữ */}
+                        {!parentText &&
+                            texts.map((t) => (
+                                <DraggableText
+                                    key={t.id}
+                                    id={t.id}
+                                    text={t.text}
+                                    style={{
+                                        left: `${t.pos.xPct}%`,
+                                        top: `${t.pos.yPct}%`
+                                    }}
+                                />
+                            ))
+                        }
 
-                    {/* render chữ */}
-                    {!parentText &&
-                        texts.map((t) => (
-                            <DraggableText
-                                key={t.id}
-                                id={t.id}
-                                text={t.text}
-                                style={{
-                                    left: `${t.pos.xPct}%`,
-                                    top: `${t.pos.yPct}%`
-                                }}
-                            />
-                        ))
-                    }
+                        {character}
 
-                    {character}
+                        {/* hiệu ứng khi đúng */}
+                        {effect &&
+                            cards.map((c) => (
+                                <div
+                                    key={`ghost-${c.id}`}
+                                    className="card animate ghost"
+                                    style={{
+                                        left: `${pos.char.xPct}%`,
+                                        top: `${pos.char.yPct}%`,
+                                        position: 'absolute'
+                                    }}
+                                >
+                                    <div className="caption">{c.caption}</div>
+                                    <img src={c.src} alt={c.caption} draggable="false" />
+                                </div>
+                            ))
+                        }
+                    </DndContext>
 
-                    {/* hiệu ứng khi đúng */}
-                    {effect &&
-                        cards.map((c) => (
-                            <div
-                                key={`ghost-${c.id}`}
-                                className="card animate ghost"
-                                style={{
-                                    left: `${pos.char.xPct}%`,
-                                    top: `${pos.char.yPct}%`,
-                                    position: 'absolute'
-                                }}
-                            >
-                                <div className="caption">{c.caption}</div>
-                                <img src={c.src} alt={c.caption} draggable="false" />
-                            </div>
-                        ))
-                    }
-                </DndContext>
-
-                {/* chat hiển thị câu */}
-                <BoxChat posX={950} posY={330} text={textAnimal} />
-                <button
-                    onClick={() => clickReplay()}
-                >
-                    <BoxChat posX={900} posY={270} text={textQuestion} />
-                </button>
+                    {/* chat hiển thị câu */}
+                    <BoxChat posX={950} posY={330} text={textAnimal} />
+                    <button
+                        onClick={() => clickReplay()}
+                    >
+                        <BoxChat posX={900} posY={270} text={textQuestion} />
+                    </button>
+                </div>
+                <div className="setting-phase">
+                    <img src={instruction} alt="instruction" onClick={openInstruction} className="btn-icon" />
+                    <img src={exit} alt="exit" onClick={() => navigate("/homescreen")} className="btn-icon" />
+                </div>
             </div>
+
+            {/* Overlay làm mờ nền nhưng KHÔNG ảnh hưởng modal */}
+            {showInstruction && (
+                <ModalPortal>
+                    <div className="screen-dim" />
+                </ModalPortal>
+            )}
+
+            {/* Popup hướng dẫn */}
+            {showInstruction && (
+                <ModalPortal>
+                    <div className="modal" role="dialog" aria-modal="true" aria-label="Hướng dẫn">
+                        <div className="modal-backdrop" onClick={closeInstruction} />
+                        <div className="modal-content" ref={modalRef} tabIndex={-1}>
+                            <h2 className="modal-title">Phase 6 Instructions</h2>
+                            <div className="modal-body">
+                                <p>Hãy kéo thả các thẻ vào đúng vị trí để hoàn thành nhiệm vụ…</p>
+                            </div>
+                        </div>
+                    </div>
+                </ModalPortal>
+            )}
         </div>
     );
 };
