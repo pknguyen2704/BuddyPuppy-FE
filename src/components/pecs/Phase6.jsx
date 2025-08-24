@@ -22,7 +22,6 @@ export const Phase6 = () => {
 
     const [showPopup, setShowPopup] = useState(false);
 
-
     let indexQuestion = 0;
 
     function playSoundNTimes(src, n) {
