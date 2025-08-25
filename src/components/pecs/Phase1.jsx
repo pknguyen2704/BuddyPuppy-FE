@@ -12,6 +12,7 @@ import './Phase.css';
 import { playSoundNTimes } from './Sound/Sound';
 import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 import { useNavigate } from 'react-router-dom';
+import { getAllAnimalsService, getAnimalByIdService} from '~/service/animalService'
 
 export const Phase1 = () => {
     const frameRef = useRef(null);
@@ -20,7 +21,26 @@ export const Phase1 = () => {
     const [effect, setEffect] = useState(false);
     const [animate, setAnimate] = useState(false);
     const [showInstruction, setShowInstruction] = useState(true);
+    const [indexAnimal, setIndexAnimal] = useState(0);
+    const [animalSelect, setAnimalSelect] = useState();
     const navigate = useNavigate();
+
+    // Random index of array animal
+    function randomIndex(start, finish){
+        return Math.floor(Math.random() * (finish - start +1 ) + start);
+    }
+
+    // Get data from backend
+    useEffect(() => {
+        async function fetchData () {
+            const response = await getAllAnimalsService();
+            const index = randomIndex(0, 7)
+            setIndexAnimal(index);
+            setAnimalSelect(response.animals[index]);
+            // console.log(animalSelect);
+        }
+        fetchData()
+    }, [])
 
     useEffect(() => {
         const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
@@ -54,11 +74,12 @@ export const Phase1 = () => {
     }
 
 
-
     // set vị trí ban đầu của các thẻ
+    // Nếu random ra cá thì phải setPosition theo fish còn lại thì random theo animals
     const [pos, setPos] = useState({
         char: { xPct: 70, yPct: 50 },
-        pig: { xPct: 30, yPct: 40 },
+        animals: { xPct: randomIndex(35,65), yPct: randomIndex(20, 80) },
+        fish: {xPct: 20, yPct: 75}
     });
 
     const clamp = (v) => Math.max(0, Math.min(100, v));
@@ -70,7 +91,7 @@ export const Phase1 = () => {
         // Nếu thả vào droppable thì xóa luôn
         if (over) {
             setParent(over.id);
-            playSoundNTimes(soundEffect, 3);
+            playSoundNTimes(animalSelect.sound, 3);
 
             // bật hiệu ứng
             setEffect(true);
@@ -82,9 +103,10 @@ export const Phase1 = () => {
         }
     }
 
-    const cards = [
-        { id: "pig", src: pig, caption: "Pig", pos: pos.pig },
-    ];
+
+    const cards = animalSelect ? [
+        { id: animalSelect.name, src: animalSelect.image, caption: animalSelect.name, pos: (indexAnimal === 5) ? pos.fish : pos.animals },
+    ] : [];
 
     const character = (
         <DroppableCharacter

@@ -23,6 +23,7 @@ export const Phase2 = () => {
     const [animate, setAnimate] = useState(false);
     const [findAnimal, setFindAnimal] = useState('bear');
     const [showInstruction, setShowInstruction] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const onKey = (e) => e.key === "Escape" && setShowInstruction(false);

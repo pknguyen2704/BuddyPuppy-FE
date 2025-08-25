@@ -35,9 +35,9 @@ export const HomeScreen = () => {
                         <div className="hs-container-util">
                             <img src={study} alt="Study" className="hs-util-image" onClick={() => navigate("/phase1")} />
                             <h1 className="hs-util-title">STUDY WITH PUPPY</h1>
-                        </div>
+                        </div> 
                         <div className="hs-container-util">
-                            <img src={story} alt="Story" className="hs-util-image" />
+                            <img src={story} alt="Story" className="hs-util-image" onClick={()=> navigate("")} />
                             <h1 className="hs-util-title">SOCIAL STORY</h1>
                         </div>
                     </div>
