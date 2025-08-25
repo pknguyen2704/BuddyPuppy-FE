@@ -8,6 +8,25 @@
     /* tránh lộ màu trắng ở viền */
 }
 
+/* Button next phase */
+.button-continue {
+    position: absolute;
+    top: 80%;
+    left: 51%;
+    transform: translateX(-50%);
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #ed8600, #f5fd00);
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
 .phase-background {
     width: 100%;
     height: 100%;

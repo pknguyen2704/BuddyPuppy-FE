@@ -12,7 +12,8 @@ import './Phase.css';
 import { playSoundNTimes } from './Sound/Sound';
 import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 import { useNavigate } from 'react-router-dom';
-import { getAllAnimalsService, getAnimalByIdService} from '~/service/animalService'
+import { getAllAnimalsService, getAnimalByIdService } from '~/service/animalService'
+import { ttsFunction } from '~/service/ttsService'
 
 export const Phase1 = () => {
     const frameRef = useRef(null);
@@ -23,16 +24,17 @@ export const Phase1 = () => {
     const [showInstruction, setShowInstruction] = useState(true);
     const [indexAnimal, setIndexAnimal] = useState(0);
     const [animalSelect, setAnimalSelect] = useState();
+    const [isContinue, setIsContinue] = useState(false);
     const navigate = useNavigate();
 
     // Random index of array animal
-    function randomIndex(start, finish){
-        return Math.floor(Math.random() * (finish - start +1 ) + start);
+    function randomIndex(start, finish) {
+        return Math.floor(Math.random() * (finish - start + 1) + start);
     }
 
     // Get data from backend
     useEffect(() => {
-        async function fetchData () {
+        async function fetchData() {
             const response = await getAllAnimalsService();
             const index = randomIndex(0, 7)
             setIndexAnimal(index);
@@ -77,30 +79,50 @@ export const Phase1 = () => {
     // Nếu random ra cá thì phải setPosition theo fish còn lại thì random theo animals
     const [pos, setPos] = useState({
         char: { xPct: 70, yPct: 50 },
-        animals: { xPct: randomIndex(35,65), yPct: randomIndex(20, 80) },
-        fish: {xPct: 20, yPct: 75}
+        animals: { xPct: randomIndex(35, 65), yPct: randomIndex(20, 80) },
+        fish: { xPct: 20, yPct: 75 }
     });
 
     const clamp = (v) => Math.max(0, Math.min(100, v));
 
     // Xử lý kéo thả
-    function handleDragEnd({ active, over }) {
-        if (!frameRef.current || !active) return;
+    async function handleDragEnd({ active, over }) {
+        try {
+            if (!frameRef.current || !active) return;
 
-        // Nếu thả vào droppable thì xóa luôn
-        if (over) {
-            setParent(over.id);
-            playSoundNTimes(animalSelect.sound, 3);
+            // Nếu thả vào droppable thì xóa luôn
+            if (over) {
+                setParent(over.id);
+                await onSound(`I want ${animalSelect.name}`, 'male')
 
-            // bật hiệu ứng
-            setEffect(true);
+                playSoundNTimes(animalSelect.sound, 1);
 
-            // sau 1s (bằng thời gian animation) thì tắt effect
-            setTimeout(() => {
-                setEffect(false);
-            }, 1000);
+                // bật hiệu ứng
+                setEffect(true);
+
+                // sau 1s (bằng thời gian animation) thì tắt effect
+                setTimeout(() => {
+                    setEffect(false);
+                }, 1000);
+            }
+        } catch (error) {
+            console.error(error.message);
+        } finally {
+            setIsContinue(true);
         }
     }
+    const onSound = async (text, gender) => {
+        const response = await ttsFunction({
+            text: text,
+            gender: gender,
+        });
+
+        const audioBlob = new Blob([response], { type: "audio/mpeg" });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        const audio = new Audio(audioUrl);
+        audio.play();
+    };
 
 
     const cards = animalSelect ? [
@@ -121,6 +143,13 @@ export const Phase1 = () => {
 
     return (
         <div className="container-phase">
+            {isContinue &&
+                <button
+                    className='button-continue'
+                    onClick={() => navigate('/phase2')}
+                > Continue
+                </button>
+            }
             <div className={`stage ${showInstruction ? "dimmed" : ""}`} aria-hidden={showInstruction}>
                 <div className="phase-background" ref={frameRef}>
                     <img src={bg} alt="Phase Background" className="phase-image" />

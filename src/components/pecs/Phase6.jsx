@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { BoxChat } from './BoxChat/BoxChat';
 import { getAllAnimalsService } from '~/service/animalService';
 import pig from '~/assets/Pecs/pig.png';
+import { ttsFunction } from '~/service/ttsService'
 
 export const Phase6 = () => {
     const frameRef = useRef(null);
@@ -30,6 +31,7 @@ export const Phase6 = () => {
     const textQuestion = 'What do you see?';
     const [dataAnimals, setDataAnimals] = useState([]);
     const [indexAnimals, setIndexAnimals] = useState(0);
+    const [isContinue, setIsContinue] = useState(false);
 
     const navigate = useNavigate();
 
@@ -95,21 +97,41 @@ export const Phase6 = () => {
 
         fetchData();
     }, []);
+    const onSound = async (text, gender) => {
+        const response = await ttsFunction({
+            text: text,
+            gender: gender,
+        });
 
+        const audioBlob = new Blob([response], { type: "audio/mpeg" });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        const audio = new Audio(audioUrl);
+        audio.play();
+    };
+
+    const closeInstruction = () => {
+        setShowInstruction(false);
+        onSound(textQuestion, 'female');
+    }
+
+    // ESC -> đóng popup
     useEffect(() => {
-        const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
-        window.addEventListener("keydown", onKey);
-        return () => window.removeEventListener("keydown", onKey);
+        const onKey = (e) => e.key === 'Escape' && closeInstruction();
+        window.addEventListener('keydown', onKey);
+        closeInstruction
+        return () => window.removeEventListener('keydown', onKey);
     }, []);
 
+    // click ngoài modal -> đóng
     useEffect(() => {
         if (!showInstruction) return;
         const onClickAnywhere = (e) => {
             if (!modalRef.current) return;
-            if (!modalRef.current.contains(e.target)) setShowInstruction(false);
+            if (!modalRef.current.contains(e.target)) closeInstruction();
         };
-        document.addEventListener("mousedown", onClickAnywhere);
-        return () => document.removeEventListener("mousedown", onClickAnywhere);
+        document.addEventListener('mousedown', onClickAnywhere);
+        return () => document.removeEventListener('mousedown', onClickAnywhere);
     }, [showInstruction]);
 
     useEffect(() => {
@@ -124,7 +146,7 @@ export const Phase6 = () => {
         return createPortal(children, document.body);
     }
 
-    function handleDragEnd({ active, over }) {
+    async function handleDragEnd({ active, over }) {
         if (!frameRef.current || !active || !over) return;
 
         // Kéo thả text card
@@ -136,7 +158,7 @@ export const Phase6 = () => {
         }
 
         if (!parentText) {
-            alert("Start with 'I see'");
+            await onSound(`The sentence starts with I see. Try again!`);
             return;
         }
 
@@ -145,17 +167,22 @@ export const Phase6 = () => {
         if (draggedCard) {
             if (draggedCard.id === dataAnimals[indexAnimals].name) {
                 setDroppedAnimals(prev => [...prev, draggedCard.id]);
-                setTextAnimal("I want " + draggedCard.id);
+                const textSpeed = "I want " + draggedCard.id;
+                setTextAnimal(textSpeed);
+                await onSound(textSpeed, 'male');
 
                 // Play âm thanh riêng của con vật
                 if (draggedCard.sound) {
-                    playSoundNTimes(draggedCard.sound, 3);
+                    playSoundNTimes(draggedCard.sound, 1);
                 }
 
                 setEffectAnimal(draggedCard.id);
-                setTimeout(() => setEffectAnimal(null), 1000);
+                setTimeout(() => {
+                    setEffectAnimal(null)
+                    setIsContinue(true);
+                }, 1000);
             } else {
-                alert('sai roio');
+                await onSound('Try again!');
             }
         }
     }
@@ -181,7 +208,13 @@ export const Phase6 = () => {
 
     return (
         <div className="container-phase">
-
+            {isContinue &&
+                <button
+                    className='button-continue'
+                    onClick={() => navigate('/homescreen')}
+                > Done
+                </button>
+            }
             {showPopup && (
                 <div className="popup-overlay">
                     <div className="popup-content">

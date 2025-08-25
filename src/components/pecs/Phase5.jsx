@@ -13,32 +13,21 @@ import { playSoundNTimes } from './Sound/Sound';
 import { useNavigate } from 'react-router-dom';
 import { BoxChat } from './BoxChat/BoxChat';
 import { getAllAnimalsService } from '~/service/animalService';
+import { ttsFunction } from '~/service/ttsService'
 
 export const Phase5 = () => {
   const frameRef = useRef(null);
   const modalRef = useRef(null);
-
+  const [isContinue, setIsContinue] = useState(false);
   const navigate = useNavigate();
-
-  // UI / modal
   const [showInstruction, setShowInstruction] = useState(true);
-
-  // Câu hỏi + câu trả lời đang hiển thị
   const questions = ['What do you want?', 'What do you see?'];
   const [questionIndex, setQuestionIndex] = useState(Math.floor(Math.random() * 2));
   const [sentence, setSentence] = useState('....... .......');
-
-  // DnD: khóa render khi đã thả
   const [parentText, setParentText] = useState(null);
-
-  // Data động vật + vị trí
-  const [cards, setCards] = useState([]); // [{id, src, caption, sound, pos}]
-  const [droppedAnimals, setDroppedAnimals] = useState([]); // id các con đã thả (ẩn riêng)
-
-  // Hiệu ứng cho đúng con vừa thả
+  const [cards, setCards] = useState([]);
+  const [droppedAnimals, setDroppedAnimals] = useState([]);
   const [effectAnimal, setEffectAnimal] = useState(null);
-
-  // Vị trí cố định
   const pos = {
     char: { xPct: 70, yPct: 50 },
     fish: { xPct: 20, yPct: 80 },
@@ -61,7 +50,7 @@ export const Phase5 = () => {
   // Hai thẻ chữ phải kéo đúng theo câu hỏi
   const texts = [
     { id: 'word1', text: 'I want', pos: posText.text1, index: 0 },
-    { id: 'word2', text: 'I see', pos: posText.text2, index: 1 }   
+    { id: 'word2', text: 'I see', pos: posText.text2, index: 1 }
   ];
 
   // tiện ích
@@ -82,7 +71,7 @@ export const Phase5 = () => {
           position = pos.fish;
         } else {
           const idx = randomIndex(0, Math.max(positionsCopy.length - 1, 0));
-          position = positionsCopy[idx] || pos.fish; 
+          position = positionsCopy[idx] || pos.fish;
           positionsCopy.splice(idx, 1);
         }
         return {
@@ -99,11 +88,29 @@ export const Phase5 = () => {
 
     fetchData();
   }, []);
+  const onSound = async (text, gender) => {
+    const response = await ttsFunction({
+      text: text,
+      gender: gender,
+    });
+
+    const audioBlob = new Blob([response], { type: "audio/mpeg" });
+    const audioUrl = URL.createObjectURL(audioBlob);
+
+    const audio = new Audio(audioUrl);
+    audio.play();
+  };
+
+  const closeInstruction = () => {
+    setShowInstruction(false);
+    onSound(questions[questionIndex], 'female');
+  }
 
   // ESC -> đóng popup
   useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && setShowInstruction(false);
+    const onKey = (e) => e.key === 'Escape' && closeInstruction();
     window.addEventListener('keydown', onKey);
+    closeInstruction
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
@@ -112,7 +119,7 @@ export const Phase5 = () => {
     if (!showInstruction) return;
     const onClickAnywhere = (e) => {
       if (!modalRef.current) return;
-      if (!modalRef.current.contains(e.target)) setShowInstruction(false);
+      if (!modalRef.current.contains(e.target)) closeInstruction();
     };
     document.addEventListener('mousedown', onClickAnywhere);
     return () => document.removeEventListener('mousedown', onClickAnywhere);
@@ -134,7 +141,7 @@ export const Phase5 = () => {
   }
 
   // Handler kéo thả
-  function handleDragEnd({ active, over }) {
+  async function handleDragEnd({ active, over }) {
     if (!frameRef.current || !active) return;
     if (!over) return;
 
@@ -142,7 +149,7 @@ export const Phase5 = () => {
     const draggedText = texts.find((t) => t.id === active.id);
     if (draggedText) {
       if (draggedText.index !== questionIndex) {
-        alert(`The question is "${questions[questionIndex]}"`);
+        await onSound(`The question is ${questions[questionIndex]}. Try again!`, 'female');
         return;
       }
       setParentText(over.id);
@@ -152,7 +159,7 @@ export const Phase5 = () => {
 
     // Bắt buộc phải kéo thẻ chữ trước
     if (!parentText) {
-      alert(`Start with "${texts[questionIndex].text}"`);
+      await onSound(`The sentence starts with I see or I want. Try again!`);
       return;
     }
 
@@ -166,9 +173,10 @@ export const Phase5 = () => {
       const leading = texts[questionIndex].text;
       setSentence(`${leading} ${draggedCard.id}`);
 
+      await onSound(`I ${questionIndex === 0 ? 'want' : 'see'} ${draggedCard.id}`, 'male')
       // Phát âm thanh từng con (nếu có)
       if (draggedCard.sound) {
-        playSoundNTimes(draggedCard.sound, 2);
+        playSoundNTimes(draggedCard.sound, 1);
       }
 
       // Hiệu ứng ghost chỉ cho con vừa thả
@@ -177,9 +185,7 @@ export const Phase5 = () => {
 
       // Chuyển sang câu hỏi tiếp theo sau 1.2s (đợi effect ~1s)
       setTimeout(() => {
-        setParentText(null);
-        setSentence('....... .......');
-        setQuestionIndex((prev) => (prev + 1) % questions.length);
+        setIsContinue(true);
       }, 1200);
 
       return;
@@ -200,6 +206,13 @@ export const Phase5 = () => {
 
   return (
     <div className="container-phase">
+      {isContinue &&
+        <button
+          className='button-continue'
+          onClick={() => navigate('/phase6')}
+        > Continue
+        </button>
+      }
       <div className={`stage ${showInstruction ? 'dimmed' : ''}`} aria-hidden={showInstruction}>
         <div className="phase-background" ref={frameRef}>
           <img src={bg} alt="Phase Background" className="phase-image" />

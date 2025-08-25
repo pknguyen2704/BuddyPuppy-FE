@@ -10,7 +10,9 @@ import { SocialStory2 } from './components/SocialStory/Story2/SocialStory2'
 import { SocialStory3 } from './components/SocialStory/Story3/SocialStory3'
 import { Phase1 } from './components/pecs/Phase1.jsx'
 import { Phase2 } from "./components/pecs/Phase2.jsx"
-import { Phase3 } from "./components/pecs/Phase3.jsx"
+import { Phase3p1 } from "./components/pecs/Phase3p1.jsx"
+import { Phase3p2 } from "./components/pecs/Phase3p2.jsx"
+import { Phase3p3 } from "./components/pecs/Phase3p3.jsx"
 import { Phase4 } from "./components/pecs/Phase4.jsx"
 import { Phase5 } from "./components/pecs/Phase5.jsx"
 import { Phase6 } from "./components/pecs/Phase6.jsx"
@@ -65,9 +67,19 @@ function App() {
           <Phase2 />
         </ProtectedRoute>
       } />
-      <Route path="/phase3" element={
+      <Route path="/phase3p1" element={
         <ProtectedRoute>
-          <Phase3 />
+          <Phase3p1 />
+        </ProtectedRoute>
+      } />
+      <Route path="/phase3p2" element={
+        <ProtectedRoute>
+          <Phase3p2 />
+        </ProtectedRoute>
+      } />
+      <Route path="/phase3p3" element={
+        <ProtectedRoute>
+          <Phase3p3 />
         </ProtectedRoute>
       } />
       <Route path="/phase4" element={

@@ -13,18 +13,19 @@ import { playSoundNTimes } from './Sound/Sound';
 import { useNavigate } from 'react-router-dom';
 import { BoxChat } from './BoxChat/BoxChat';
 import { getAllAnimalsService } from '~/service/animalService';
+import { ttsFunction } from '~/service/ttsService'
 
 export const Phase4 = () => {
     const frameRef = useRef(null);
     const modalRef = useRef(null);
     const [showInstruction, setShowInstruction] = useState(true);
-
     const [cards, setCards] = useState([]);
     const [animalSelect, setAnimalSelect] = useState(null);
     const [textAnimal, setTextAnimal] = useState('....... .......');
     const [parentText, setParentText] = useState(null);
     const [droppedAnimals, setDroppedAnimals] = useState([]);
     const [effectAnimal, setEffectAnimal] = useState(null);
+    const [isContinue, setIsContinue] = useState(false);
 
     const navigate = useNavigate();
 
@@ -87,6 +88,18 @@ export const Phase4 = () => {
 
         fetchData();
     }, []);
+    const onSound = async (text, gender) => {
+        const response = await ttsFunction({
+            text: text,
+            gender: gender,
+        });
+
+        const audioBlob = new Blob([response], { type: "audio/mpeg" });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        const audio = new Audio(audioUrl);
+        audio.play();
+    };
 
     useEffect(() => {
         const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
@@ -116,7 +129,7 @@ export const Phase4 = () => {
         return createPortal(children, document.body);
     }
 
-    function handleDragEnd({ active, over }) {
+    async function handleDragEnd({ active, over }) {
         if (!frameRef.current || !active || !over) return;
 
         // Kéo thả text card
@@ -136,15 +149,18 @@ export const Phase4 = () => {
         const draggedCard = cards.find(c => c.id === active.id);
         if (draggedCard) {
             setDroppedAnimals(prev => [...prev, draggedCard.id]);
-            setTextAnimal("I want " + draggedCard.id);
+            const textSpeed = "I want " + draggedCard.id
+            setTextAnimal(textSpeed);
 
             // Play âm thanh riêng của con vật
+            await onSound(textSpeed);
             if (draggedCard.sound) {
-                playSoundNTimes(draggedCard.sound, 3);
+                playSoundNTimes(draggedCard.sound, 1);
             }
 
             setEffectAnimal(draggedCard.id);
             setTimeout(() => setEffectAnimal(null), 1000);
+            setIsContinue(true);
         }
     }
 
@@ -162,6 +178,13 @@ export const Phase4 = () => {
 
     return (
         <div className="container-phase">
+            {isContinue &&
+                <button
+                    className='button-continue'
+                    onClick={() => navigate('/phase5')}
+                > Continue
+                </button>
+            }
             <div className={`stage ${showInstruction ? "dimmed" : ""}`} aria-hidden={showInstruction}>
                 <div className="phase-background" ref={frameRef}>
                     <img src={bg} alt="Phase Background" className="phase-image" />

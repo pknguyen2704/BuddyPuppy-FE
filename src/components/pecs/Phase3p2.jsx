@@ -12,22 +12,24 @@ import './Phase.css';
 import { playSoundNTimes } from './Sound/Sound';
 import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 import { useNavigate } from 'react-router-dom';
+import { ttsFunction } from '~/service/ttsService'
 
 import { BoxChat } from './BoxChat/BoxChat';
 import { getAllAnimalsService, getAnimalByIdService } from '~/service/animalService'
 
-export const Phase3 = () => {
+export const Phase3p2 = () => {
     const frameRef = useRef(null);
     const modalRef = useRef(null);
+    const [cards, setCards] = useState([]);
     const [parent, setParent] = useState(null);
     const [effect, setEffect] = useState(false);
     const [animate, setAnimate] = useState(false);
     const [findAnimal, setFindAnimal] = useState('bear');
-    const [showInstruction, setShowInstruction] = useState(true);
+    const [showInstruction, setShowInstruction] = useState(false);
     const [animalsArray, setAnimalsArray] = useState([]);
     const [textSelect, setTextSelect] = useState('Find the bear!');
     const [animalSelect, setAnimalSelect] = useState(0);
-
+    const [isContinue, setIsContinue] = useState(false);
 
     //Animal bị xóa
     const [droppedAnimals, setDroppedAnimals] = useState([]);
@@ -35,59 +37,6 @@ export const Phase3 = () => {
 
 
     const navigate = useNavigate();
-
-    // Random index of array animal
-    function randomIndex(start, finish) {
-        return Math.floor(Math.random() * (finish - start + 1) + start);
-    }
-
-    // Get data from backend
-    useEffect(() => {
-        async function fetchData() {
-            const response = await getAllAnimalsService();
-            setAnimalsArray(response.animals);
-            let indexSel = randomIndex(0, 7);
-            let animSel = response.animals[indexSel]
-            setAnimalSelect(animSel);
-            setTextSelect(`Find the ${animSel.name}!`)
-        }
-        fetchData()
-    }, [])
-
-    useEffect(() => {
-        const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
-        window.addEventListener("keydown", onKey);
-        return () => window.removeEventListener("keydown", onKey);
-    }, []);
-
-    // Click ở bất kỳ đâu ngoài popup -> đóng
-    useEffect(() => {
-        if (!showInstruction) return;
-        const onClickAnywhere = (e) => {
-            if (!modalRef.current) return;
-            if (!modalRef.current.contains(e.target)) setShowInstruction(false);
-        };
-        document.addEventListener("mousedown", onClickAnywhere);
-        return () => document.removeEventListener("mousedown", onClickAnywhere);
-    }, [showInstruction]);
-    const openInstruction = () => setShowInstruction(true);
-    const closeInstruction = () => setShowInstruction(false);
-
-    useEffect(() => {
-        if (showInstruction) {
-            const prev = document.body.style.overflow;
-            document.body.style.overflow = 'hidden';
-            return () => { document.body.style.overflow = prev; };
-        }
-    }, [showInstruction]);
-
-    function ModalPortal({ children }) {
-        return createPortal(children, document.body);
-    }
-
-
-
-    // set vị trí ban đầu của các thẻ
     const [pos, setPos] = useState({
         char: { xPct: 70, yPct: 50 },
         fish: { xPct: 20, yPct: 80 },
@@ -102,10 +51,123 @@ export const Phase3 = () => {
         ]
     });
 
+    // Random index of array animal
+    function randomIndex(start, finish) {
+        return Math.floor(Math.random() * (finish - start + 1) + start);
+    }
+
+    // Get data from backend
+    useEffect(() => {
+        async function fetchData() {
+            const response = await getAllAnimalsService();
+            const animals = response.animals;
+
+            // 🔹 Chọn ngẫu nhiên 2 con từ mảng animals
+            const shuffled = [...animals].sort(() => 0.5 - Math.random());
+            const selectedAnimals = shuffled.slice(0, 4);
+
+            const positionsCopy = [...pos.animalsPositions];
+            const cardsWithPos = selectedAnimals.map((item) => {
+                let position;
+                if (item.name === 'fish') {
+                    position = pos.fish;
+                } else {
+                    let idx = randomIndex(0, positionsCopy.length - 1);
+                    position = positionsCopy[idx];
+                    positionsCopy.splice(idx, 1);
+                }
+                return {
+                    id: item.name,
+                    src: item.image,
+                    caption: item.name,
+                    sound: item.sound,
+                    pos: position
+                };
+            });
+
+            setCards(cardsWithPos);
+
+            // 🔹 Chọn 1 trong 2 con làm mục tiêu hiển thị trong BoxChat
+            const indexSel = randomIndex(0, selectedAnimals.length - 1);
+            setAnimalSelect(selectedAnimals[indexSel]);
+            const textSpeed = `Find the ${selectedAnimals[indexSel].name}!`
+            setTextSelect(textSpeed);
+        }
+
+        fetchData();
+    }, []);
+
+    const handleCloseInstruction = () => {
+        setShowInstruction(false);
+        if (animalSelect) {
+            onSound(textSelect, 'male');
+        }
+    };
+
+    // Khi animalSelect thay đổi (sau fetch) thì phát âm thanh
+    useEffect(() => {
+        if (animalSelect && animalSelect.name) {
+            onSound(`Find the ${animalSelect.name}!`, 'male');
+        }
+    }, [animalSelect]);
+
+
+    // ESC -> đóng popup
+    useEffect(() => {
+        const onKey = (e) => e.key === "Escape" && handleCloseInstruction();
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, [animalSelect, textSelect]);
+
+
+    // click ngoài modal -> đóng
+    useEffect(() => {
+        if (!showInstruction) return;
+        const onClickAnywhere = (e) => {
+            if (!modalRef.current) return;
+            if (!modalRef.current.contains(e.target)) {
+                handleCloseInstruction();
+            }
+        };
+        document.addEventListener("mousedown", onClickAnywhere);
+        return () => document.removeEventListener("mousedown", onClickAnywhere);
+    }, [showInstruction, animalSelect, textSelect]);
+
+    const openInstruction = () => setShowInstruction(true);
+    const closeInstruction = () => setShowInstruction(false);
+
+    useEffect(() => {
+        if (showInstruction) {
+            const prev = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+            return () => { document.body.style.overflow = prev; };
+        }
+    }, [showInstruction]);
+
+    function ModalPortal({ children }) {
+        return createPortal(children, document.body);
+    }
+    const onSound = async (text, gender) => {
+        const response = await ttsFunction({
+            text: text,
+            gender: gender,
+        });
+
+        const audioBlob = new Blob([response], { type: "audio/mpeg" });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        const audio = new Audio(audioUrl);
+        audio.play();
+    };
+
+
+    // set vị trí ban đầu của các thẻ
+
+
     const clamp = (v) => Math.max(0, Math.min(100, v));
 
     // Xử lý kéo thả
-    function handleDragEnd({ active, over }) {
+    async function handleDragEnd({ active, over }) {
         if (!frameRef.current || !active) return;
 
         // Nếu thả vào droppable thì xóa luôn
@@ -114,7 +176,8 @@ export const Phase3 = () => {
 
             if (draggedCard.id === animalSelect.name) {
                 setDroppedAnimals(prev => [...prev, draggedCard.id]);
-                playSoundNTimes(animalSelect.sound, 3);
+                await onSound(`I want ${animalSelect.name}`);
+                playSoundNTimes(animalSelect.sound, 1);
 
 
                 // bật hiệu ứng
@@ -125,34 +188,18 @@ export const Phase3 = () => {
                 setTimeout(() => {
                     setEffectAnimal(null);
                 }, 1000);
-
+                setTimeout(() => {
+                    navigate('/phase3p3')
+                }, 1500);
             }
             else {
-                alert('Sai roi!')
+                await onSound('Try again!', 'female');
             }
 
 
         }
     }
-    const positions = [...pos.animalsPositions];
-    const cards = animalsArray.map((item, index) => {
-        let posision;
-        if (item.name === 'fish') {
-            posision = pos.fish
-        }
-        else {
-            let indexTemp = randomIndex(0, positions.length - 1);
-            posision = positions[indexTemp];
-            positions.splice(indexTemp, 1);
-        }
-        return {
-            id: item.name,
-            src: item.image,
-            caption: item.name,
-            sound: item.sound,
-            pos: posision
-        }
-    })
+
 
 
     const character = (
