@@ -28,6 +28,7 @@ export const StoryPage = () => {
                             <img src={story3} alt="Story1" className="st-util-image" />
                             <h1 className="st-util-title">SAY HI AND GOODBYE</h1>
                         </div>
+                        
                         <div className="util-container" onClick={() => navigate("/SocialStory3")}>
                             <img src={story2} alt="Story1" className="st-util-image" />
                             <h1 className="st-util-title">POTTY-TRAINING</h1>
