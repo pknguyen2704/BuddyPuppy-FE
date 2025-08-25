@@ -100,7 +100,7 @@ export const SocialStory2 = () => {
                     >
                         {/* Slide 1 */}
                         {index === 0 && (
-                            <div className="position-relative w-100 text-center div-1">
+                            <div className="position-relative w-100 text-center s2div-1">
                                 <img src={image1} alt="story-1" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3"
@@ -113,7 +113,7 @@ export const SocialStory2 = () => {
 
                         {/* Slide 2 */}
                         {index === 1 && (
-                            <div className="position-relative w-100 text-center div-2">
+                            <div className="position-relative w-100 text-center s2div-2">
                                 <img src={image2} alt="story-2" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3"
@@ -126,7 +126,7 @@ export const SocialStory2 = () => {
 
                         {/* Slide 3 */}
                         {index === 2 && (
-                            <div className="position-relative w-100 text-center div-3">
+                            <div className="position-relative w-100 text-center s2div-3">
                                 <img src={image3} alt="story-3" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-1"
@@ -163,7 +163,7 @@ export const SocialStory2 = () => {
 
                         {/* Slide 4 */}
                         {index === 3 && (
-                            <div className="position-relative w-100 text-center div-4">
+                            <div className="position-relative w-100 text-center s2div-4">
                                 <img src={image4} alt="story-4" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-1"
@@ -202,7 +202,7 @@ export const SocialStory2 = () => {
 
                         {/* Slide 5 */}
                         {index === 4 && (
-                            <div className="position-relative w-100 text-center div-6">
+                            <div className="position-relative w-100 text-center s2div-6">
                                 <img src={image6} alt="story-5" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-1"
@@ -233,7 +233,7 @@ export const SocialStory2 = () => {
 
                         {/* Slide 6 */}
                         {index === 5 && (
-                            <div className="position-relative w-100 text-center div-5">
+                            <div className="position-relative w-100 text-center s2div-5">
                                 <img src={image5} alt="story-6" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3"
@@ -246,7 +246,7 @@ export const SocialStory2 = () => {
 
                         {/* Slide 7 */}
                         {index === 6 && (
-                            <div className="position-relative w-100 text-center div-7">
+                            <div className="position-relative w-100 text-center s2div-7">
                                 <img src={image7} alt="story-7" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute me-3"
@@ -257,7 +257,7 @@ export const SocialStory2 = () => {
                             </div>
                         )}
                         {index === 7 && (
-                            <div className="position-relative w-100 text-center div-8">
+                            <div className="position-relative w-100 text-center s2div-8">
                                 <img src={image8} alt="story-8" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-1"
@@ -292,7 +292,7 @@ export const SocialStory2 = () => {
                             </div>
                         )}
                         {index === 8 && (
-                            <div className="position-relative w-100 text-center div-9">
+                            <div className="position-relative w-100 text-center s2div-9">
                                 <img src={image9} alt="story-9" className="img-fluid rounded" />
                                 <button
                                     className="btn btn-light rounded-circle position-absolute me-3"

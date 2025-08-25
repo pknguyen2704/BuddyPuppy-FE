@@ -1,49 +1,52 @@
-.div-1 button {
+.s3div-1 button {
   position: absolute !important;
   top: 21% !important;
   left: 59% !important;
 }
 
-.div-2 .bt-1 {
+.s3div-2 .bt-1 {
   position: absolute !important;
   top: 20% !important;
   left: 59% !important;
 }
-.div-2 .bt-2 {
+
+.s3div-2 .bt-2 {
   position: absolute !important;
   top: 60% !important;
   left: 47% !important;
 }
 
-.div-3 .bt-1 {
+.s3div-3 .bt-1 {
   position: absolute !important;
   top: 17% !important;
   left: 55% !important;
 }
-.div-3 .bt-2 {
+
+.s3div-3 .bt-2 {
   position: absolute !important;
   top: 50% !important;
   left: 50%;
 }
 
-.div-4 .bt-1 {
+.s3div-4 .bt-1 {
   position: absolute !important;
   top: 22% !important;
   left: 55% !important;
-}   
+}
 
-.div-5 .bt-1 {
+.s3div-5 .bt-1 {
   position: absolute !important;
   top: 14% !important;
   left: 56%;
 }
-.div-5 .bt-2 {
+
+.s3div-5 .bt-2 {
   position: absolute !important;
   top: 50% !important;
   left: 60%;
 }
 
-.div-6 button {
+.s3div-6 button {
   position: absolute !important;
   top: 16% !important;
   left: 57%;
@@ -51,41 +54,44 @@
 
 
 
-.div-7 button {
+.s3div-7 button {
   position: absolute !important;
   top: 44% !important;
   left: 46%;
 }
 
-.div-8 .bt-1 {
+.s3div-8 .bt-1 {
   position: absolute !important;
   top: 32% !important;
   left: 57%;
 }
 
-.div-9 button {
+.s3div-9 button {
   position: absolute !important;
-  top:40.5% !important;
-  left: 60%;
-}
-.div-10 button {
-  position: absolute !important;
-  top:41% !important;
-  left: 48%;
-}
-.div-11 .bt-1 {
-  position: absolute !important;
-  top:33% !important;
-  left: 40%;
-}
-.div-11 .bt-2 {
-  position: absolute !important;
-  top:46% !important;
+  top: 40.5% !important;
   left: 60%;
 }
 
-.div-12 button {
+.s3div-10 button {
   position: absolute !important;
-  top:21% !important;
+  top: 41% !important;
+  left: 48%;
+}
+
+.s3div-11 .bt-1 {
+  position: absolute !important;
+  top: 33% !important;
+  left: 40%;
+}
+
+.s3div-11 .bt-2 {
+  position: absolute !important;
+  top: 46% !important;
+  left: 60%;
+}
+
+.s3div-12 button {
+  position: absolute !important;
+  top: 21% !important;
   left: 65%;
 }
