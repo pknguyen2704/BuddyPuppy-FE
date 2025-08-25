@@ -37,7 +37,6 @@ export const Phase1 = () => {
             const index = randomIndex(0, 7)
             setIndexAnimal(index);
             setAnimalSelect(response.animals[index]);
-            // console.log(animalSelect);
         }
         fetchData()
     }, [])
