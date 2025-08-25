@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, use } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import bg from '~/assets/Pecs/bg.png';
 import pig from '~/assets/Pecs/pig.png';
@@ -14,6 +14,7 @@ import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 import { useNavigate } from 'react-router-dom';
 
 import { BoxChat } from './BoxChat/BoxChat';
+import { getAllAnimalsService, getAnimalByIdService } from '~/service/animalService'
 
 export const Phase2 = () => {
     const frameRef = useRef(null);
@@ -23,6 +24,36 @@ export const Phase2 = () => {
     const [animate, setAnimate] = useState(false);
     const [findAnimal, setFindAnimal] = useState('bear');
     const [showInstruction, setShowInstruction] = useState(true);
+    const [animalsArray, setAnimalsArray] = useState([]);
+    const [textSelect, setTextSelect] = useState('Find the bear!');
+    const [animalSelect, setAnimalSelect] = useState(0);
+    const [firstRoundDone, setFirstRoundDone] = useState(false);
+
+
+    //Animal bị xóa
+    const [droppedAnimals, setDroppedAnimals] = useState([]);
+    const [effectAnimal, setEffectAnimal] = useState(null);
+
+
+    const navigate = useNavigate();
+
+    // Random index of array animal
+    function randomIndex(start, finish) {
+        return Math.floor(Math.random() * (finish - start + 1) + start);
+    }
+
+    // Get data from backend
+    useEffect(() => {
+        async function fetchData() {
+            const response = await getAllAnimalsService();
+            setAnimalsArray(response.animals);
+            let indexSel = randomIndex(0, 7);
+            let animSel = response.animals[indexSel]
+            setAnimalSelect(animSel);
+            setTextSelect(`Find the ${animSel.name}!`)
+        }
+        fetchData()
+    }, [])
 
     useEffect(() => {
         const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
@@ -60,14 +91,17 @@ export const Phase2 = () => {
     // set vị trí ban đầu của các thẻ
     const [pos, setPos] = useState({
         char: { xPct: 70, yPct: 50 },
-        animal1: { xPct: 30, yPct: 30 },
-        animal2: { xPct: 40, yPct: 40 },
-        animal3: { xPct: 50, yPct: 50 },
-        animal4: { xPct: 60, yPct: 30 },
-        animal5: { xPct: 55, yPct: 40 },
-        animal6: { xPct: 20, yPct: 80 },
-        animal7: { xPct: 50, yPct: 83 },
-        bear: { xPct: 30, yPct: 40 }
+        fish: { xPct: 20, yPct: 80 },
+        animalsPositions: [
+            { xPct: 35, yPct: 44 },
+            { xPct: 40, yPct: 68 },
+            { xPct: 45, yPct: 32 },
+            { xPct: 50, yPct: 56 },
+            { xPct: 55, yPct: 30 },
+            { xPct: 60, yPct: 76 },
+            { xPct: 65, yPct: 48 }
+        ]
+
     });
 
     const clamp = (v) => Math.max(0, Math.min(100, v));
@@ -80,34 +114,66 @@ export const Phase2 = () => {
         if (over) {
             const draggedCard = cards.find(c => c.id === active.id);
 
-            if (draggedCard.id === findAnimal) {
-                setParent(over.id);
-                playSoundNTimes(soundEffect, 3);
+            if (!firstRoundDone) {
+                if (draggedCard.id === animalSelect.name) {
+                    setDroppedAnimals(prev => [...prev, draggedCard.id]);
+                    playSoundNTimes(animalSelect.sound, 3);
+
+                    // Các lượt sau sẽ kéo ngẫu nhiên
+                    setFirstRoundDone(true);
+
+                    setTextSelect('Now, try dragging the other animals!')
+
+                    // bật hiệu ứng
+                    // setEffect(true);
+                    setEffectAnimal(draggedCard.id);
+
+                    // sau 1s (bằng thời gian animation) thì tắt effect
+                    setTimeout(() => {
+                        setEffectAnimal(null);
+                    }, 1000);
+
+                }
+                else {
+                    alert('Sai roi!')
+                }
+            }
+            else {
+                setDroppedAnimals(prev => [...prev, draggedCard.id]);
+                playSoundNTimes(draggedCard.sound, 3);
 
                 // bật hiệu ứng
-                setEffect(true);
+                // setEffect(true);
+                setEffectAnimal(draggedCard.id);
 
                 // sau 1s (bằng thời gian animation) thì tắt effect
                 setTimeout(() => {
-                    setEffect(false);
+                    setEffectAnimal(null);
                 }, 1000);
             }
-            else {
-                alert('Sai roi!')
-            }
+
         }
     }
+    const positions = [...pos.animalsPositions];
+    const cards = animalsArray.map((item, index) => {
+        let posision;
+        if (item.name === 'fish') {
+            posision = pos.fish
+        }
+        else {
+            let indexTemp = randomIndex(0, positions.length - 1);
+            posision = positions[indexTemp];
+            positions.splice(indexTemp, 1);
+        }
+        return {
+            id: item.name,
+            src: item.image,
+            caption: item.name,
+            sound: item.sound,
+            pos: posision
+        }
+    })
 
-    const cards = [
-        { id: "animal1", src: pig, caption: "animal1", pos: pos.animal1 },
-        { id: "animal2", src: pig, caption: "animal2", pos: pos.animal2 },
-        { id: "animal3", src: pig, caption: "animal3", pos: pos.animal3 },
-        { id: "animal4", src: pig, caption: "animal4", pos: pos.animal4 },
-        { id: "animal5", src: pig, caption: "animal5", pos: pos.animal5 },
-        { id: "animal6", src: pig, caption: "animal6", pos: pos.animal6 },
-        { id: "animal7", src: pig, caption: "animal7", pos: pos.animal7 },
-        { id: "bear", src: pig, caption: "bear", pos: pos.bear },
-    ];
 
     const character = (
         <DroppableCharacter
@@ -127,38 +193,45 @@ export const Phase2 = () => {
                 <div className="phase-background" ref={frameRef}>
                     <img src={bg} alt="Phase Background" className="phase-image" />
                     <BoxChat
-                        posX={650}
+                        posX={800}
                         posY={100}
-                        text={'Find the bear!'}
+                        text={textSelect}
                     />
                     <DndContext onDragEnd={handleDragEnd}>
                         {/* Chỉ hiện card nếu chưa drop */}
-                        {!parent
-                            ? cards.map((c) => (
-                                <DraggableCard
-                                    key={c.id}
-                                    id={c.id}
-                                    src={c.src}
-                                    caption={c.caption}
-                                    style={{ left: `${c.pos.xPct}%`, top: `${c.pos.yPct}%` }}
-                                    animate={false} // <-- đúng prop
-                                />
-                            ))
-                            : null}
+                        {cards.filter(c => !droppedAnimals.includes(c.id)).map((c) => (
+                            <DraggableCard
+                                key={c.id}
+                                id={c.id}
+                                src={c.src}
+                                caption={c.caption}
+                                style={{ left: `${c.pos.xPct}%`, top: `${c.pos.yPct}%` }}
+                                animate={false}
+                            />
+                        ))}
+
 
                         {character}
 
-                        {effect &&
-                            cards.map((c) => (
+                        {effectAnimal && (() => {
+                            const c = cards.find(c => c.id === effectAnimal);
+                            if (!c) return null;
+                            return (
                                 <div
                                     key={`ghost-${c.id}`}
                                     className="card animate ghost"
-                                    style={{ left: `${pos.char.xPct}%`, top: `${pos.char.yPct}%`, position: 'absolute' }}
+                                    style={{
+                                        left: `${pos.char.xPct}%`,
+                                        top: `${pos.char.yPct}%`,
+                                        position: 'absolute'
+                                    }}
                                 >
                                     <div className="caption">{c.caption}</div>
                                     <img src={c.src} alt={c.caption} draggable="false" />
                                 </div>
-                            ))}
+                            );
+                        })()}
+
                     </DndContext>
                 </div>
                 <div className="setting-phase">
