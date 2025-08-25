@@ -1,14 +1,18 @@
 /* ------------ Base & theme ------------ */
-/* :root {
+:root {
     --bg: #e9d86a;
+    /* nền vàng nhạt */
     --panel: #e6e6e6;
+    /* khung xám nhạt */
     --white: #ffffff;
     --accent: #f36c21;
+    /* cam tiêu đề */
     --text: #2c2c2c;
     --shadow: 0 6px 18px rgba(0, 0, 0, .12);
     --radius-lg: 20px;
     --radius-md: 14px;
-} */
+    --radius-xs: 8px;
+}
 
 @font-face {
     font-family: "Montserrat";
