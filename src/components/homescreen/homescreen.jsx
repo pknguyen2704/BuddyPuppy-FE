@@ -18,7 +18,7 @@ export const HomeScreen = () => {
     const handleLogout = async () => {
         try {
             await logout();      // gọi service logout
-            navigate("/login");
+            navigate("/");
         } catch (err) {
             console.error("Logout failed:", err);
         }
