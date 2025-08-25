@@ -87,29 +87,25 @@ export const Phase1 = () => {
 
     // Xử lý kéo thả
     async function handleDragEnd({ active, over }) {
-        try {
-            if (!frameRef.current || !active) return;
+        if (!frameRef.current || !active) return;
 
-            // Nếu thả vào droppable thì xóa luôn
-            if (over) {
-                setParent(over.id);
-                await onSound(`I want ${animalSelect.name}`, 'male')
+        // Nếu thả vào droppable thì xóa luôn
+        if (over) {
+            setParent(over.id);
+            await onSound(`I want ${animalSelect.name}`, 'male')
 
-                playSoundNTimes(animalSelect.sound, 1);
+            playSoundNTimes(animalSelect.sound, 1);
 
-                // bật hiệu ứng
-                setEffect(true);
+            // bật hiệu ứng
+            setEffect(true);
 
-                // sau 1s (bằng thời gian animation) thì tắt effect
-                setTimeout(() => {
-                    setEffect(false);
-                }, 1000);
-            }
-        } catch (error) {
-            console.error(error.message);
-        } finally {
-            setIsContinue(true);
+            // sau 1s (bằng thời gian animation) thì tắt effect
+            setTimeout(() => {
+                setEffect(false);
+                setIsContinue(true);
+            }, 1000);
         }
+
     }
     const onSound = async (text, gender) => {
         const response = await ttsFunction({
