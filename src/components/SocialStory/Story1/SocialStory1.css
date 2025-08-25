@@ -1,3 +1,33 @@
+.container-back {
+  position: absolute;
+  /* căn theo thẻ cha gần nhất có position: relative */
+  top: 10px;
+  /* cách trên 10px */
+  left: 10px;
+  /* cách trái 10px */
+}
+
+.Back {
+  margin: 0;
+  padding: 8px 16px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.Back:hover {
+  background: #f36c21;
+  /* đổi màu nền */
+  color: #fff;
+  /* đổi màu chữ */
+  transform: translateY(-2px);
+  /* nổi lên một chút */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
 .div-1 button {
   position: absolute !important;
   top: 13.5% !important;

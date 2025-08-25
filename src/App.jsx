@@ -21,14 +21,18 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LogIn />} />
-      <Route path="/signup1" element={<SignUp />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/about" element={<h1>About BuddyPuppy</h1>} />
       <Route path="/contact" element={<h1>Contact Us</h1>} />
 
 
-      <Route path="/StoryPage" element={<StoryPage />} />
-    
-        
+      <Route path="/StoryPage" element={
+        <ProtectedRoute>
+          <StoryPage />
+        </ProtectedRoute>
+      } />
+
+
       <Route path="/homescreen" element={
         <ProtectedRoute>
           <HomeScreen />

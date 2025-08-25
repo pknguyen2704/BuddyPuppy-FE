@@ -6,6 +6,7 @@ import { login } from "../../service/authService";
 import "./LogIn.css";
 
 export const LogIn = () => {
+
     const handleLogin = async (e) => {
         e.preventDefault();
         const username = e.target.username.value;
@@ -20,6 +21,7 @@ export const LogIn = () => {
             const response = await login(username, password);
             console.log("Login successful:", response);
             // Redirect or perform further actions after successful login
+            navigate("/homescreen");
         } catch (error) {
             console.error("Login failed:", error);
             // Handle login error (e.g., show an error message)

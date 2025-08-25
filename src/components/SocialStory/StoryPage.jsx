@@ -11,7 +11,7 @@ export const StoryPage = () => {
         <div className="StoryPage">
             <div className="Story-container">
                 <div className="st-header">
-                    <div className="st-back">Back</div>
+                    <div className="st-back" onClick={() => navigate("/homescreen")}>Back</div>
                     <div className="st-title">SOCIAL STORY</div>
                 </div>
                 <div className="st-container-character">

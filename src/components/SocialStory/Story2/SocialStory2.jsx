@@ -13,18 +13,20 @@ import image6 from "~/assets/SocialStory2/S2-image5.jpg";
 import image7 from "~/assets/SocialStory2/S2-image7.jpg";
 import image8 from "~/assets/SocialStory2/S2-image8.jpg";
 import image9 from "~/assets/SocialStory2/S2-image9.jpg";
+import { useNavigate } from "react-router-dom";
 
 import { motion, AnimatePresence } from "framer-motion";
 
 export const SocialStory2 = () => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(0);
+    const navigate = useNavigate();
 
     const dataText = [
         { text: "When my family members and friends see me, they say hi, hello, or they wave.", gender: "female" },
         { text: "When they say hi or wave, I should say hi or wave back.", gender: "male" },
         { text: "Hey there!", gender: "male" },
-        { text: "Hi, buddy!", gender: "male"},
+        { text: "Hi, buddy!", gender: "male" },
         { text: "How’s it going?", gender: "male" },
         { text: "What's up?", gender: "male" },
         { text: "When I say “hi” to my friends, I can say ...", gender: "female" },
@@ -196,7 +198,7 @@ export const SocialStory2 = () => {
                             </div>
                         )}
 
-                        
+
 
                         {/* Slide 5 */}
                         {index === 4 && (
@@ -302,6 +304,9 @@ export const SocialStory2 = () => {
                         )}
                     </motion.div>
                 </AnimatePresence>
+                <div className="container-back" onClick={() => navigate("/StoryPage")}>
+                    <h2 className="Back">Exit</h2>
+                </div>
 
                 {/* nút điều hướng */}
                 <button
