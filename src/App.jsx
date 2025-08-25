@@ -20,16 +20,39 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LogIn />} />
-      <Route path="/signup1" element={<SignUp />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/about" element={<h1>About BuddyPuppy</h1>} />
       <Route path="/contact" element={<h1>Contact Us</h1>} />
       <Route path="/homescreen" element={<HomeScreen />} />
 
-      <Route path="/StoryPage" element={<StoryPage />} />
-      <Route path="/SocialStory1" element={<SocialStory1 />} />
-      <Route path="/SocialStory2" element={<SocialStory2 />} />
-      <Route path="/SocialStory3" element={<SocialStory3 />} />
+      <Route path="/StoryPage" element={
+        <ProtectedRoute>
+          <StoryPage />
+        </ProtectedRoute>
+      } />
 
+
+      <Route path="/homescreen" element={
+        <ProtectedRoute>
+          <HomeScreen />
+        </ProtectedRoute>
+      } />
+
+      <Route path="/SocialStory1" element={
+        <ProtectedRoute>
+          <SocialStory1 />
+        </ProtectedRoute>
+      } />
+      <Route path="/SocialStory2" element={
+        <ProtectedRoute>
+          <SocialStory2 />
+        </ProtectedRoute>
+      } />
+      <Route path="/SocialStory3" element={
+        <ProtectedRoute>
+          <SocialStory3 />
+        </ProtectedRoute>
+      } />
 
       <Route path="/phase1" element={<Phase1 />} />
       <Route path="/phase2" element={<Phase2 />} />

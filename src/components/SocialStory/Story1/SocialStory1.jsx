@@ -11,12 +11,14 @@ import image4 from "~/assets/SocialStory1/S1-image4.png";
 import image5 from "~/assets/SocialStory1/S1-image6.png";
 import image6 from "~/assets/SocialStory1/S1-image5.png";
 import image7 from "~/assets/SocialStory1/S1-image7.png";
+import { useNavigate } from "react-router-dom";
 
 import { motion, AnimatePresence } from "framer-motion";
 
 export const SocialStory1 = () => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(0);
+    const navigate = useNavigate();
 
     const dataText = [
         { text: "Sometimes I get angry. That's okay", gender: "male" },
@@ -211,7 +213,9 @@ export const SocialStory1 = () => {
                         )}
                     </motion.div>
                 </AnimatePresence>
-
+                <div className="container-back" onClick={() => navigate("/StoryPage")}>
+                    <h2 className="Back">Exit</h2>
+                </div>
                 {/* nút điều hướng */}
                 <button
                     className="btn btn-light rounded-circle position-absolute top-50 start-0 translate-middle-y ms-2 d-flex align-items-center justify-content-center"

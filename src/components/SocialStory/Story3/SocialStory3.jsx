@@ -16,18 +16,20 @@ import image9 from "~/assets/SocialStory3/S3-image9.jpg";
 import image10 from "~/assets/SocialStory3/S3-image10.jpg";
 import image11 from "~/assets/SocialStory3/S3-image11.jpg";
 import image12 from "~/assets/SocialStory3/S3-image12.jpg";
+import { useNavigate } from "react-router-dom";
 
 import { motion, AnimatePresence } from "framer-motion";
 
 export const SocialStory3 = () => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(0);
+    const navigate = useNavigate();
 
     const dataText = [
         { text: "I want to go to the potty !", gender: "female" },
         { text: "When my tummy feels like I need to pee or poop, I need to say ...", gender: "male" },
         { text: "May I go to the potty, please?", gender: "male" },
-        { text: "When my bracelet shakes and lights up, I need to say...", gender: "female"},
+        { text: "When my bracelet shakes and lights up, I need to say...", gender: "female" },
         { text: "May I go to the potty, please?", gender: "female" },
         { text: "Pee and poop do not go in your underwear. That is gross.", gender: "male" },
         { text: "First, when I get to the potty:", gender: "male" },
@@ -165,7 +167,7 @@ export const SocialStory3 = () => {
                                     onClick={() => onSound(6)}
                                 >
                                     <Volume2 />
-                                </button> 
+                                </button>
                                 <button
                                     className="btn btn-light rounded-circle position-absolute m-3 bt-2"
                                     onClick={() => onSound(7)}
@@ -263,6 +265,9 @@ export const SocialStory3 = () => {
                         )}
                     </motion.div>
                 </AnimatePresence>
+                <div className="container-back" onClick={() => navigate("/StoryPage")}>
+                    <h2 className="Back">Exit</h2>
+                </div>
 
                 {/* nút điều hướng */}
                 <button
