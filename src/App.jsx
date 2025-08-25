@@ -14,6 +14,7 @@ import { Phase3 } from "./components/pecs/Phase3.jsx"
 import { Phase4 } from "./components/pecs/Phase4.jsx"
 import { Phase5 } from "./components/pecs/Phase5.jsx"
 import { Phase6 } from "./components/pecs/Phase6.jsx"
+import { ProtectedRoute } from "./protectedComponent.jsx"
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/about" element={<h1>About BuddyPuppy</h1>} />
       <Route path="/contact" element={<h1>Contact Us</h1>} />
-      <Route path="/homescreen" element={<HomeScreen />} />
+
 
       <Route path="/StoryPage" element={
         <ProtectedRoute>
@@ -54,12 +55,36 @@ function App() {
         </ProtectedRoute>
       } />
 
-      <Route path="/phase1" element={<Phase1 />} />
-      <Route path="/phase2" element={<Phase2 />} />
-      <Route path="/phase3" element={<Phase3 />} />
-      <Route path="/phase4" element={<Phase4 />} />
-      <Route path="/phase5" element={<Phase5 />} />
-      <Route path="/phase6" element={<Phase6 />} />
+      <Route path="/phase1" element={
+        <ProtectedRoute>
+          <Phase1 />
+        </ProtectedRoute>
+      } />
+      <Route path="/phase2" element={
+        <ProtectedRoute>
+          <Phase2 />
+        </ProtectedRoute>
+      } />
+      <Route path="/phase3" element={
+        <ProtectedRoute>
+          <Phase3 />
+        </ProtectedRoute>
+      } />
+      <Route path="/phase4" element={
+        <ProtectedRoute>
+          <Phase4 />
+        </ProtectedRoute>
+      } />
+      <Route path="/phase5" element={
+        <ProtectedRoute>
+          <Phase5 />
+        </ProtectedRoute>
+      } />
+      <Route path="/phase6" element={
+        <ProtectedRoute>
+          <Phase6 />
+        </ProtectedRoute>
+      } />
 
     </Routes>
   )
