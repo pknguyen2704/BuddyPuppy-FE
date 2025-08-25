@@ -3,7 +3,7 @@ import corgi from "../../assets/corgi 3.png";
 import story from "../../assets/story.png";
 import study from "../../assets/pecs.png";
 import speakers from "../../assets/speakers.png";
-import avatar from "../../assets/google.png";
+import avatar from "../../assets/avatar.png";
 import "./homescreen.css";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ export const HomeScreen = () => {
                             <h1 className="hs-util-title">STUDY WITH PUPPY</h1>
                         </div>
                         <div className="hs-container-util">
-                            <img src={story} alt="Story" className="hs-util-image" />
+                            <img src={story} alt="Story" className="hs-util-image" onClick={() => navigate("/StoryPage")} />
                             <h1 className="hs-util-title">SOCIAL STORY</h1>
                         </div>
                     </div>
