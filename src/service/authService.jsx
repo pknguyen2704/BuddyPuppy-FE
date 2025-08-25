@@ -14,10 +14,10 @@ export async function register(payload) {
     return data;
 }
 
-// export async function logout() {
-//   try {
-//     await http.post(ENDPOINTS.auth.logout);
-//   } finally {
-//     localStorage.removeItem('token');
-//   }
-// }
+export async function logout() {
+    try {
+        await http.post(ENDPOINTS.auth.logout);
+    } finally {
+        localStorage.removeItem('token');
+    }
+}

@@ -4,12 +4,25 @@ import story from "../../assets/story.png";
 import study from "../../assets/pecs.png";
 import speakers from "../../assets/speakers.png";
 import avatar from "../../assets/avatar.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./homescreen.css";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../service/authService";
+
 
 export const HomeScreen = () => {
 
     const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try {
+            await logout();      // gọi service logout
+            navigate("/login");
+        } catch (err) {
+            console.error("Logout failed:", err);
+        }
+    };
 
     return (
         <div className="home-screen">
@@ -17,7 +30,24 @@ export const HomeScreen = () => {
                 <div className="hs-container-btn">
                     <img src={bell} alt="Notifications" className="hs-motifications" />
                     <img src={speakers} alt="Music" className="hs-music" />
-                    <img src={avatar} alt="avatar" className="hs-avatar" />
+                    <div className="dropdown">
+                        <a
+                            href="#"
+                            className="d-inline-block"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            margin="8px -16px"
+                            onClick={(e) => e.preventDefault()}
+                        >
+                            <img src={avatar} alt="avatar" className="hs-avatar rounded-circle" />
+                        </a>
+                        <ul className="dropdown-menu dropdown-menu-end shadow" data-bs-popper="static" >
+                            <li><button className="dropdown-item">Profile</button></li>
+                            <li><button className="dropdown-item">Settings</button></li>
+                            <li><hr className="dropdown-divider" /></li>
+                            <li><button className="dropdown-item text-danger" onClick={handleLogout}>Log out</button></li>
+                        </ul>
+                    </div>
                 </div>
                 <div className="hs-container-text-hello">
                     <h3 className="hs-hello">Hi, My Name Is Buddy Puppy</h3>
@@ -35,7 +65,7 @@ export const HomeScreen = () => {
                         <div className="hs-container-util">
                             <img src={study} alt="Study" className="hs-util-image" onClick={() => navigate("/phase1")} />
                             <h1 className="hs-util-title">STUDY WITH PUPPY</h1>
-                        </div> 
+                        </div>
                         <div className="hs-container-util">
                             <img src={story} alt="Story" className="hs-util-image" onClick={() => navigate("/StoryPage")} />
                             <h1 className="hs-util-title">SOCIAL STORY</h1>
@@ -43,6 +73,6 @@ export const HomeScreen = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

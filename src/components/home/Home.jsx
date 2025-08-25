@@ -11,7 +11,7 @@ export const Home = () => {
                 <img src={logo1} alt="Buddy Puppy Logo" className="logo1" />
                 <div className="button-group">
                     <div className="btn login-btn" onClick={() => navigate('/login')}>SIGN IN</div>
-                    <div className="btn register-btn" onClick={() => navigate('/signup1')}>SIGN UP</div>
+                    <div className="btn register-btn" onClick={() => navigate('/signup')}>SIGN UP</div>
                 </div>
             </header>
 
