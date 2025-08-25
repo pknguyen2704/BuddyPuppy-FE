@@ -53,8 +53,8 @@ body,
     font-size: 14px;
     font-weight: 600;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center  !important;
+    align-items: center !important;
     cursor: pointer;
     white-space: nowrap;
 }

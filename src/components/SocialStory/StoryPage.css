@@ -36,7 +36,7 @@ body {
 /* ------------ Page wrapper ------------ */
 .StoryPage {
     min-height: 100vh;
-    background: var(--bg);
+    background: var(--bg) !important;
     display: grid;
     place-items: center;
 }
@@ -46,7 +46,7 @@ body {
     min-height: 95vh;
     background: transparent;
     position: relative;
-    background-color: #e6d86f;
+    background-color: #e6d86f !important;
     padding: 10px 40px;
     border-radius: 40px;
 }
@@ -57,7 +57,7 @@ body {
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: 16px;
-    background-color: var(--white);
+    background-color: var(--white) !important;
     border-radius: 1dvb;
 }
 
@@ -111,14 +111,14 @@ body {
 /* ------------ Utilities area ------------ */
 .st-container-util {
     margin-top: clamp(16px, 2.2vw, 28px);
-    background: transparent;
+    background: transparent  !important;
     margin: 10vh 15vw;
 }
 
 /* nhãn "Let's Start ...." */
 .st-util-title {
     display: inline-block;
-    background: var(--white);
+    background: var(--white)  !important;
     color: var(--accent);
     font-weight: 800;
     font-size: clamp(16px, 1.8vw, 20px);
@@ -134,7 +134,7 @@ body {
 
 /* khung xám bo tròn chứa 3 ô */
 .st-utilities {
-    background: var(--panel);
+    background: var(--panel) !important;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
     padding: clamp(16px, 2.5vw, 28px);
@@ -147,7 +147,7 @@ body {
 
 /* từng ô item */
 .util-container {
-    background: var(--white);
+    background: var(--white) !important;
     width: 100%;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow);
@@ -177,7 +177,7 @@ body {
 /* tiêu đề của từng ô */
 .util-container .st-util-title {
     color: var(--text);
-    background: none;
+    background: none !important;
     box-shadow: none;
     margin: 0;
     padding: 0;
