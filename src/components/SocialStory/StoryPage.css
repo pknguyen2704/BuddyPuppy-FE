@@ -1,17 +1,13 @@
-/* ------------ Base & theme ------------ */
 :root {
     --bg: #e9d86a;
-    /* nền vàng nhạt */
     --panel: #e6e6e6;
-    /* khung xám nhạt */
     --white: #ffffff;
     --accent: #f36c21;
-    /* cam tiêu đề */
     --text: #2c2c2c;
     --shadow: 0 6px 18px rgba(0, 0, 0, .12);
     --radius-lg: 20px;
     --radius-md: 14px;
-    --radius-xs: 8px;
+
 }
 
 @font-face {
@@ -115,14 +111,14 @@ body {
 /* ------------ Utilities area ------------ */
 .st-container-util {
     margin-top: clamp(16px, 2.2vw, 28px);
-    background: transparent  !important;
+    background: transparent !important;
     margin: 10vh 15vw;
 }
 
 /* nhãn "Let's Start ...." */
 .st-util-title {
     display: inline-block;
-    background: var(--white)  !important;
+    background: var(--white) !important;
     color: var(--accent);
     font-weight: 800;
     font-size: clamp(16px, 1.8vw, 20px);

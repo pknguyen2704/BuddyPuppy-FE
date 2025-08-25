@@ -27,7 +27,7 @@ export const Phase6 = () => {
     const [parentText, setParentText] = useState(null);
     const [droppedAnimals, setDroppedAnimals] = useState([]);
     const [effectAnimal, setEffectAnimal] = useState(null);
-    const [showPopup, setShowPopup] = useState(false);
+    const [showPopup, setShowPopup] = useState(true);
     const textQuestion = 'What do you see?';
     const [dataAnimals, setDataAnimals] = useState([]);
     const [indexAnimals, setIndexAnimals] = useState(0);
@@ -215,7 +215,7 @@ export const Phase6 = () => {
                 > Done
                 </button>
             }
-            {showPopup && (
+            {showPopup && dataAnimals && indexAnimals &&  (
                 <div className="popup-overlay">
                     <div className="popup-content">
                         <img src={dataAnimals[indexAnimals].image} alt="Replay" />
