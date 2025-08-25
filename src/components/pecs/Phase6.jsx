@@ -26,7 +26,7 @@ export const Phase6 = () => {
     const [showInstruction, setShowInstruction] = useState(true);
     const navigate = useNavigate();
 
-    const [showPopup, setShowPopup] = useState(false);
+    const [showPopup, setShowPopup] = useState(true);
 
     let indexQuestion = 0;
 
@@ -109,13 +109,13 @@ export const Phase6 = () => {
             return;
         }
         if (!parentText) {
-            alert("Start with 'I want' or 'I see'")
+            alert("Start with 'I see'")
             return
         }
         // Nếu là card ảnh
         const draggedCard = cards.find(c => c.id === active.id);
         if (draggedCard) {
-            setTextAnimal("I want " + draggedCard.id);
+            setTextAnimal("I see " + draggedCard.id);
             setparentCard(over.id);
             playSoundNTimes(soundEffect, 3);
 

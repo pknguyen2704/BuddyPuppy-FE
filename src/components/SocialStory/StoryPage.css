@@ -11,6 +11,7 @@
     --shadow: 0 6px 18px rgba(0, 0, 0, .12);
     --radius-lg: 20px;
     --radius-md: 14px;
+    --radius-xs: 8px;
 }
 
 @font-face {
