@@ -60,17 +60,17 @@ body,
 }
 
 .btn:hover {
-    color: var(--colorhover) !important;
+    background-color: var(--colorfont) !important;
 }
 
 .login-btn {
     background-color: var(--colorbtn) !important;
-    color: var(--colorfont) !important;
+    color: black;
 }
 
 .register-btn {
     background-color: var(--colorbtn) !important;
-    color: var(--colorfont) !important;
+    color: black;
 }
 
 /* Nội dung chính */
