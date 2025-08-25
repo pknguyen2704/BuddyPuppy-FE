@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import bg from '~/assets/Pecs/bg.png';
-import pig from '~/assets/Pecs/pig.png';
 import boy from '~/assets/Pecs/boy.png';
 import instruction from '~/assets/Pecs/instruction.png';
 import exit from '~/assets/Pecs/exit.png';
@@ -11,24 +10,91 @@ import { DroppableCharacter } from './Character/Character';
 import { DraggableText } from './wordCard/wordCard';
 import './Phase.css';
 import { playSoundNTimes } from './Sound/Sound';
-import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 import { useNavigate } from 'react-router-dom';
 import { BoxChat } from './BoxChat/BoxChat';
+import { getAllAnimalsService } from '~/service/animalService';
+import pig from '~/assets/Pecs/pig.png';
 
 export const Phase6 = () => {
     const frameRef = useRef(null);
     const modalRef = useRef(null);
-    const [parentCard, setparentCard] = useState(null);
-    const [parentText, setparentText] = useState(null);
-    const [effect, setEffect] = useState(false);
-    const [textAnimal, setTextAnimal] = useState('....... .......');
-    const textQuestion = 'What do you see?';
     const [showInstruction, setShowInstruction] = useState(true);
+
+    const [cards, setCards] = useState([]);
+    const [animalSelect, setAnimalSelect] = useState(null);
+    const [textAnimal, setTextAnimal] = useState('....... .......');
+    const [parentText, setParentText] = useState(null);
+    const [droppedAnimals, setDroppedAnimals] = useState([]);
+    const [effectAnimal, setEffectAnimal] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
+    const textQuestion = 'What do you see?';
+    const [dataAnimals, setDataAnimals] = useState([]);
+    const [indexAnimals, setIndexAnimals] = useState(0);
+
     const navigate = useNavigate();
 
-    const [showPopup, setShowPopup] = useState(false);
+    const pos = {
+        char: { xPct: 70, yPct: 50 },
+        fish: { xPct: 20, yPct: 80 },
+        animalsPositions: [
+            { xPct: 35, yPct: 44 },
+            { xPct: 40, yPct: 68 },
+            { xPct: 45, yPct: 32 },
+            { xPct: 50, yPct: 56 },
+            { xPct: 55, yPct: 30 },
+            { xPct: 60, yPct: 76 },
+            { xPct: 55, yPct: 48 }
+        ]
+    };
 
-    let indexQuestion = 0;
+    const posText = {
+        text1: { xPct: 48, yPct: 80 }
+    };
+
+    const texts = [
+        { id: "word1", text: "I see", pos: posText.text1 },
+    ];
+
+    function randomIndex(start, finish) {
+        return Math.floor(Math.random() * (finish - start + 1) + start);
+    }
+
+    // Fetch data và khởi tạo vị trí con vật chỉ 1 lần
+    useEffect(() => {
+        async function fetchData() {
+            const response = await getAllAnimalsService();
+            const animals = response.animals;
+            setDataAnimals(animals);
+            setIndexAnimals(randomIndex(0, animals.length));
+
+
+            const positionsCopy = [...pos.animalsPositions];
+            const cardsWithPos = animals.map((item) => {
+                let posision;
+                if (item.name === 'fish') {
+                    posision = pos.fish;
+                } else {
+                    let indexTemp = randomIndex(0, positionsCopy.length - 1);
+                    posision = positionsCopy[indexTemp];
+                    positionsCopy.splice(indexTemp, 1);
+                }
+                return {
+                    id: item.name,
+                    src: item.image,
+                    caption: item.name,
+                    sound: item.sound,
+                    pos: posision
+                };
+            });
+
+            setCards(cardsWithPos);
+
+            const indexSel = randomIndex(0, animals.length - 1);
+            setAnimalSelect(animals[indexSel]);
+        }
+
+        fetchData();
+    }, []);
 
     useEffect(() => {
         const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
@@ -36,7 +102,6 @@ export const Phase6 = () => {
         return () => window.removeEventListener("keydown", onKey);
     }, []);
 
-    // Click ở bất kỳ đâu ngoài popup -> đóng
     useEffect(() => {
         if (!showInstruction) return;
         const onClickAnywhere = (e) => {
@@ -46,8 +111,6 @@ export const Phase6 = () => {
         document.addEventListener("mousedown", onClickAnywhere);
         return () => document.removeEventListener("mousedown", onClickAnywhere);
     }, [showInstruction]);
-    const openInstruction = () => setShowInstruction(true);
-    const closeInstruction = () => setShowInstruction(false);
 
     useEffect(() => {
         if (showInstruction) {
@@ -61,70 +124,40 @@ export const Phase6 = () => {
         return createPortal(children, document.body);
     }
 
-
-
-    // set vị trí ban đầu của các thẻ
-    const [pos, setPos] = useState({
-        char: { xPct: 70, yPct: 50 },
-        animal1: { xPct: 30, yPct: 30 },
-        animal2: { xPct: 40, yPct: 40 },
-        animal3: { xPct: 50, yPct: 50 },
-        animal4: { xPct: 60, yPct: 30 },
-        animal5: { xPct: 55, yPct: 40 },
-        animal6: { xPct: 20, yPct: 80 },
-        animal7: { xPct: 50, yPct: 83 },
-        bear: { xPct: 30, yPct: 40 }
-    });
-
-    const [posText, setPosText] = useState({
-        text1: { xPct: 30, yPct: 70 }
-    })
-
-    const cards = [
-        { id: "animal1", src: pig, caption: "animal1", pos: pos.animal1 },
-        { id: "animal2", src: pig, caption: "animal2", pos: pos.animal2 },
-        { id: "animal3", src: pig, caption: "animal3", pos: pos.animal3 },
-        { id: "animal4", src: pig, caption: "animal4", pos: pos.animal4 },
-        { id: "animal5", src: pig, caption: "animal5", pos: pos.animal5 },
-        { id: "animal6", src: pig, caption: "animal6", pos: pos.animal6 },
-        { id: "animal7", src: pig, caption: "animal7", pos: pos.animal7 },
-        { id: "bear", src: pig, caption: "bear", pos: pos.bear },
-    ];
-
-    const texts = [
-        { id: "word2", text: "I see", pos: posText.text1 },
-    ];
-
-    // xử lý khi thả
     function handleDragEnd({ active, over }) {
-        if (!frameRef.current || !active) return;
-        if (!over) return;
+        if (!frameRef.current || !active || !over) return;
 
-        // Nếu là card chữ
+        // Kéo thả text card
         const draggedText = texts.find(t => t.id === active.id);
-
         if (draggedText) {
-            setparentText(over.id);
+            setParentText(over.id);
             setTextAnimal(draggedText.text + " .......");
             return;
         }
-        if (!parentText) {
-            alert("Start with 'I want' or 'I see'")
-            return
-        }
-        // Nếu là card ảnh
-        const draggedCard = cards.find(c => c.id === active.id);
-        if (draggedCard) {
-            setTextAnimal("I want " + draggedCard.id);
-            setparentCard(over.id);
-            playSoundNTimes(soundEffect, 3);
 
-            setEffect(true);
-            setTimeout(() => setEffect(false), 1000);
+        if (!parentText) {
+            alert("Start with 'I see'");
             return;
         }
 
+        // Kéo thả ảnh
+        const draggedCard = cards.find(c => c.id === active.id);
+        if (draggedCard) {
+            if (draggedCard.id === dataAnimals[indexAnimals].name) {
+                setDroppedAnimals(prev => [...prev, draggedCard.id]);
+                setTextAnimal("I want " + draggedCard.id);
 
+                // Play âm thanh riêng của con vật
+                if (draggedCard.sound) {
+                    playSoundNTimes(draggedCard.sound, 3);
+                }
+
+                setEffectAnimal(draggedCard.id);
+                setTimeout(() => setEffectAnimal(null), 1000);
+            } else {
+                alert('sai roio');
+            }
+        }
     }
 
     const character = (
@@ -138,7 +171,6 @@ export const Phase6 = () => {
             }}
         />
     );
-
     const clickReplay = () => {
         setShowPopup(true);
     };
@@ -147,38 +179,35 @@ export const Phase6 = () => {
         setShowPopup(false);
     };
 
-
     return (
         <div className="container-phase">
+
             {showPopup && (
                 <div className="popup-overlay">
                     <div className="popup-content">
-                        <img src={pig} alt="Replay" />
+                        <img src={dataAnimals[indexAnimals].image} alt="Replay" />
                         <button onClick={closePopup}>Close</button>
                     </div>
                 </div>
             )}
+
+
             <div className={`stage ${showInstruction ? "dimmed" : ""}`} aria-hidden={showInstruction}>
                 <div className="phase-background" ref={frameRef}>
                     <img src={bg} alt="Phase Background" className="phase-image" />
 
                     <DndContext onDragEnd={handleDragEnd}>
                         {/* render ảnh */}
-                        {!parentCard &&
-                            cards.map((c) => (
-                                <DraggableCard
-                                    key={c.id}
-                                    id={c.id}
-                                    src={c.src}
-                                    caption={c.caption}
-                                    style={{
-                                        left: `${c.pos.xPct}%`,
-                                        top: `${c.pos.yPct}%`
-                                    }}
-                                    animate={false}
-                                />
-                            ))
-                        }
+                        {cards.filter(c => !droppedAnimals.includes(c.id)).map((c) => (
+                            <DraggableCard
+                                key={c.id}
+                                id={c.id}
+                                src={c.src}
+                                caption={c.caption}
+                                style={{ left: `${c.pos.xPct}%`, top: `${c.pos.yPct}%` }}
+                                animate={false}
+                            />
+                        ))}
 
                         {/* render chữ */}
                         {!parentText &&
@@ -198,8 +227,10 @@ export const Phase6 = () => {
                         {character}
 
                         {/* hiệu ứng khi đúng */}
-                        {effect &&
-                            cards.map((c) => (
+                        {effectAnimal && (() => {
+                            const c = cards.find(c => c.id === effectAnimal);
+                            if (!c) return null;
+                            return (
                                 <div
                                     key={`ghost-${c.id}`}
                                     className="card animate ghost"
@@ -212,8 +243,8 @@ export const Phase6 = () => {
                                     <div className="caption">{c.caption}</div>
                                     <img src={c.src} alt={c.caption} draggable="false" />
                                 </div>
-                            ))
-                        }
+                            );
+                        })()}
                     </DndContext>
 
                     {/* chat hiển thị câu */}
@@ -224,13 +255,14 @@ export const Phase6 = () => {
                         <BoxChat posX={900} posY={270} text={textQuestion} />
                     </button>
                 </div>
+
                 <div className="setting-phase">
-                    <img src={instruction} alt="instruction" onClick={openInstruction} className="btn-icon" />
+                    <img src={instruction} alt="instruction" onClick={() => setShowInstruction(true)} className="btn-icon" />
                     <img src={exit} alt="exit" onClick={() => navigate("/homescreen")} className="btn-icon" />
                 </div>
             </div>
 
-            {/* Overlay làm mờ nền nhưng KHÔNG ảnh hưởng modal */}
+            {/* Overlay làm mờ nền */}
             {showInstruction && (
                 <ModalPortal>
                     <div className="screen-dim" />
@@ -241,7 +273,7 @@ export const Phase6 = () => {
             {showInstruction && (
                 <ModalPortal>
                     <div className="modal" role="dialog" aria-modal="true" aria-label="Hướng dẫn">
-                        <div className="modal-backdrop" onClick={closeInstruction} />
+                        <div className="modal-backdrop" onClick={() => setShowInstruction(false)} />
                         <div className="modal-content" ref={modalRef} tabIndex={-1}>
                             <h2 className="modal-title">Phase 6 Instructions</h2>
                             <div className="modal-body">

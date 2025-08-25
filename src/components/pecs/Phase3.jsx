@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, use } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import bg from '~/assets/Pecs/bg.png';
 import pig from '~/assets/Pecs/pig.png';
@@ -14,6 +14,7 @@ import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 import { useNavigate } from 'react-router-dom';
 
 import { BoxChat } from './BoxChat/BoxChat';
+import { getAllAnimalsService, getAnimalByIdService } from '~/service/animalService'
 
 export const Phase3 = () => {
     const frameRef = useRef(null);
@@ -23,7 +24,35 @@ export const Phase3 = () => {
     const [animate, setAnimate] = useState(false);
     const [findAnimal, setFindAnimal] = useState('bear');
     const [showInstruction, setShowInstruction] = useState(true);
+    const [animalsArray, setAnimalsArray] = useState([]);
+    const [textSelect, setTextSelect] = useState('Find the bear!');
+    const [animalSelect, setAnimalSelect] = useState(0);
+
+
+    //Animal bị xóa
+    const [droppedAnimals, setDroppedAnimals] = useState([]);
+    const [effectAnimal, setEffectAnimal] = useState(null);
+
+
     const navigate = useNavigate();
+
+    // Random index of array animal
+    function randomIndex(start, finish) {
+        return Math.floor(Math.random() * (finish - start + 1) + start);
+    }
+
+    // Get data from backend
+    useEffect(() => {
+        async function fetchData() {
+            const response = await getAllAnimalsService();
+            setAnimalsArray(response.animals);
+            let indexSel = randomIndex(0, 7);
+            let animSel = response.animals[indexSel]
+            setAnimalSelect(animSel);
+            setTextSelect(`Find the ${animSel.name}!`)
+        }
+        fetchData()
+    }, [])
 
     useEffect(() => {
         const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
@@ -61,9 +90,16 @@ export const Phase3 = () => {
     // set vị trí ban đầu của các thẻ
     const [pos, setPos] = useState({
         char: { xPct: 70, yPct: 50 },
-        animal1: { xPct: 50, yPct: 70 },
-        animal2: { xPct: 40, yPct: 70 },
-        bear: { xPct: 60, yPct: 70 }
+        fish: { xPct: 20, yPct: 80 },
+        animalsPositions: [
+            { xPct: 35, yPct: 44 },
+            { xPct: 40, yPct: 68 },
+            { xPct: 45, yPct: 32 },
+            { xPct: 50, yPct: 56 },
+            { xPct: 55, yPct: 30 },
+            { xPct: 60, yPct: 76 },
+            { xPct: 65, yPct: 48 }
+        ]
     });
 
     const clamp = (v) => Math.max(0, Math.min(100, v));
@@ -76,30 +112,48 @@ export const Phase3 = () => {
         if (over) {
             const draggedCard = cards.find(c => c.id === active.id);
 
-            if (draggedCard.id === findAnimal) {
-                setParent(over.id);
-                playSoundNTimes(soundEffect, 3);
+            if (draggedCard.id === animalSelect.name) {
+                setDroppedAnimals(prev => [...prev, draggedCard.id]);
+                playSoundNTimes(animalSelect.sound, 3);
+
 
                 // bật hiệu ứng
-                setEffect(true);
+                // setEffect(true);
+                setEffectAnimal(draggedCard.id);
 
                 // sau 1s (bằng thời gian animation) thì tắt effect
                 setTimeout(() => {
-                    setEffect(false);
+                    setEffectAnimal(null);
                 }, 1000);
+
             }
             else {
                 alert('Sai roi!')
             }
 
+
         }
     }
+    const positions = [...pos.animalsPositions];
+    const cards = animalsArray.map((item, index) => {
+        let posision;
+        if (item.name === 'fish') {
+            posision = pos.fish
+        }
+        else {
+            let indexTemp = randomIndex(0, positions.length - 1);
+            posision = positions[indexTemp];
+            positions.splice(indexTemp, 1);
+        }
+        return {
+            id: item.name,
+            src: item.image,
+            caption: item.name,
+            sound: item.sound,
+            pos: posision
+        }
+    })
 
-    const cards = [
-        { id: "animal1", src: pig, caption: "animal1", pos: pos.animal1 },
-        { id: "animal2", src: pig, caption: "animal2", pos: pos.animal2 },
-        { id: "bear", src: pig, caption: "bear", pos: pos.bear },
-    ];
 
     const character = (
         <DroppableCharacter
@@ -119,38 +173,45 @@ export const Phase3 = () => {
                 <div className="phase-background" ref={frameRef}>
                     <img src={bg} alt="Phase Background" className="phase-image" />
                     <BoxChat
-                        posX={650}
-                        posY={150}
-                        text={'Find the bear!'}
+                        posX={800}
+                        posY={100}
+                        text={textSelect}
                     />
                     <DndContext onDragEnd={handleDragEnd}>
                         {/* Chỉ hiện card nếu chưa drop */}
-                        {!parent
-                            ? cards.map((c) => (
-                                <DraggableCard
-                                    key={c.id}
-                                    id={c.id}
-                                    src={c.src}
-                                    caption={c.caption}
-                                    style={{ left: `${c.pos.xPct}%`, top: `${c.pos.yPct}%` }}
-                                    animate={false} // <-- đúng prop
-                                />
-                            ))
-                            : null}
+                        {cards.filter(c => !droppedAnimals.includes(c.id)).map((c) => (
+                            <DraggableCard
+                                key={c.id}
+                                id={c.id}
+                                src={c.src}
+                                caption={c.caption}
+                                style={{ left: `${c.pos.xPct}%`, top: `${c.pos.yPct}%` }}
+                                animate={false}
+                            />
+                        ))}
+
 
                         {character}
 
-                        {effect &&
-                            cards.map((c) => (
+                        {effectAnimal && (() => {
+                            const c = cards.find(c => c.id === effectAnimal);
+                            if (!c) return null;
+                            return (
                                 <div
                                     key={`ghost-${c.id}`}
                                     className="card animate ghost"
-                                    style={{ left: `${pos.char.xPct}%`, top: `${pos.char.yPct}%`, position: 'absolute' }}
+                                    style={{
+                                        left: `${pos.char.xPct}%`,
+                                        top: `${pos.char.yPct}%`,
+                                        position: 'absolute'
+                                    }}
                                 >
                                     <div className="caption">{c.caption}</div>
                                     <img src={c.src} alt={c.caption} draggable="false" />
                                 </div>
-                            ))}
+                            );
+                        })()}
+
                     </DndContext>
                 </div>
                 <div className="setting-phase">
