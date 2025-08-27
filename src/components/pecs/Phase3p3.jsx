@@ -90,7 +90,7 @@ export const Phase3p3 = () => {
             // 🔹 Chọn 1 trong 2 con làm mục tiêu hiển thị trong BoxChat
             const indexSel = randomIndex(0, selectedAnimals.length - 1);
             setAnimalSelect(selectedAnimals[indexSel]);
-            const textSpeed = `Find the ${selectedAnimals[indexSel].name}!`
+            const textSpeed = `Choose the ${selectedAnimals[indexSel].name}!`
             setTextSelect(textSpeed);
         }
 
@@ -107,10 +107,9 @@ export const Phase3p3 = () => {
     // Khi animalSelect thay đổi (sau fetch) thì phát âm thanh
     useEffect(() => {
         if (animalSelect && animalSelect.name) {
-            onSound(`Find the ${animalSelect.name}!`, 'male');
+            setTimeout(() => onSound(`Choose the ${animalSelect.name}!`, 'male'), 1000);
         }
     }, [animalSelect]);
-
 
 
     // ESC -> đóng popup
@@ -190,7 +189,7 @@ export const Phase3p3 = () => {
                     setEffectAnimal(null);
                 }, 1000);
                 setTimeout(() => {
-                    navigate('/phase4')
+                    setIsContinue(true)
                 }, 1500);
             }
             else {
@@ -217,6 +216,11 @@ export const Phase3p3 = () => {
 
     return (
         <div className="container-phase">
+             {isContinue && (
+                <button className="button-continue" onClick={() => navigate('/phase4')}>
+                    Continue
+                </button>
+            )}
             <div className={`stage ${showInstruction ? "dimmed" : ""}`} aria-hidden={showInstruction}>
                 <div className="phase-background" ref={frameRef}>
                     <img src={bg} alt="Phase Background" className="phase-image" />

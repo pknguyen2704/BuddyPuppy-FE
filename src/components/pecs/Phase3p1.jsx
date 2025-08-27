@@ -90,7 +90,7 @@ export const Phase3p1 = () => {
             // 🔹 Chọn 1 trong 2 con làm mục tiêu hiển thị trong BoxChat
             const indexSel = randomIndex(0, selectedAnimals.length - 1);
             setAnimalSelect(selectedAnimals[indexSel]);
-            const textSpeed = `Find the ${selectedAnimals[indexSel].name}!`
+            const textSpeed = `Choose the ${selectedAnimals[indexSel].name}!`
             setTextSelect(textSpeed);
         }
 
@@ -183,7 +183,7 @@ export const Phase3p1 = () => {
                 }, 1000);
                 setTimeout(() => {
                     navigate('/phase3p2')
-                }, 1500);
+                }, 1700);
             }
             else {
                 await onSound('Try again!', 'female');

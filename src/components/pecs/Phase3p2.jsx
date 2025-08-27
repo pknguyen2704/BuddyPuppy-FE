@@ -90,7 +90,7 @@ export const Phase3p2 = () => {
             // 🔹 Chọn 1 trong 2 con làm mục tiêu hiển thị trong BoxChat
             const indexSel = randomIndex(0, selectedAnimals.length - 1);
             setAnimalSelect(selectedAnimals[indexSel]);
-            const textSpeed = `Find the ${selectedAnimals[indexSel].name}!`
+            const textSpeed = `Choose the ${selectedAnimals[indexSel].name}!`
             setTextSelect(textSpeed);
         }
 
@@ -107,7 +107,7 @@ export const Phase3p2 = () => {
     // Khi animalSelect thay đổi (sau fetch) thì phát âm thanh
     useEffect(() => {
         if (animalSelect && animalSelect.name) {
-            onSound(`Find the ${animalSelect.name}!`, 'male');
+            setTimeout(() => onSound(`Choose the ${animalSelect.name}!`, 'male'), 1000);
         }
     }, [animalSelect]);
 
@@ -190,7 +190,7 @@ export const Phase3p2 = () => {
                 }, 1000);
                 setTimeout(() => {
                     navigate('/phase3p3')
-                }, 1500);
+                }, 1700);
             }
             else {
                 await onSound('Try again!', 'female');

@@ -1,39 +1,41 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
+import { createPortal } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
+
 import bg from '~/assets/Pecs/bg.png';
 import boy from '~/assets/Pecs/boy.png';
 import instruction from '~/assets/Pecs/instruction.png';
 import exit from '~/assets/Pecs/exit.png';
-import { createPortal } from 'react-dom';
+
 import { DraggableCard } from './Card/Card';
 import { DroppableCharacter } from './Character/Character';
 import { DraggableText } from './wordCard/wordCard';
-import './Phase.css';
-import { playSoundNTimes } from './Sound/Sound';
-import { useNavigate } from 'react-router-dom';
 import { BoxChat } from './BoxChat/BoxChat';
 import { getAllAnimalsService } from '~/service/animalService';
-import pig from '~/assets/Pecs/pig.png';
-import { ttsFunction } from '~/service/ttsService'
+import { ttsFunction } from '~/service/ttsService';
+import { playSoundNTimes } from './Sound/Sound';
+
+import './Phase.css';
 
 export const Phase6 = () => {
     const frameRef = useRef(null);
     const modalRef = useRef(null);
-    const [showInstruction, setShowInstruction] = useState(true);
 
+    const navigate = useNavigate();
+
+    const [showInstruction, setShowInstruction] = useState(true);
+    const [dataAnimals, setDataAnimals] = useState([]);
     const [cards, setCards] = useState([]);
-    const [animalSelect, setAnimalSelect] = useState(null);
-    const [textAnimal, setTextAnimal] = useState('....... .......');
+    const [currentRound, setCurrentRound] = useState(0);
     const [parentText, setParentText] = useState(null);
+    const [textAnimal, setTextAnimal] = useState('....... .......');
     const [droppedAnimals, setDroppedAnimals] = useState([]);
     const [effectAnimal, setEffectAnimal] = useState(null);
     const [showPopup, setShowPopup] = useState(true);
-    const textQuestion = 'What do you see?';
-    const [dataAnimals, setDataAnimals] = useState([]);
-    const [indexAnimals, setIndexAnimals] = useState(0);
-    const [isContinue, setIsContinue] = useState(false);
+    const [isDone, setIsDone] = useState(false);
 
-    const navigate = useNavigate();
+    const textQuestion = 'What do you see?';
 
     const pos = {
         char: { xPct: 70, yPct: 50 },
@@ -49,36 +51,29 @@ export const Phase6 = () => {
         ]
     };
 
-    const posText = {
-        text1: { xPct: 48, yPct: 80 }
-    };
+    const posText = { text1: { xPct: 48, yPct: 80 } };
 
-    const texts = [
-        { id: "word1", text: "I see", pos: posText.text1 },
-    ];
+    const texts = [{ id: "word1", text: "I see", pos: posText.text1 }];
 
     function randomIndex(start, finish) {
         return Math.floor(Math.random() * (finish - start + 1) + start);
     }
 
-    // Fetch data và khởi tạo vị trí con vật chỉ 1 lần
+    // Fetch animals và gán vị trí
     useEffect(() => {
         async function fetchData() {
             const response = await getAllAnimalsService();
             const animals = response.animals;
             setDataAnimals(animals);
-            setIndexAnimals(randomIndex(0, animals.length));
-
 
             const positionsCopy = [...pos.animalsPositions];
             const cardsWithPos = animals.map((item) => {
                 let posision;
-                if (item.name === 'fish') {
-                    posision = pos.fish;
-                } else {
-                    let indexTemp = randomIndex(0, positionsCopy.length - 1);
-                    posision = positionsCopy[indexTemp];
-                    positionsCopy.splice(indexTemp, 1);
+                if (item.name === 'fish') posision = pos.fish;
+                else {
+                    const idx = randomIndex(0, positionsCopy.length - 1);
+                    posision = positionsCopy[idx];
+                    positionsCopy.splice(idx, 1);
                 }
                 return {
                     id: item.name,
@@ -88,24 +83,16 @@ export const Phase6 = () => {
                     pos: posision
                 };
             });
-
             setCards(cardsWithPos);
-
-            const indexSel = randomIndex(0, animals.length - 1);
-            setAnimalSelect(animals[indexSel]);
+            setShowPopup(true); 
         }
-
         fetchData();
     }, []);
-    const onSound = async (text, gender) => {
-        const response = await ttsFunction({
-            text: text,
-            gender: gender,
-        });
 
+    const onSound = async (text, gender) => {
+        const response = await ttsFunction({ text, gender });
         const audioBlob = new Blob([response], { type: "audio/mpeg" });
         const audioUrl = URL.createObjectURL(audioBlob);
-
         const audio = new Audio(audioUrl);
         audio.play();
     };
@@ -113,17 +100,16 @@ export const Phase6 = () => {
     const closeInstruction = () => {
         setShowInstruction(false);
         onSound(textQuestion, 'female');
-    }
+    };
 
     // ESC -> đóng popup
     useEffect(() => {
         const onKey = (e) => e.key === 'Escape' && closeInstruction();
         window.addEventListener('keydown', onKey);
-        closeInstruction
         return () => window.removeEventListener('keydown', onKey);
     }, []);
 
-    // click ngoài modal -> đóng
+    // Click ngoài modal -> đóng
     useEffect(() => {
         if (!showInstruction) return;
         const onClickAnywhere = (e) => {
@@ -134,6 +120,7 @@ export const Phase6 = () => {
         return () => document.removeEventListener('mousedown', onClickAnywhere);
     }, [showInstruction]);
 
+    // Chặn scroll khi mở modal
     useEffect(() => {
         if (showInstruction) {
             const prev = document.body.style.overflow;
@@ -146,7 +133,7 @@ export const Phase6 = () => {
         return createPortal(children, document.body);
     }
 
-    async function handleDragEnd({ active, over }) {
+    const handleDragEnd = async ({ active, over }) => {
         if (!frameRef.current || !active || !over) return;
 
         // Kéo thả text card
@@ -165,27 +152,33 @@ export const Phase6 = () => {
         // Kéo thả ảnh
         const draggedCard = cards.find(c => c.id === active.id);
         if (draggedCard) {
-            if (draggedCard.id === dataAnimals[indexAnimals].name) {
+            const correctAnimal = dataAnimals[currentRound].name;
+            if (draggedCard.id === correctAnimal) {
                 setDroppedAnimals(prev => [...prev, draggedCard.id]);
                 const textSpeed = "I want " + draggedCard.id;
                 setTextAnimal(textSpeed);
                 await onSound(textSpeed, 'male');
 
-                // Play âm thanh riêng của con vật
-                if (draggedCard.sound) {
-                    playSoundNTimes(draggedCard.sound, 1);
-                }
+                if (draggedCard.sound) playSoundNTimes(draggedCard.sound, 1);
 
                 setEffectAnimal(draggedCard.id);
                 setTimeout(() => {
-                    setEffectAnimal(null)
-                    setIsContinue(true);
+                    setEffectAnimal(null);
+                    const nextRound = currentRound + 1;
+                    if (nextRound < 5) {
+                        setCurrentRound(nextRound);
+                        setTextAnimal('....... .......');
+                        setParentText(null);
+                        setShowPopup(true);
+                    } else {
+                        setIsDone(true);
+                    }
                 }, 1000);
             } else {
                 await onSound('Try again!');
             }
         }
-    }
+    };
 
     const character = (
         <DroppableCharacter
@@ -198,32 +191,24 @@ export const Phase6 = () => {
             }}
         />
     );
-    const clickReplay = () => {
-        setShowPopup(true);
-    };
-
-    const closePopup = () => {
-        setShowPopup(false);
-    };
 
     return (
         <div className="container-phase">
-            {isContinue &&
-                <button
-                    className='button-continue'
-                    onClick={() => navigate('/homescreen')}
-                > Done
+            {isDone && (
+                <button className="button-continue" onClick={() => navigate('/homescreen')}>
+                    Done
                 </button>
-            }
-            {showPopup && dataAnimals && indexAnimals &&  (
+            )}
+
+            {/* Popup ảnh hiện tại */}
+            {showPopup && dataAnimals[currentRound] && (
                 <div className="popup-overlay">
                     <div className="popup-content">
-                        <img src={dataAnimals[indexAnimals].image} alt="Replay" />
-                        <button onClick={closePopup}>Close</button>
+                        <img src={dataAnimals[currentRound].image} alt="Animal" />
+                        <button onClick={() => setShowPopup(false)}>Close</button>
                     </div>
                 </div>
             )}
-
 
             <div className={`stage ${showInstruction ? "dimmed" : ""}`} aria-hidden={showInstruction}>
                 <div className="phase-background" ref={frameRef}>
@@ -231,7 +216,7 @@ export const Phase6 = () => {
 
                     <DndContext onDragEnd={handleDragEnd}>
                         {/* render ảnh */}
-                        {cards.filter(c => !droppedAnimals.includes(c.id)).map((c) => (
+                        {cards.filter(c => !droppedAnimals.includes(c.id)).map(c => (
                             <DraggableCard
                                 key={c.id}
                                 id={c.id}
@@ -243,19 +228,17 @@ export const Phase6 = () => {
                         ))}
 
                         {/* render chữ */}
-                        {!parentText &&
-                            texts.map((t) => (
-                                <DraggableText
-                                    key={t.id}
-                                    id={t.id}
-                                    text={t.text}
-                                    style={{
-                                        left: `${t.pos.xPct}%`,
-                                        top: `${t.pos.yPct}%`
-                                    }}
-                                />
-                            ))
-                        }
+                        {!parentText && texts.map(t => (
+                            <DraggableText
+                                key={t.id}
+                                id={t.id}
+                                text={t.text}
+                                style={{
+                                    left: `${t.pos.xPct}%`,
+                                    top: `${t.pos.yPct}%`
+                                }}
+                            />
+                        ))}
 
                         {character}
 
@@ -281,12 +264,11 @@ export const Phase6 = () => {
                     </DndContext>
 
                     {/* chat hiển thị câu */}
-                    <BoxChat posX={950} posY={330} text={textAnimal} />
-                    <button
-                        onClick={() => clickReplay()}
-                    >
+                    <button onClick={() => setShowPopup(true)}>
                         <BoxChat posX={900} posY={270} text={textQuestion} />
                     </button>
+                    <BoxChat posX={950} posY={330} text={textAnimal} />
+
                 </div>
 
                 <div className="setting-phase">

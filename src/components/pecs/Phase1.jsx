@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import bg from '~/assets/Pecs/bg.png';
-import pig from '~/assets/Pecs/pig.png';
 import boy from '~/assets/Pecs/boy.png';
 import instruction from '~/assets/Pecs/instruction.png';
 import exit from '~/assets/Pecs/exit.png';
@@ -10,58 +9,103 @@ import { DraggableCard } from './Card/Card';
 import { DroppableCharacter } from './Character/Character';
 import './Phase.css';
 import { playSoundNTimes } from './Sound/Sound';
-import soundEffect from '~/assets/Pecs/pig-sound.mp3';
 import { useNavigate } from 'react-router-dom';
-import { getAllAnimalsService, getAnimalByIdService } from '~/service/animalService'
-import { ttsFunction } from '~/service/ttsService'
+import { BoxChat } from './BoxChat/BoxChat';
+import { getAllAnimalsService } from '~/service/animalService';
+import { ttsFunction } from '../../service/ttsService';
 
 export const Phase1 = () => {
     const frameRef = useRef(null);
     const modalRef = useRef(null);
-    const [parent, setParent] = useState(null);
-    const [effect, setEffect] = useState(false);
-    const [animate, setAnimate] = useState(false);
+
+    const [cards, setCards] = useState([]);
+    const [animalSelect, setAnimalSelect] = useState(null);
     const [showInstruction, setShowInstruction] = useState(true);
-    const [indexAnimal, setIndexAnimal] = useState(0);
-    const [animalSelect, setAnimalSelect] = useState();
+    const [firstRoundDone, setFirstRoundDone] = useState(false);
+    const [droppedAnimals, setDroppedAnimals] = useState([]);
+    const [effectAnimal, setEffectAnimal] = useState(null);
     const [isContinue, setIsContinue] = useState(false);
     const navigate = useNavigate();
 
-    // Random index of array animal
+    const pos = {
+        char: { xPct: 70, yPct: 50 },
+        fish: { xPct: 20, yPct: 80 },
+        animalsPositions: [
+            { xPct: 35, yPct: 44 },
+            { xPct: 40, yPct: 68 },
+            { xPct: 45, yPct: 32 },
+            { xPct: 50, yPct: 56 },
+            { xPct: 55, yPct: 30 },
+            { xPct: 60, yPct: 76 },
+            { xPct: 65, yPct: 48 }
+        ]
+    };
+
     function randomIndex(start, finish) {
         return Math.floor(Math.random() * (finish - start + 1) + start);
     }
 
-    // Get data from backend
+    // Lấy data từ backend
     useEffect(() => {
         async function fetchData() {
             const response = await getAllAnimalsService();
-            const index = randomIndex(0, 7)
-            setIndexAnimal(index);
-            setAnimalSelect(response.animals[index]);
-        }
-        fetchData()
-    }, [])
+            const animals = response.animals;
 
+            const positionsCopy = [...pos.animalsPositions];
+            const cardsWithPos = animals.map((item) => {
+                let position;
+                if (item.name === 'fish') {
+                    position = pos.fish;
+                } else {
+                    let idx = randomIndex(0, positionsCopy.length - 1);
+                    position = positionsCopy[idx];
+                    positionsCopy.splice(idx, 1);
+                }
+                return {
+                    id: item.name,
+                    src: item.image,
+                    caption: item.name,
+                    sound: item.sound,
+                    pos: position
+                };
+            });
+
+            setCards(cardsWithPos);
+
+            // chọn 1 con random làm mục tiêu đầu tiên
+            const indexSel = randomIndex(0, animals.length - 1);
+            setAnimalSelect(animals[indexSel]);
+            const textSpeed = `Find the ${animals[indexSel].name}!`
+            setTextSelect(textSpeed);
+        }
+
+        fetchData();
+    }, []);
+
+
+    // ESC -> đóng popup
     useEffect(() => {
         const onKey = (e) => e.key === "Escape" && setShowInstruction(false);
         window.addEventListener("keydown", onKey);
         return () => window.removeEventListener("keydown", onKey);
-    }, []);
+    }, [animalSelect]);
 
-    // Click ở bất kỳ đâu ngoài popup -> đóng
+
+    // click ngoài modal -> đóng
     useEffect(() => {
         if (!showInstruction) return;
         const onClickAnywhere = (e) => {
             if (!modalRef.current) return;
-            if (!modalRef.current.contains(e.target)) setShowInstruction(false);
+            if (!modalRef.current.contains(e.target)) {
+                setShowInstruction(false);
+            }
         };
         document.addEventListener("mousedown", onClickAnywhere);
         return () => document.removeEventListener("mousedown", onClickAnywhere);
-    }, [showInstruction]);
-    const openInstruction = () => setShowInstruction(true);
-    const closeInstruction = () => setShowInstruction(false);
+    }, [showInstruction, animalSelect]);
 
+
+    // chặn scroll khi mở modal
     useEffect(() => {
         if (showInstruction) {
             const prev = document.body.style.overflow;
@@ -74,38 +118,26 @@ export const Phase1 = () => {
         return createPortal(children, document.body);
     }
 
-
-    // set vị trí ban đầu của các thẻ
-    // Nếu random ra cá thì phải setPosition theo fish còn lại thì random theo animals
-    const [pos, setPos] = useState({
-        char: { xPct: 70, yPct: 50 },
-        animals: { xPct: randomIndex(35, 65), yPct: randomIndex(20, 80) },
-        fish: { xPct: 20, yPct: 75 }
-    });
-
-    const clamp = (v) => Math.max(0, Math.min(100, v));
-
     // Xử lý kéo thả
     async function handleDragEnd({ active, over }) {
         if (!frameRef.current || !active) return;
+        if (!over) return;
 
-        // Nếu thả vào droppable thì xóa luôn
-        if (over) {
-            setParent(over.id);
-            await onSound(`I want ${animalSelect.name}`, 'male')
+        const draggedCard = cards.find(c => c.id === active.id);
+        if (!draggedCard) return;
 
-            playSoundNTimes(animalSelect.sound, 1);
+        setDroppedAnimals(prev => [...prev, draggedCard.id]);
+        await onSound(`I want ${draggedCard.id}`, 'male');
+        playSoundNTimes(draggedCard.sound, 1);
 
-            // bật hiệu ứng
-            setEffect(true);
+        setEffectAnimal(draggedCard.id);
+        setTimeout(() => setEffectAnimal(null), 1000);
 
-            // sau 1s (bằng thời gian animation) thì tắt effect
-            setTimeout(() => {
-                setEffect(false);
-                setIsContinue(true);
-            }, 1000);
+        console.log(droppedAnimals.length);
+
+        if (droppedAnimals.length === 7) {
+            setIsContinue(true);
         }
-
     }
     const onSound = async (text, gender) => {
         const response = await ttsFunction({
@@ -119,11 +151,6 @@ export const Phase1 = () => {
         const audio = new Audio(audioUrl);
         audio.play();
     };
-
-
-    const cards = animalSelect ? [
-        { id: animalSelect.name, src: animalSelect.image, caption: animalSelect.name, pos: (indexAnimal === 5) ? pos.fish : pos.animals },
-    ] : [];
 
     const character = (
         <DroppableCharacter
@@ -139,68 +166,82 @@ export const Phase1 = () => {
 
     return (
         <div className="container-phase">
-            {isContinue &&
+            {isContinue && (
                 <button
-                    className='button-continue'
+                    className="button-continue"
                     onClick={() => navigate('/phase2')}
-                > Continue
+                >
+                    Continue
                 </button>
-            }
+            )}
+
             <div className={`stage ${showInstruction ? "dimmed" : ""}`} aria-hidden={showInstruction}>
                 <div className="phase-background" ref={frameRef}>
                     <img src={bg} alt="Phase Background" className="phase-image" />
+
                     <DndContext onDragEnd={handleDragEnd}>
-                        {/* Chỉ hiện card nếu chưa drop */}
-                        {!parent
-                            ? cards.map((c) => (
+                        {/* Chỉ hiển thị 1 con vật chưa thả */}
+                        {cards.length > 0 && droppedAnimals.length < cards.length && (() => {
+                            const nextAnimal = cards[droppedAnimals.length];
+                            return (
                                 <DraggableCard
-                                    key={c.id}
-                                    id={c.id}
-                                    src={c.src}
-                                    caption={c.caption}
-                                    style={{ left: `${c.pos.xPct}%`, top: `${c.pos.yPct}%` }}
-                                    animate={false} // <-- đúng prop
+                                    key={nextAnimal.id}
+                                    id={nextAnimal.id}
+                                    src={nextAnimal.src}
+                                    caption={nextAnimal.caption}
+                                    style={{
+                                        left: `${nextAnimal.pos.xPct}%`,
+                                        top: `${nextAnimal.pos.yPct}%`
+                                    }}
+                                    animate={false}
                                 />
-                            ))
-                            : null}
+                            );
+                        })()}
 
                         {character}
 
-                        {effect &&
-                            cards.map((c) => (
+                        {/* hiệu ứng khi thả đúng */}
+                        {effectAnimal && (() => {
+                            const c = cards.find(c => c.id === effectAnimal);
+                            if (!c) return null;
+                            return (
                                 <div
                                     key={`ghost-${c.id}`}
                                     className="card animate ghost"
-                                    style={{ left: `${pos.char.xPct}%`, top: `${pos.char.yPct}%`, position: 'absolute' }}
+                                    style={{
+                                        left: `${pos.char.xPct}%`,
+                                        top: `${pos.char.yPct}%`,
+                                        position: 'absolute'
+                                    }}
                                 >
                                     <div className="caption">{c.caption}</div>
                                     <img src={c.src} alt={c.caption} draggable="false" />
                                 </div>
-                            ))}
+                            );
+                        })()}
                     </DndContext>
                 </div>
+
                 <div className="setting-phase">
-                    <img src={instruction} alt="instruction" onClick={openInstruction} className="btn-icon" />
+                    <img src={instruction} alt="instruction" onClick={() => setShowInstruction(true)} className="btn-icon" />
                     <img src={exit} alt="exit" onClick={() => navigate("/homescreen")} className="btn-icon" />
                 </div>
             </div>
 
-            {/* Overlay làm mờ nền nhưng KHÔNG ảnh hưởng modal */}
             {showInstruction && (
                 <ModalPortal>
                     <div className="screen-dim" />
                 </ModalPortal>
             )}
 
-            {/* Popup hướng dẫn */}
             {showInstruction && (
                 <ModalPortal>
                     <div className="modal" role="dialog" aria-modal="true" aria-label="Hướng dẫn">
-                        <div className="modal-backdrop" onClick={closeInstruction} />
+                        <div className="modal-backdrop" onClick={() => setShowInstruction(false)} />
                         <div className="modal-content" ref={modalRef} tabIndex={-1}>
                             <h2 className="modal-title">Phase 1 Instructions</h2>
                             <div className="modal-body">
-                                <p>Hãy kéo thả các thẻ vào đúng vị trí để hoàn thành nhiệm vụ…</p>
+                                <p>Hãy kéo thả con vật đúng theo hướng dẫn, sau đó thử với những con khác!</p>
                             </div>
                         </div>
                     </div>
@@ -208,4 +249,5 @@ export const Phase1 = () => {
             )}
         </div>
     );
+
 };
