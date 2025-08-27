@@ -88,15 +88,13 @@ export const Phase4 = () => {
     async function handleDragEnd({ active, over }) {
         if (!active || !over) return;
 
-        // Xử lý thẻ "I want"
         const draggedText = texts.find(t => t.id === active.id);
         if (draggedText) {
             setParentText(over.id);
             setTextAnimal(draggedText.text + " .......");
-            return; // chỉ xử lý thẻ
+            return;
         }
 
-        // Xử lý card con vật
         const draggedCard = cards.find(c => c.id === active.id);
         if (!draggedCard) return;
 
@@ -120,7 +118,12 @@ export const Phase4 = () => {
         if (nextRound < cards.length) {
             setCurrentRound(nextRound);
             setParentText(null);
-            setTextAnimal('....... .......');
+            if (nextRound >= 3) {
+                setTextAnimal('....... ........')
+            }
+            else {
+                setTextAnimal('I want .......');
+            }
         } else {
             setIsContinue(true);
         }

@@ -18,13 +18,15 @@ import { ttsFunction } from '~/service/ttsService';
 export const Phase5p4 = () => {
     const frameRef = useRef(null);
     const modalRef = useRef(null);
-    const [showInstruction, setShowInstruction] = useState(true);
+    const [showInstruction, setShowInstruction] = useState(false);
     const [sentence, setSentence] = useState('....... .......');
     const [parentText, setParentText] = useState(null);
     const [cards, setCards] = useState([]);
     const [droppedAnimals, setDroppedAnimals] = useState([]);
     const [effectAnimal, setEffectAnimal] = useState(null);
     const [incorrect, setIncorrect] = useState(false);
+    const [isContinue, setIsContinue] = useState(false);
+
 
     const navigate = useNavigate();
     const question = 'Do you want a fish or a bird?';
@@ -91,7 +93,35 @@ export const Phase5p4 = () => {
     };
 
 
-   
+    const closeInstruction = () => setShowInstruction(false);
+
+    useEffect(() => {
+        const onKey = e => e.key === 'Escape' && closeInstruction();
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, []);
+
+    useEffect(() => {
+        if (!showInstruction) return;
+        const onClickAnywhere = e => {
+            if (!modalRef.current) return;
+            if (!modalRef.current.contains(e.target)) closeInstruction();
+        };
+        document.addEventListener('mousedown', onClickAnywhere);
+        return () => document.removeEventListener('mousedown', onClickAnywhere);
+    }, [showInstruction]);
+
+    useEffect(() => {
+        if (showInstruction) {
+            const prev = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+            return () => (document.body.style.overflow = prev);
+        }
+    }, [showInstruction]);
+
+    function ModalPortal({ children }) {
+        return createPortal(children, document.body);
+    }
 
     async function handleDragEnd({ active, over }) {
         if (!active || !over) return;
@@ -120,7 +150,7 @@ export const Phase5p4 = () => {
 
                 setEffectAnimal(draggedCard.id);
                 setTimeout(() => setEffectAnimal(null), 1000);
-                setTimeout(() => navigate('/phase6'), 1000);
+                setIsContinue(true);
             }
             else {
                 setIncorrect(true);
@@ -145,7 +175,9 @@ export const Phase5p4 = () => {
 
     return (
         <div className="container-phase">
-            <div className={`stage`} aria-hidden={showInstruction}>
+            {isContinue && <button className='button-continue' onClick={() => navigate('/phase6p1')}> Continue </button>}
+
+            <div className={`stage ${showInstruction ? 'dimmed' : ''}`} aria-hidden={showInstruction}>
                 <div className="phase-background" ref={frameRef}>
                     <img src={bg} alt="Phase Background" className="phase-image" />
 
@@ -214,8 +246,30 @@ export const Phase5p4 = () => {
                     <img src={exit} alt="exit" onClick={() => navigate('/homescreen')} className="btn-icon" />
                 </div>
             </div>
+            {showInstruction && (
+                <ModalPortal>
+                    <div className="screen-dim" />
+                </ModalPortal>
+            )}
 
-            
+            {/* Popup hướng dẫn */}
+            {showInstruction && (
+                <ModalPortal>
+                    <div className="modal" role="dialog" aria-modal="true" aria-label="Hướng dẫn">
+                        <div className="modal-backdrop" onClick={() => setShowInstruction(false)} />
+                        <div className="modal-content" ref={modalRef} tabIndex={-1}>
+                            <h2 className="modal-title">Phase 5 Instructions</h2>
+                            <div className="modal-body">
+                                <p>
+                                    Kéo thả thẻ chữ phù hợp với câu hỏi (“I want” hoặc “I see”), sau đó kéo con vật để
+                                    hoàn thành câu. Mỗi lần hoàn thành sẽ tự chuyển sang câu hỏi kế tiếp.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </ModalPortal>
+            )}
+
         </div>
     );
 };
