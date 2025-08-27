@@ -18,7 +18,9 @@ import { Phase5p1 } from "./components/pecs/Phase5p1.jsx"
 import { Phase5p2 } from "./components/pecs/Phase5p2.jsx"
 import { Phase5p3 } from "./components/pecs/Phase5p3.jsx"
 import { Phase5p4 } from "./components/pecs/Phase5p4.jsx"
-import { Phase6 } from "./components/pecs/Phase6.jsx"
+import { Phase6p1 } from "./components/pecs/Phase6p1.jsx"
+import { Phase6p2 } from "./components/pecs/Phase6p2.jsx"
+import { Phase6p3 } from "./components/pecs/Phase6p3.jsx"
 import { ProtectedRoute } from "./protectedComponent.jsx"
 
 function App() {
@@ -110,12 +112,21 @@ function App() {
           <Phase5p4 />
         </ProtectedRoute>
       } />
-      <Route path="/phase6" element={
+      <Route path="/phase6p1" element={
         <ProtectedRoute>
-          <Phase6 />
+          <Phase6p1 />
         </ProtectedRoute>
       } />
-
+      <Route path="/phase6p2" element={
+        <ProtectedRoute>
+          <Phase6p2 />
+        </ProtectedRoute>
+      } />
+      <Route path="/phase6p3" element={
+        <ProtectedRoute>
+          <Phase6p3 />
+        </ProtectedRoute>
+      } />
     </Routes>
   )
 }

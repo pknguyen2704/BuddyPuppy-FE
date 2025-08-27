@@ -18,7 +18,7 @@ import { playSoundNTimes } from './Sound/Sound';
 
 import './Phase.css';
 
-export const Phase6 = () => {
+export const Phase6p1 = () => {
     const frameRef = useRef(null);
     const modalRef = useRef(null);
 
@@ -33,7 +33,6 @@ export const Phase6 = () => {
     const [droppedAnimals, setDroppedAnimals] = useState([]);
     const [effectAnimal, setEffectAnimal] = useState(null);
     const [showPopup, setShowPopup] = useState(true);
-    const [isDone, setIsDone] = useState(false);
 
     const textQuestion = 'What do you see?';
 
@@ -52,18 +51,23 @@ export const Phase6 = () => {
     };
 
     const posText = { text1: { xPct: 48, yPct: 80 } };
-
     const texts = [{ id: "word1", text: "I see", pos: posText.text1 }];
 
     function randomIndex(start, finish) {
         return Math.floor(Math.random() * (finish - start + 1) + start);
     }
 
+    // Hàm shuffle mảng
+    function shuffle(array) {
+        return [...array].sort(() => Math.random() - 0.5);
+    }
+
     // Fetch animals và gán vị trí
     useEffect(() => {
         async function fetchData() {
             const response = await getAllAnimalsService();
-            const animals = response.animals;
+            // Shuffle toàn bộ danh sách animal để random con vật cần chọn
+            const animals = shuffle(response.animals);
             setDataAnimals(animals);
 
             const positionsCopy = [...pos.animalsPositions];
@@ -84,7 +88,7 @@ export const Phase6 = () => {
                 };
             });
             setCards(cardsWithPos);
-            setShowPopup(true); 
+            setShowPopup(true);
         }
         fetchData();
     }, []);
@@ -155,7 +159,7 @@ export const Phase6 = () => {
             const correctAnimal = dataAnimals[currentRound].name;
             if (draggedCard.id === correctAnimal) {
                 setDroppedAnimals(prev => [...prev, draggedCard.id]);
-                const textSpeed = "I want " + draggedCard.id;
+                const textSpeed = "I see " + draggedCard.id;
                 setTextAnimal(textSpeed);
                 await onSound(textSpeed, 'male');
 
@@ -165,13 +169,14 @@ export const Phase6 = () => {
                 setTimeout(() => {
                     setEffectAnimal(null);
                     const nextRound = currentRound + 1;
-                    if (nextRound < 5) {
+                    if (nextRound < 2) {
                         setCurrentRound(nextRound);
                         setTextAnimal('....... .......');
                         setParentText(null);
                         setShowPopup(true);
+                        setTimeout(() => onSound(textQuestion, 'female'), 1500);
                     } else {
-                        setIsDone(true);
+                        setTimeout(() => navigate('/phase6p2'), 1000);
                     }
                 }, 1000);
             } else {
@@ -194,12 +199,6 @@ export const Phase6 = () => {
 
     return (
         <div className="container-phase">
-            {isDone && (
-                <button className="button-continue" onClick={() => navigate('/homescreen')}>
-                    Done
-                </button>
-            )}
-
             {/* Popup ảnh hiện tại */}
             {showPopup && dataAnimals[currentRound] && (
                 <div className="popup-overlay">
