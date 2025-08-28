@@ -1,3 +1,6 @@
+.container-fluid {
+  background-color: #ffd6ba !important;
+}
 .container-back {
   position: absolute;
   /* căn theo thẻ cha gần nhất có position: relative */
@@ -54,6 +57,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.25s ease;
+  background-color: #ffd6ba;
 }
 
 .Back:hover {
@@ -70,6 +74,7 @@
   background-color: #f36c21 !important;
   border-color: #f36c21 !important;
   color: #fff !important;
+
 }
 
 .hover-2:hover {
@@ -82,78 +87,104 @@
   position: absolute !important;
   top: 13.5% !important;
   left: 70%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-2 button {
   position: absolute !important;
   top: 25% !important;
   left: 70%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-3 button {
   position: absolute !important;
   top: 15% !important;
   left: 65%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-4 button {
   position: absolute !important;
   top: 12% !important;
   left: 68%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-5 .bt-1 {
   position: absolute !important;
   top: -1.5% !important;
   left: 41%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-5 .bt-2 {
   position: absolute !important;
   top: -1% !important;
   left: 75%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-5 .bt-3 {
   position: absolute !important;
   top: 49% !important;
   left: 42%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-5 .bt-4 {
   position: absolute !important;
   top: 49% !important;
   left: 77%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-6 .bt-1 {
   position: absolute !important;
   top: -1.5% !important;
   left: 43%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-6 .bt-2 {
   position: absolute !important;
   top: -1% !important;
   left: 75%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-6 .bt-3 {
   position: absolute !important;
   top: 49% !important;
   left: 42%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-6 .bt-4 {
   position: absolute !important;
   top: 49% !important;
   left: 77%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .s1div-7 button {
   position: absolute !important;
   top: 15% !important;
   left: 67%;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 @media (min-width: 1401px) {

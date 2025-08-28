@@ -1,5 +1,5 @@
 .home-screen {
-    background: #f8ec7d;
+    background: #ffe8cd;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -7,10 +7,10 @@
 }
 
 .hs-container {
-    background: #e6d86f;
+    background: #ffd6ba;
     border-radius: 24px;
     padding: 32px 40px;
-    width: 90vw;
+    width: 95vw;
     height: 95vh;
     min-width: 1050px;
     min-height: 700px;
@@ -65,13 +65,17 @@
 }
 
 .hs-hello {
-    background: #d3d3d3;
+    background: #fff;
     color: var(--colorfont);
     font-size: 2rem;
     font-weight: 700;
     border-radius: 12px;
     padding: 12px 24px;
     display: inline-block;
+}
+.hs-hello:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .hs-container-character {
@@ -84,6 +88,10 @@
 .hs-character {
     width: 300px;
     height: auto;
+}
+.hs-character:hover {
+    transform: translateY(-2px) scale(1.05);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .hs-main-content {
@@ -98,6 +106,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    /* background-color: #222; */
+    /* border-radius: 6px; */
 }
 
 .hs-container-text-title {
@@ -113,7 +123,7 @@
 }
 
 .hs-title {
-    color: #fff;
+    color: #E6521F;
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 8px;
@@ -121,7 +131,7 @@
 }
 
 .hs-subtitle {
-    color: #fff;
+    color: #E6521F;
     font-size: 1.2rem;
     font-weight: 400;
     margin-bottom: 2px;

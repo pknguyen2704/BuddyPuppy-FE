@@ -2,6 +2,8 @@
   position: absolute !important;
   top: 21% !important;
   left: 62% !important;
+  width: 60px !important;
+  height: 60px !important;
 }
 
 .s2div-2 button {

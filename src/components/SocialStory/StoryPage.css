@@ -1,5 +1,5 @@
 :root {
-    --bg: #e9d86a;
+    --bg: #ffd6ba;
     --panel: #e6e6e6;
     --white: #ffffff;
     --accent: #f36c21;
@@ -37,7 +37,7 @@ body {
 /* ------------ Page wrapper ------------ */
 .StoryPage {
     min-height: 100vh;
-    background: var(--bg) !important;
+    background-color: #ffd6ba;
     display: grid;
     place-items: center;
 }
@@ -47,7 +47,7 @@ body {
     min-height: 95vh;
     background: transparent;
     position: relative;
-    background-color: #e6d86f !important;
+     */
     padding: 10px 40px;
     border-radius: 40px;
 }
@@ -60,6 +60,7 @@ body {
     gap: 16px;
     background-color: var(--white) !important;
     border-radius: 1dvb;
+    height: 60px;
 }
 
 /* nút Back ở trái */
@@ -73,6 +74,8 @@ body {
     cursor: pointer;
     user-select: none;
     width: max-content;
+    margin: 0 10px;
+    background-color: #ffd6ba;
 }
 
 .st-back:hover {

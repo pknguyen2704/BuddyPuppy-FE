@@ -102,7 +102,6 @@ export const SignUp = () => {
           </div>
 
           <div className="if-signup">
-            <h2 className="if-title">Sign Up</h2>
 
             {/* Username */}
             <label className="if-field">
@@ -121,7 +120,7 @@ export const SignUp = () => {
                 className="eye-icon icon1"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
               </span>
               {errors.password && <p className="error">{errors.password}</p>}
             </label>
@@ -137,7 +136,7 @@ export const SignUp = () => {
                 className="eye-icon icon2"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                {/* {showConfirmPassword ? <FaEyeSlash /> : <FaEye />} */}
               </span>
               {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
             </label>

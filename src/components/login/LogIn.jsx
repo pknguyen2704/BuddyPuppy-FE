@@ -48,7 +48,6 @@ export const LogIn = () => {
                 <div className="logo">
                     <img src={logo1} onClick={() => navigate("/")} alt="Buddy Puppy" />
                 </div>
-                <h2>Login</h2>
                 <form onSubmit={handleLogin} className="login-form">
                     {/* Username */}
                     <div>
@@ -73,17 +72,17 @@ export const LogIn = () => {
                             className="eye-icon-login"
                             onClick={() => setShowPassword(!showPassword)}
                         >
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
                         </span>
                         {errors.password && <p className="error">{errors.password}</p>}
                     </div>
 
-                    <button className="login-btn2">Login</button>
+                    <button className="login-btn2">Log in</button>
                 </form>
 
                 <p className="signup-text">
                     Don’t Have An Account?{" "}
-                    <a onClick={() => navigate("/signup")}>Sign Up</a>
+                    <a onClick={() => navigate("/signup")}>Register</a>
                 </p>
             </div>
         </div>

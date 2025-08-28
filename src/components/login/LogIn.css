@@ -9,7 +9,7 @@
     display: flex;
     min-height: 100vh;
     font-family: "Montserrat", sans-serif;
-    background-color: var(--colortheme);
+    background-color: #ffe8cd;
 }
 
 /* Form container */
@@ -41,9 +41,9 @@
 }
 
 .logo img {
-    width: 120px;
+    width: 220px;
     display: block;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     margin-bottom: 40px;
     cursor: pointer;
 }
@@ -62,14 +62,15 @@
 .login-btn2 {
     width: 100%;
     padding: 0.8rem;
-    background-color: var(--colortheme);
+    background-color: #F39E60;
     border: none;
     font-weight: bold;
     cursor: pointer;
     border-radius: 6px;
     margin-bottom: 0.8rem;
     transition: background 0.2s;
-    color: #000;
+    color: #fff;
+    text-transform: uppercase;
 }
 
 .login-btn2:hover {
@@ -82,9 +83,10 @@
 }
 
 .signup-text a {
-    color: #184bff;
-    text-decoration: none;
-    cursor: pointer;
+    color: #F39E60 !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+    font-weight: bold;
 }
 
 /* Divider */
