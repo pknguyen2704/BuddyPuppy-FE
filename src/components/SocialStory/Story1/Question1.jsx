@@ -26,6 +26,7 @@ export const Questions1 = () => {
             closeBtnRef.current?.focus();
             // chặn scroll nền
             document.body.style.overflow = "hidden";
+            onSound(DataGrade[grade]);
         } else {
             document.body.style.overflow = "";
         }
@@ -84,7 +85,7 @@ export const Questions1 = () => {
 
     const handleGrade = (check) => {
         if (check) {
-            setGrade(grade + 1);
+            setGrade(grade => grade + 1);
             setRunConfetti(true);
         }
     }
@@ -99,14 +100,11 @@ export const Questions1 = () => {
                 setIndex(index + 1);
             } else {
                 setOpen(true);
-                onSound(DataGrade[grade]);
                 setRunConfetti(true);
             }
             setWaiting(false);
         }, 5000);
     };
-
-
 
     const onSound = async (text) => {
         const response = await ttsFunction({
@@ -157,8 +155,8 @@ export const Questions1 = () => {
                                 onClick={() => {
                                     setSelected("A");
                                     onSound(dataQuestions1[index].feedbackA);
-                                    handleAnswer();
                                     handleGrade(dataQuestions1[index].ansA);
+                                    handleAnswer();
                                 }}
                                 disabled={waiting}
                             >
@@ -174,8 +172,8 @@ export const Questions1 = () => {
                                 onClick={() => {
                                     setSelected("B")
                                     onSound(dataQuestions1[index].feedbackB);
-                                    handleAnswer();
                                     handleGrade(dataQuestions1[index].ansB);
+                                    handleAnswer();
                                 }}
                                 disabled={waiting}
                             >
@@ -191,8 +189,8 @@ export const Questions1 = () => {
                                 onClick={() => {
                                     setSelected("C")
                                     onSound(dataQuestions1[index].feedbackC);
+                                    handleGrade(dataQuestions1[index].ansC);
                                     handleAnswer();
-                                    handleGrade(dataQuestions1[index].ansC)
                                 }}
                                 disabled={waiting}
                             >
