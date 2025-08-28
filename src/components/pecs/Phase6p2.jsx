@@ -301,7 +301,7 @@ export const Phase6p2 = () => {
                         <div className="modal-content" ref={modalRef} tabIndex={-1}>
                             <h2 className="modal-title">Phase 6 Instructions</h2>
                             <div className="modal-body">
-                                <p>Hãy kéo thả các thẻ vào đúng vị trí để hoàn thành nhiệm vụ…</p>
+                                <p>Hãy chọn và kéo hình các con vật xuất hiện trong ảnh để tạo thành câu...</p>
                             </div>
                         </div>
                     </div>

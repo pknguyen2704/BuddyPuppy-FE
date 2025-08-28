@@ -196,7 +196,7 @@ export const Phase4 = () => {
                         <div className="modal-content" ref={modalRef} tabIndex={-1}>
                             <h2 className="modal-title">Phase 4 Instructions</h2>
                             <div className="modal-body">
-                                <p>Hãy kéo thả các thẻ vào đúng vị trí để hoàn thành nhiệm vụ…</p>
+                                <p>Hãy kéo thả các thẻ vào đúng vị trí để hoàn thành cấu trúc câu…</p>
                             </div>
                         </div>
                     </div>
