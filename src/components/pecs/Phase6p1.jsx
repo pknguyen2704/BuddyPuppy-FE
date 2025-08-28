@@ -144,7 +144,7 @@ export const Phase6p1 = () => {
         const draggedText = texts.find(t => t.id === active.id);
         if (draggedText) {
             setParentText(over.id);
-            setTextAnimal(draggedText.text + " .......");
+            setTextAnimal(draggedText.text + " a .......");
             return;
         }
 
@@ -159,7 +159,7 @@ export const Phase6p1 = () => {
             const correctAnimal = dataAnimals[currentRound].name;
             if (draggedCard.id === correctAnimal) {
                 setDroppedAnimals(prev => [...prev, draggedCard.id]);
-                const textSpeed = "I see " + draggedCard.id;
+                const textSpeed = "I see a " + draggedCard.id;
                 setTextAnimal(textSpeed);
                 await onSound(textSpeed, 'male');
 
@@ -171,10 +171,11 @@ export const Phase6p1 = () => {
                     const nextRound = currentRound + 1;
                     if (nextRound < 2) {
                         setCurrentRound(nextRound);
-                        setTextAnimal('....... .......');
-                        setParentText(null);
+                        setTimeout(() => setTextAnimal('....... .......'), 1700)
+                        
                         setShowPopup(true);
                         setTimeout(() => onSound(textQuestion, 'female'), 1500);
+                        setTimeout(() => setParentText(null), 1500);
                     } else {
                         setTimeout(() => navigate('/phase6p2'), 2000);
                     }

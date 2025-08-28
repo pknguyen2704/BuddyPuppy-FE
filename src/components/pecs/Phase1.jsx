@@ -127,7 +127,7 @@ export const Phase1 = () => {
         if (!draggedCard) return;
 
         setDroppedAnimals(prev => [...prev, draggedCard.id]);
-        await onSound(`I want ${draggedCard.id}`, 'male');
+        await onSound(`I want a ${draggedCard.id}`, 'male');
         playSoundNTimes(draggedCard.sound, 1);
 
         setEffectAnimal(draggedCard.id);

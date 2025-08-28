@@ -176,7 +176,7 @@ export const Phase3p2 = () => {
 
             if (draggedCard.id === animalSelect.name) {
                 setDroppedAnimals(prev => [...prev, draggedCard.id]);
-                await onSound(`I want ${animalSelect.name}`);
+                await onSound(`I want a ${animalSelect.name}`);
                 playSoundNTimes(animalSelect.sound, 1);
 
 

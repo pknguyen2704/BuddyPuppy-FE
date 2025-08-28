@@ -130,7 +130,7 @@ export const Phase5p4 = () => {
         const draggedText = texts.find(t => t.id === active.id);
         if (draggedText) {
             setParentText(over.id);
-            setSentence(`${draggedText.text} .......`);
+            setSentence(`${draggedText.text} a .......`);
             return;
         }
 
@@ -143,9 +143,9 @@ export const Phase5p4 = () => {
         if (draggedCard) {
             if (draggedCard.id === 'fish' || draggedCard.id === 'bird') {
                 setDroppedAnimals(prev => [...prev, draggedCard.id]);
-                setSentence(`I want ${draggedCard.id}`);
+                setSentence(`I want a ${draggedCard.id}`);
 
-                await onSound(`I want ${draggedCard.id}`, 'male');
+                await onSound(`I want a ${draggedCard.id}`, 'male');
                 if (draggedCard.sound) playSoundNTimes(draggedCard.sound, 1);
 
                 setEffectAnimal(draggedCard.id);

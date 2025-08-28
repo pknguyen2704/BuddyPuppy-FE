@@ -148,7 +148,7 @@ export const Phase6p2 = () => {
         const draggedText = texts.find(t => t.id === active.id);
         if (draggedText) {
             setParentText(over.id);
-            setTextAnimal(draggedText.text + " ....... and .......");
+            setTextAnimal(draggedText.text + " a ....... and a .......");
             return;
         }
 
@@ -165,14 +165,14 @@ export const Phase6p2 = () => {
                     setDroppedAnimals(prev => [...prev, draggedCard.id]);
                 }
                 if (targetAnimals.every(a => droppedAnimals.concat(draggedCard.id).includes(a.name))) {
-                    const textSpeed = textAnimal.split('and')[0] += (' and ' + draggedCard.id);
+                    const textSpeed = textAnimal.split('and')[0] += (' and a ' + draggedCard.id);
                     setTextAnimal(textSpeed);
                     await onSound(textSpeed, 'male');
                     setTimeout(() => playSoundNTimes(draggedCard.sound, 1), 2000);
                     setTimeout(() => navigate('/phase6p3'), 2200);
                 }
                 else {
-                    const textSpeed = "I see " + draggedCard.id + " and ";
+                    const textSpeed = "I see a " + draggedCard.id + " and a ";
                     setTextAnimal(textSpeed + " .......");
                     if (draggedCard.sound) playSoundNTimes(draggedCard.sound, 1);
                 }
