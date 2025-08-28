@@ -246,7 +246,7 @@ export const Phase5p1 = () => {
               <h2 className="modal-title">Phase 5 Instructions</h2>
               <div className="modal-body">
                 <p>
-                  Kéo thả thẻ chữ phù hợp với câu hỏi (“I want” hoặc “I see”), sau đó kéo con vật để
+                  Kéo thả thẻ chữ phù hợp với câu hỏi (“I want”), sau đó kéo con vật để
                   hoàn thành câu. Mỗi lần hoàn thành sẽ tự chuyển sang câu hỏi kế tiếp.
                 </p>
               </div>
