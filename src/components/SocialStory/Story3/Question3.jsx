@@ -26,6 +26,7 @@ export const Questions3 = () => {
             closeBtnRef.current?.focus();
             // chặn scroll nền
             document.body.style.overflow = "hidden";
+            onSound(DataGrade[grade], "female");
         } else {
             document.body.style.overflow = "";
         }
@@ -78,10 +79,10 @@ export const Questions3 = () => {
     ];
 
     const DataGrade = [
-        "You did not greet people today. Let’s try again tomorrow. 💡",           // 0 correct
-        "You greeted people 1 time today. Let’s keep practicing! 🙂",             // 1 correct
-        "Well done! You greeted people 2 out of 3 times today. 🌟",               // 2 correct
-        "Great job! You said hi and goodbye 3 out of 3 times today. 🎉",          // 3 correct
+        "You did not greet people today. Let’s try again tomorrow. ",           // 0 correct
+        "You greeted people 1 time today. Let’s keep practicing! ",             // 1 correct
+        "Well done! You greeted people 2 out of 3 times today. ",               // 2 correct
+        "Great job! You said hi and goodbye 3 out of 3 times today. ",          // 3 correct
     ];
 
     const handleGrade = (check) => {
@@ -101,7 +102,6 @@ export const Questions3 = () => {
                 setIndex(index + 1);
             } else {
                 setOpen(true);
-                onSound(DataGrade[grade], "female");
                 setRunConfetti(true);
             }
             setWaiting(false);

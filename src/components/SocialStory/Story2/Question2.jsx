@@ -26,6 +26,7 @@ export const Questions2 = () => {
             closeBtnRef.current?.focus();
             // chặn scroll nền
             document.body.style.overflow = "hidden";
+            onSound(DataGrade[grade]);
         } else {
             document.body.style.overflow = "";
         }
@@ -76,9 +77,9 @@ export const Questions2 = () => {
 
     const DataGrade = [
         "You did not use the potty today. Let’s try again tomorrow.",     // 0 correct
-        "You used the potty 1 time today. Let’s keep practicing! 🙂",     // 1 correct
-        "Well done! You used the potty 2 out of 3 times today. 🌟",       // 2 correct
-        "Great job! You used the potty 3 out of 3 times today. 🎉",       // 3 correct
+        "You used the potty 1 time today. Let’s keep practicing! ",     // 1 correct
+        "Well done! You used the potty 2 out of 3 times today. ",       // 2 correct
+        "Great job! You used the potty 3 out of 3 times today. ",       // 3 correct
     ];
 
     const handleGrade = (check) => {
@@ -98,7 +99,6 @@ export const Questions2 = () => {
                 setIndex(index + 1);
             } else {
                 setOpen(true);
-                onSound(DataGrade[grade]);
                 setRunConfetti(true);
             }
             setWaiting(false);
