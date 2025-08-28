@@ -176,7 +176,7 @@ export const Phase6p1 = () => {
                         setShowPopup(true);
                         setTimeout(() => onSound(textQuestion, 'female'), 1500);
                     } else {
-                        setTimeout(() => navigate('/phase6p2'), 1000);
+                        setTimeout(() => navigate('/phase6p2'), 2000);
                     }
                 }, 1000);
             } else {

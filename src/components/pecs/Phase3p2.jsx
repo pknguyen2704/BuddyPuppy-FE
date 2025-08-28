@@ -190,7 +190,7 @@ export const Phase3p2 = () => {
                 }, 1000);
                 setTimeout(() => {
                     navigate('/phase3p3')
-                }, 1700);
+                }, 2500);
             }
             else {
                 await onSound('Try again!', 'female');
