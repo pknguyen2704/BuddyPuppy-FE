@@ -120,13 +120,24 @@ body {
     flex-direction: column;
 }
 
-.if-field input {
+.if-field input,
+.if-field select {
     height: 40px;
     padding: 0 12px;
     border: 1px solid var(--line);
     border-radius: 10px;
     outline: none;
     transition: border-color .15s, box-shadow .15s;
+}
+
+select.placeholder-select {
+    color: #999 !important;
+    /* chữ mờ lúc chưa chọn */
+}
+
+select.selected-select {
+    color: #000 !important;
+    /* chữ đen khi chọn xong */
 }
 
 .if-field input:focus {
@@ -158,6 +169,32 @@ body {
 
 .if-btn:hover {
     background: var(--colorhover);
+}
+
+/* Hiện lỗi */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.placeholder-select {
+  color: #999;
+}
+.selected-select {
+  color: #000;
+}
+ /* mắt password */
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(230%);
+  cursor: pointer;
+  color: gray;
+  font-size: 20px;
+}
+.icon1{
+    transform: translateY(45%);
 }
 
 /* ====== Responsive ====== */
@@ -226,9 +263,3 @@ body {
         font-size: 18px
     }
 }
-
-
-
-       
-
-       

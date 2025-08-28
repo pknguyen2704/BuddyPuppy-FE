@@ -22,112 +22,117 @@ import { Phase6p1 } from "./components/pecs/Phase6p1.jsx"
 import { Phase6p2 } from "./components/pecs/Phase6p2.jsx"
 import { Phase6p3 } from "./components/pecs/Phase6p3.jsx"
 import { ProtectedRoute } from "./protectedComponent.jsx"
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<LogIn />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/about" element={<h1>About BuddyPuppy</h1>} />
-      <Route path="/contact" element={<h1>Contact Us</h1>} />
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/about" element={<h1>About BuddyPuppy</h1>} />
+        <Route path="/contact" element={<h1>Contact Us</h1>} />
 
 
-      <Route path="/StoryPage" element={
-        <ProtectedRoute>
-          <StoryPage />
-        </ProtectedRoute>
-      } />
+        <Route path="/StoryPage" element={
+          <ProtectedRoute>
+            <StoryPage />
+          </ProtectedRoute>
+        } />
 
 
-      <Route path="/homescreen" element={
-        <ProtectedRoute>
-          <HomeScreen />
-        </ProtectedRoute>
-      } />
+        <Route path="/homescreen" element={
+          <ProtectedRoute>
+            <HomeScreen />
+          </ProtectedRoute>
+        } />
 
-      <Route path="/SocialStory1" element={
-        <ProtectedRoute>
-          <SocialStory1 />
-        </ProtectedRoute>
-      } />
-      <Route path="/SocialStory2" element={
-        <ProtectedRoute>
-          <SocialStory2 />
-        </ProtectedRoute>
-      } />
-      <Route path="/SocialStory3" element={
-        <ProtectedRoute>
-          <SocialStory3 />
-        </ProtectedRoute>
-      } />
+        <Route path="/SocialStory1" element={
+          <ProtectedRoute>
+            <SocialStory1 />
+          </ProtectedRoute>
+        } />
+        <Route path="/SocialStory2" element={
+          <ProtectedRoute>
+            <SocialStory2 />
+          </ProtectedRoute>
+        } />
+        <Route path="/SocialStory3" element={
+          <ProtectedRoute>
+            <SocialStory3 />
+          </ProtectedRoute>
+        } />
 
-      <Route path="/phase1" element={
-        <ProtectedRoute>
-          <Phase1 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase2" element={
-        <ProtectedRoute>
-          <Phase2 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase3p1" element={
-        <ProtectedRoute>
-          <Phase3p1 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase3p2" element={
-        <ProtectedRoute>
-          <Phase3p2 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase3p3" element={
-        <ProtectedRoute>
-          <Phase3p3 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase4" element={
-        <ProtectedRoute>
-          <Phase4 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase5p1" element={
-        <ProtectedRoute>
-          <Phase5p1 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase5p2" element={
-        <ProtectedRoute>
-          <Phase5p2 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase5p3" element={
-        <ProtectedRoute>
-          <Phase5p3 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase5p4" element={
-        <ProtectedRoute>
-          <Phase5p4 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase6p1" element={
-        <ProtectedRoute>
-          <Phase6p1 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase6p2" element={
-        <ProtectedRoute>
-          <Phase6p2 />
-        </ProtectedRoute>
-      } />
-      <Route path="/phase6p3" element={
-        <ProtectedRoute>
-          <Phase6p3 />
-        </ProtectedRoute>
-      } />
-    </Routes>
+        <Route path="/phase1" element={
+          <ProtectedRoute>
+            <Phase1 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase2" element={
+          <ProtectedRoute>
+            <Phase2 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase3p1" element={
+          <ProtectedRoute>
+            <Phase3p1 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase3p2" element={
+          <ProtectedRoute>
+            <Phase3p2 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase3p3" element={
+          <ProtectedRoute>
+            <Phase3p3 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase4" element={
+          <ProtectedRoute>
+            <Phase4 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase5p1" element={
+          <ProtectedRoute>
+            <Phase5p1 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase5p2" element={
+          <ProtectedRoute>
+            <Phase5p2 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase5p3" element={
+          <ProtectedRoute>
+            <Phase5p3 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase5p4" element={
+          <ProtectedRoute>
+            <Phase5p4 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase6p1" element={
+          <ProtectedRoute>
+            <Phase6p1 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase6p2" element={
+          <ProtectedRoute>
+            <Phase6p2 />
+          </ProtectedRoute>
+        } />
+        <Route path="/phase6p3" element={
+          <ProtectedRoute>
+            <Phase6p3 />
+          </ProtectedRoute>
+        } />
+      </Routes>
+
+      <ToastContainer position="top-right" autoClose={3000} />
+    </>
   )
 }
 
