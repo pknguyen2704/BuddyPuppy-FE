@@ -127,18 +127,17 @@ export const Phase2 = () => {
         if (!draggedCard) return;
 
         setDroppedAnimals(prev => {
-            const newDropped = [...prev, draggedCard.id];
-
+            // 2 lượt đầu tiên
             if (firstRoundDone < 2) {
                 if (draggedCard.id === animalSelect?.id) {
-                    onSound(`I want ${draggedCard.id}`, 'male');
+                    onSound(`I want a ${draggedCard.id}`, 'male');
                     playSoundNTimes(draggedCard.sound, 1);
 
                     const nextRound = firstRoundDone + 1;
                     setFirstRoundDone(nextRound);
 
                     if (nextRound === 1) {
-                        const remaining = cards.filter(c => !newDropped.includes(c.id));
+                        const remaining = cards.filter(c => ![...prev, draggedCard.id].includes(c.id));
                         if (remaining.length > 0) {
                             const nextAnimal = remaining[randomIndex(0, remaining.length - 1)];
                             setAnimalSelect(nextAnimal);
@@ -154,21 +153,30 @@ export const Phase2 = () => {
 
                     setEffectAnimal(draggedCard.id);
                     setTimeout(() => setEffectAnimal(null), 1000);
+
+                    return [...prev, draggedCard.id];
                 } else {
                     onSound('Try again!', 'female');
+                    return prev;
                 }
-            } else {
-                // Các lượt sau: kéo thoải mái
-                onSound(`I want ${draggedCard.id}`, 'male');
-                playSoundNTimes(draggedCard.sound, 1);
-                setEffectAnimal(draggedCard.id);
-                setTimeout(() => setEffectAnimal(null), 1000);
             }
 
-            if (newDropped.length === cards.length) setIsContinue(true);
-            return newDropped;
+            onSound(`I want ${draggedCard.id}`, 'male');
+            playSoundNTimes(draggedCard.sound, 1);
+            setEffectAnimal(draggedCard.id);
+            setTimeout(() => setEffectAnimal(null), 1000);
+
+            const updated = [...prev, draggedCard.id];
+
+            if (firstRoundDone >= 2 && updated.length >= 3) {
+                setIsContinue(true);
+            }
+
+            return updated;
         });
     };
+
+
 
     const character = (
         <DroppableCharacter

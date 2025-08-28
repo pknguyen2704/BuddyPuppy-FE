@@ -24,7 +24,7 @@ export const Phase4 = () => {
     const [cards, setCards] = useState([]);
     const [droppedAnimals, setDroppedAnimals] = useState([]);
     const [effectAnimal, setEffectAnimal] = useState(null);
-    const [textAnimal, setTextAnimal] = useState('I want .......');
+    const [textAnimal, setTextAnimal] = useState('I want a .......');
     const [parentText, setParentText] = useState(null);
     const [currentRound, setCurrentRound] = useState(0);
     const [isContinue, setIsContinue] = useState(false);
@@ -91,7 +91,7 @@ export const Phase4 = () => {
         const draggedText = texts.find(t => t.id === active.id);
         if (draggedText) {
             setParentText(over.id);
-            setTextAnimal(draggedText.text + " .......");
+            setTextAnimal(draggedText.text + " a .......");
             return;
         }
 
@@ -105,7 +105,7 @@ export const Phase4 = () => {
         }
 
         setDroppedAnimals(prev => [...prev, draggedCard.id]);
-        const textSpeed = `I want ${draggedCard.id}`;
+        const textSpeed = `I want a ${draggedCard.id}`;
         setTextAnimal(textSpeed);
 
         await onSound(textSpeed);
@@ -119,10 +119,10 @@ export const Phase4 = () => {
             setCurrentRound(nextRound);
             setParentText(null);
             if (nextRound >= 3) {
-                setTextAnimal('....... ........')
+                setTimeout(() => setTextAnimal('....... ........'), 1700)
             }
             else {
-                setTextAnimal('I want .......');
+                setTimeout(() => setTextAnimal('I want a .......'), 1700)
             }
         } else {
             setIsContinue(true);
