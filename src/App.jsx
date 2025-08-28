@@ -6,8 +6,11 @@ import { SignUp } from "./components/signup/SignUp"
 import { HomeScreen } from "./components/homescreen/homescreen.jsx"
 import { StoryPage } from "./components/SocialStory/StoryPage.jsx"
 import { SocialStory1 } from './components/SocialStory/Story1/SocialStory1'
+import { Questions1 } from "./components/SocialStory/Story1/Question1.jsx"
 import { SocialStory2 } from './components/SocialStory/Story2/SocialStory2'
+import { Questions2 } from "./components/SocialStory/Story2/Question2.jsx"
 import { SocialStory3 } from './components/SocialStory/Story3/SocialStory3'
+import { Questions3 } from "./components/SocialStory/Story3/Question3.jsx"
 import { Phase1 } from './components/pecs/Phase1.jsx'
 import { Phase2 } from "./components/pecs/Phase2.jsx"
 import { Phase3p1 } from "./components/pecs/Phase3p1.jsx"
@@ -46,14 +49,29 @@ function App() {
           <SocialStory1 />
         </ProtectedRoute>
       } />
+      <Route path="/questionsStory1" element={
+        <ProtectedRoute>
+          <Questions1 />
+        </ProtectedRoute>
+      } />
       <Route path="/SocialStory2" element={
         <ProtectedRoute>
           <SocialStory2 />
         </ProtectedRoute>
       } />
+      <Route path="/questionsStory2" element={
+        <ProtectedRoute>
+          <Questions2 />
+        </ProtectedRoute>
+      } />
       <Route path="/SocialStory3" element={
         <ProtectedRoute>
           <SocialStory3 />
+        </ProtectedRoute>
+      } />
+      <Route path="/questionsStory3" element={
+        <ProtectedRoute>
+          <Questions3 />
         </ProtectedRoute>
       } />
 

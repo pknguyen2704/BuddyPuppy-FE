@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./SocialStory3.css";
 
@@ -24,6 +24,20 @@ export const SocialStory3 = () => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const closeBtnRef = useRef(null);
+
+    useEffect(() => {
+        if (open) {
+            // focus vào nút Close khi popup mở
+            closeBtnRef.current?.focus();
+            // chặn scroll nền
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => { document.body.style.overflow = ""; };
+    }, [open]);
 
     const dataText = [
         { text: "I want to go to the potty !", gender: "female" },
@@ -261,6 +275,9 @@ export const SocialStory3 = () => {
                                 >
                                     <Volume2 />
                                 </button>
+                                <div className="finish-container" >
+                                    <h2 className="finish" onClick={() => setOpen(true)} >Finish</h2>
+                                </div>
                             </div>
                         )}
                     </motion.div>
@@ -285,6 +302,43 @@ export const SocialStory3 = () => {
                 >
                     <ArrowRight size={20} />
                 </button>
+                {open && (
+                    <div
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="finishTitle"
+                        className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                        style={{ background: "rgba(0,0,0,0.5)", zIndex: 2000 }}
+                        onClick={() => setOpen(false)} // click nền để đóng
+                    >
+                        <div
+                            className="bg-white rounded-4 shadow p-4"
+                            style={{ width: 420, maxWidth: "90%" }}
+                            onClick={(e) => e.stopPropagation()} // chặn click xuyên
+                        >
+                            <h5 id="finishTitle" className="mb-3">🎉 Congratulations!</h5>
+                            <p className="mb-4 text-center">You finished the story!<br></br> Now let answer some questions</p>
+                            <div className="d-flex justify-content-end gap-2">
+                                <button
+                                    ref={closeBtnRef}
+                                    type="button"
+                                    className="btn btn-secondary 1"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    Close
+                                </button>
+                                <button
+                                    ref={closeBtnRef}
+                                    type="button"
+                                    className="btn btn-secondary 2"
+                                    onClick={() => navigate("/questionsStory3")}
+                                >
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

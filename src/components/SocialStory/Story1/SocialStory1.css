@@ -7,6 +7,44 @@
   /* cách trái 10px */
 }
 
+.finish-container {
+  position: absolute;
+  /* căn theo thẻ cha gần nhất có position: relative */
+  bottom: 0;
+  left: 48%;
+}
+
+.finish {
+  margin: 0;
+  padding: 8px 16px;
+  color: #333;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.finish:hover {
+  background: #f36c21;
+  /* đổi màu nền */
+  color: #fff;
+  /* đổi màu chữ */
+  transform: translateY(-2px);
+  /* nổi lên một chút */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.Back:hover {
+  background: #f36c21;
+  /* đổi màu nền */
+  color: #fff;
+  /* đổi màu chữ */
+  transform: translateY(-2px);
+  /* nổi lên một chút */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
 .Back {
   margin: 0;
   padding: 8px 16px;
@@ -26,6 +64,18 @@
   transform: translateY(-2px);
   /* nổi lên một chút */
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.hover-1:hover {
+  background-color: #f36c21 !important;
+  border-color: #f36c21 !important;
+  color: #fff !important;
+}
+
+.hover-2:hover {
+  background-color: #f8ec7d !important;
+  border-color: #f8ec7d !important;
+  color: #f36c21 !important;
 }
 
 .s1div-1 button {
