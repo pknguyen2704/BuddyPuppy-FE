@@ -124,10 +124,33 @@
     height: 18px;
 }
 
+.error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: -0.5rem !important;
+    margin-bottom: 0.8rem;
+}
+
+
 /* Responsive: trên mobile sidebar ẩn đi */
 @media (max-width: 768px) {
     .login-page {
         background-color: #fff;
     }
 
+}
+
+
+.password-field {
+    position: relative;
+}
+
+.eye-icon-login {
+    position: absolute;
+    right: 12px;
+    top: 50% !important;
+    transform: translateY(-85%) !important;
+    cursor: pointer;
+    color: #555;
+    font-size: 20px !important;
 }

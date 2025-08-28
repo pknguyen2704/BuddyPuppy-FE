@@ -151,7 +151,7 @@ export const Phase5p1 = () => {
         const newCount = prev + 1;
         setParentText(null);
         setSentence(`...... ......`) 
-        if (newCount >= 2) navigate('/phase5p2');
+        if (newCount >= 2) setTimeout(() => navigate('/phase5p2'), 2500);
         return newCount;
       });
     }

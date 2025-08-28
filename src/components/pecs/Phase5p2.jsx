@@ -148,7 +148,7 @@ export const Phase5p2 = () => {
 
                 setEffectAnimal(draggedCard.id);
                 setTimeout(() => setEffectAnimal(null), 1000);
-                setTimeout(() => navigate('/phase5p3'), 1000);
+                setTimeout(() => navigate('/phase5p3'), 2000);
             }
             else {
                 setIncorrect(true);

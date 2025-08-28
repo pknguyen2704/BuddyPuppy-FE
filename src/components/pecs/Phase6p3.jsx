@@ -171,7 +171,7 @@ export const Phase6p3 = () => {
                     setTextAnimal(textSpeed);
                     await onSound(textSpeed, 'male');
                     setTimeout(() => playSoundNTimes(draggedCard.sound, 1), 2000);
-                    setTimeout(() =>setIsDone(true), 3000);
+                    setTimeout(() =>setIsDone(true), 3200);
                     
                 }
                 else {
