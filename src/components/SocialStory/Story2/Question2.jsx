@@ -38,37 +38,37 @@ export const Questions2 = () => {
 
     const dataQuestions2 = [
         {
-            question: "You feel your tummy telling you that you need to pee. What should you do?",
-            A: "Stay silent and pee in your underwear.",
-            B: "Say, “May I go to the potty, please?”",
-            C: "Run around and hold your tummy.",
-            feedbackA: "Pee belongs in the potty, not in underwear.",
-            feedbackB: "Good job! Asking to go potty is the right choice.",
-            feedbackC: "Running around doesn’t help. Let’s ask for the potty.",
+            question: "You see your friend at school. They wave and say, “Hi!”",
+            A: "Look away and say nothing.",
+            B: "Wave back and say, “Hi, buddy!”",
+            C: "Shout loudly and run past them.",
+            feedbackA: "Ignoring can make your friend feel sad. Let’s try again.",
+            feedbackB: "Good job! Saying hi back makes your friend happy.",
+            feedbackC: "Running away is not polite. Let’s use kind words.",
             ansA: false,
             ansB: true,
             ansC: false,
         },
         {
-            question: "You are sitting on the potty. What should you do next?",
-            A: "Pull your pants back up without going.",
-            B: "Sit and pee or poop in the potty.",
-            C: "Yell and play loudly in the bathroom.",
-            feedbackA: "Oops, you forgot to go potty first.",
-            feedbackB: "Well done! Pee and poop go in the potty.",
-            feedbackC: "Playing in the bathroom is not safe. Let’s focus on potty time.",
-            ansA: false,
-            ansB: true,
+            question: "Your grandma comes to visit and says, “Hello!”",
+            A: "Say, “Hi Grandma!” and smile.",
+            B: "Hide and don’t answer.",
+            C: "Say, “What’s up?” in a silly voice.",
+            feedbackA: "Well done! Saying hi to Grandma is polite.",
+            feedbackB: "Hiding is not friendly. Let’s greet Grandma nicely.",
+            feedbackC: "Silly words may confuse Grandma. Use kind greetings.",
+            ansA: true,
+            ansB: false,
             ansC: false,
         },
         {
-            question: "You finish going potty. What should you do after flushing the toilet?",
-            A: "Wash your hands with soap and water.",
-            B: "Run out of the bathroom without washing.",
-            C: "Wipe your hands on your pants.",
-            feedbackA: "Great choice! Clean hands keep you healthy.",
-            feedbackB: "Not washing can spread germs. Let’s wash next time.",
-            feedbackC: "Pants don’t make hands clean. Soap and water do!",
+            question: "Your teacher says, “Goodbye, see you tomorrow!”",
+            A: "Say, “Bye!” and wave back.",
+            B: "Walk away without saying anything.",
+            C: "Make a funny face instead of saying goodbye.",
+            feedbackA: "Great choice! Saying goodbye shows good manners.",
+            feedbackB: "Not saying goodbye is not polite. Let’s remember next time.",
+            feedbackC: "Funny faces are not the same as saying goodbye.",
             ansA: true,
             ansB: false,
             ansC: false,
@@ -76,10 +76,10 @@ export const Questions2 = () => {
     ];
 
     const DataGrade = [
-        "You did not use the potty today. Let’s try again tomorrow.",     // 0 correct
-        "You used the potty 1 time today. Let’s keep practicing! ",     // 1 correct
-        "Well done! You used the potty 2 out of 3 times today. ",       // 2 correct
-        "Great job! You used the potty 3 out of 3 times today. ",       // 3 correct
+        "You did not greet people today. Let’s try again tomorrow. ",           // 0 correct
+        "You greeted people 1 time today. Let’s keep practicing! ",             // 1 correct
+        "Well done! You greeted people 2 out of 3 times today. ",               // 2 correct
+        "Great job! You said hi and goodbye 3 out of 3 times today. ",          // 3 correct
     ];
 
     const handleGrade = (check) => {
