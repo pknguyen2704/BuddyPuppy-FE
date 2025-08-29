@@ -10,64 +10,96 @@
   position: absolute !important;
   top: 40% !important;
   left: 45% !important;
+  width: 60px !important;
+  height: 60px !important;
 }
 
 .s2div-3 .bt-1 {
   position: absolute !important;
   top: 34% !important;
   left: 39% !important;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-3 .bt-2 {
   position: absolute !important;
   top: 36.5% !important;
   left: 57.5%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-3 .bt-3 {
   position: absolute !important;
   top: 68% !important;
   left: 39% !important;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-3 .bt-4 {
   position: absolute !important;
   top: 61% !important;
   left: 57.5%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-3 .bt-5 {
   position: absolute !important;
   top: 13% !important;
   left: 60%;
+  width: 60px !important;
+  height: 60px !important;
 }
 
 .s2div-4 .bt-1 {
   position: absolute !important;
   top: 42% !important;
   left: 39%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-4 .bt-2 {
   position: absolute !important;
   top: 42% !important;
   left: 58%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-4 .bt-3 {
   position: absolute !important;
   top: 79% !important;
   left: 38%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-4 .bt-4 {
   position: absolute !important;
   top: 76% !important;
   left: 58%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-4 .bt-5 {
   position: absolute !important;
   top: 13.5% !important;
   left: 60% !important;
-}   
+  width: 60px !important;
+  height: 60px !important;
+}
 
 .s2div-5 button {
   position: absolute !important;
   top: 55% !important;
   left: 55%;
+  width: 60px !important;
+  height: 60px !important;
 }
 
 
@@ -75,23 +107,32 @@
   position: absolute !important;
   top: 55% !important;
   left: 39%;
+  width: 60px !important;
+  height: 60px !important;
 }
 
 .s2div-6 .bt-2 {
   position: absolute !important;
   top: 37% !important;
   left: 47%;
+  width: 60px !important;
+  height: 60px !important;
 }
 
 .s2div-6 .bt-3 {
   position: absolute !important;
   top: 49% !important;
   left: 57%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-6 .bt-4 {
   position: absolute !important;
   top: 13% !important;
   left: 60%;
+  width: 60px !important;
+  height: 60px !important;
 }
 
 
@@ -99,35 +140,54 @@
   position: absolute !important;
   top: 44% !important;
   left: 46%;
+  width: 60px !important;
+  height: 60px !important;
 }
 
 .s2div-8 .bt-1 {
   position: absolute !important;
   top: 39.5% !important;
   left: 40%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-8 .bt-2 {
   position: absolute !important;
   top: 38% !important;
   left: 55%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-8 .bt-3 {
   position: absolute !important;
   top: 69% !important;
   left: 41.5%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-8 .bt-4 {
   position: absolute !important;
   top: 62% !important;
   left: 56%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-8 .bt-5 {
   position: absolute !important;
   top: 15% !important;
   left: 50%;
+  width: 60px !important;
+  height: 60px !important;
 }
+
 .s2div-9 button {
   position: absolute !important;
-  top:25% !important;
+  top: 25% !important;
   left: 65%;
+  width: 60px !important;
+  height: 60px !important;
 }

@@ -150,7 +150,7 @@ export const Questions3 = () => {
                         <div className="d-flex flex-column gap-3">
                             <ConfettiEffect run={runConfetti} duration={3000} onDone={() => setRunConfetti(false)} />
                             <button
-                                className={`btn mt-2 ${selected === "A"
+                                className={`btn btn-a mt-2 ${selected === "A"
                                     ? dataQuestions3[index].ansA
                                         ? "btn-success"   // xanh nếu đúng
                                         : "btn-danger"   // đỏ nếu sai
@@ -167,7 +167,7 @@ export const Questions3 = () => {
                                 {dataQuestions3[index].A}
                             </button>
                             <button
-                                className={`btn mt-2 ${selected === "B"
+                                className={`btn btn-a mt-2 ${selected === "B"
                                     ? dataQuestions3[index].ansB
                                         ? "btn-success"   // xanh nếu đúng
                                         : "btn-danger"   // đỏ nếu sai
@@ -184,7 +184,7 @@ export const Questions3 = () => {
                                 {dataQuestions3[index].B}
                             </button>
                             <button
-                                className={`btn mt-2 ${selected === "C"
+                                className={`btn btn-a mt-2 ${selected === "C"
                                     ? dataQuestions3[index].ansC
                                         ? "btn-success"   // xanh nếu đúng
                                         : "btn-danger"   // đỏ nếu sai

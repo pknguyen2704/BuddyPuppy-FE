@@ -9,3 +9,25 @@
     border-color: #f36c21 !important;
     color: #fff !important;
 }
+
+.btn-a {
+    min-width: 350px;
+    /* tất cả button đều rộng ít nhất 350px */
+    max-width: 90%;
+    /* không vượt quá màn hình */
+    white-space: normal;
+    /* cho phép xuống dòng */
+    word-wrap: break-word;
+    /* ngắt chữ khi dài quá */
+    text-align: left;
+    /* căn chữ sang trái (đọc dễ hơn) */
+    font-size: 18px;
+    /* chữ to vừa */
+    line-height: 1.4;
+    /* giãn dòng để không dính */
+    padding: 12px 16px;
+    /* tăng khoảng cách trong nút */
+    border-radius: 12px;
+    /* bo góc mềm */
+    text-align: center;
+}
