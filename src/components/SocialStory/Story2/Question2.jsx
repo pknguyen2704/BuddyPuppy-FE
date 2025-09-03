@@ -39,9 +39,13 @@ export const Questions2 = () => {
     const dataQuestions2 = [
         {
             question: "You see your friend at school. They wave and say, “Hi!”",
+            meaningQ: "(Con nhìn thấy bạn ở trường. Bạn vẫy tay và nói: “Chào!”)",
             A: "Look away and say nothing.",
             B: "Wave back and say, “Hi, buddy!”",
             C: "Shout loudly and run past them.",
+            meaningA: "(Nhìn đi chỗ khác và không nói gì.)",
+            meaningB: "(Vẫy tay lại và nói: “Chào bạn!”)",
+            meaningC: "(Hét to và chạy vụt qua bạn.)",
             feedbackA: "Ignoring can make your friend feel sad. Let’s try again.",
             feedbackB: "Good job! Saying hi back makes your friend happy.",
             feedbackC: "Running away is not polite. Let’s use kind words.",
@@ -51,9 +55,13 @@ export const Questions2 = () => {
         },
         {
             question: "Your grandma comes to visit and says, “Hello!”",
+            meaningQ: "(Bà đến thăm và nói: “Xin chào!”)",
             A: "Say, “Hi Grandma!” and smile.",
             B: "Hide and don’t answer.",
             C: "Say, “What’s up?” in a silly voice.",
+            meaningA: "(Nói: “Chào bà!” và mỉm cười.)",
+            meaningB: "(Trốn đi và không trả lời.)",
+            meaningC: "(Nói: “Có chuyện gì thế?” bằng giọng chọc ghẹo.)",
             feedbackA: "Well done! Saying hi to Grandma is polite.",
             feedbackB: "Hiding is not friendly. Let’s greet Grandma nicely.",
             feedbackC: "Silly words may confuse Grandma. Use kind greetings.",
@@ -63,9 +71,13 @@ export const Questions2 = () => {
         },
         {
             question: "Your teacher says, “Goodbye, see you tomorrow!”",
+            meaningQ: "(Cô giáo nói: “Tạm biệt, hẹn gặp con ngày mai!”)",
             A: "Say, “Bye!” and wave back.",
             B: "Walk away without saying anything.",
             C: "Make a funny face instead of saying goodbye.",
+            meaningA: "(Nói: “Tạm biệt!” và vẫy tay lại.)",
+            meaningB: "(Bỏ đi mà không nói gì.)",
+            meaningC: "(Làm mặt buồn cười thay vì nói tạm biệt.)",
             feedbackA: "Great choice! Saying goodbye shows good manners.",
             feedbackB: "Not saying goodbye is not polite. Let’s remember next time.",
             feedbackC: "Funny faces are not the same as saying goodbye.",
@@ -134,15 +146,16 @@ export const Questions2 = () => {
                         key={index}
                         custom={direction}
                         variants={variants}
+                        style={{ maxHeight: "100vh", overflowY: "scroll" }}
                         initial="enter"
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+                        className="w-100 h-100 d-flex flex-column justify-content-start align-items-center"
                     >
                         <div className="d-flex flex-column gap-3" style={{ justifyContent: "center", alignItems: "center" }}>
-                            <h3 className="mb-4">{dataQuestions2[index].question}</h3>
-                            <img src={image[index]} style={{ maxWidth: "40vw", maxHeight: "45vh" }} />
+                            <h3 className="mb-4" style={{ textAlign: "center", marginTop: "10px" }}>{dataQuestions2[index].question}<br></br>{dataQuestions2[index].meaningQ}</h3>
+                            <img src={image[index]} style={{ maxWidth: "35vw", maxHeight: "40vh" }} />
                         </div>
                         <div className="d-flex flex-column gap-3">
                             <ConfettiEffect run={runConfetti} duration={3000} onDone={() => setRunConfetti(false)} />
@@ -161,7 +174,7 @@ export const Questions2 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions2[index].A}
+                                {dataQuestions2[index].A}<br></br>{dataQuestions2[index].meaningA}
                             </button>
                             <button
                                 className={`btn btn-a mt-2 ${selected === "B"
@@ -178,7 +191,7 @@ export const Questions2 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions2[index].B}
+                                {dataQuestions2[index].B}<br></br>{dataQuestions2[index].meaningB}
                             </button>
                             <button
                                 className={`btn btn-a mt-2 ${selected === "C"
@@ -195,7 +208,7 @@ export const Questions2 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions2[index].C}
+                                {dataQuestions2[index].C}<br></br>{dataQuestions2[index].meaningC}
                             </button>
                         </div>
                         {waiting && (
