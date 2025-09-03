@@ -39,9 +39,13 @@ export const Questions3 = () => {
     const dataQuestions3 = [
         {
             question: "You feel your tummy telling you that you need to pee. What should you do?",
+            meaningQ: "(Con cảm thấy bụng báo rằng con cần đi tiểu. Con nên làm gì?)",
             A: "Stay silent and pee in your underwear.",
             B: "Say, “May I go to the potty, please?”",
             C: "Run around and hold your tummy.",
+            meaningA: "(Im lặng và đi tiểu vào quần lót.)",
+            meaningB: "(Nói: “Con xin đi vệ sinh được không ạ?”)",
+            meaningC: "(Chạy loanh quanh và ôm bụng.)",
             feedbackA: "Pee belongs in the potty, not in underwear.",
             feedbackB: "Good job! Asking to go potty is the right choice.",
             feedbackC: "Running around doesn’t help. Let’s ask for the potty.",
@@ -52,9 +56,13 @@ export const Questions3 = () => {
         },
         {
             question: "You are sitting on the potty. What should you do next?",
+            meaningQ: "(Con đang ngồi trên bồn cầu. Con nên làm gì tiếp theo?)",
             A: "Pull your pants back up without going.",
             B: "Sit and pee or poop in the potty.",
             C: "Yell and play loudly in the bathroom.",
+            meaningA: "(Kéo quần lên mà không đi tiểu/đi ngoài.)",
+            meaningB: "(Ngồi và đi tiểu hoặc đi ngoài vào bồn cầu.)",
+            meaningC: "(La hét và chơi ồn ào trong nhà vệ sinh.)",
             feedbackA: "Oops, you forgot to go potty first.",
             feedbackB: "Well done! Pee and poop go in the potty.",
             feedbackC: "Playing in the bathroom is not safe. Let’s focus on potty time.",
@@ -65,9 +73,13 @@ export const Questions3 = () => {
         },
         {
             question: "You finish going potty. What should you do after flushing the toilet?",
+            meaningQ: "(Con đi vệ sinh xong. Sau khi xả nước bồn cầu, con nên làm gì?)",
             A: "Wash your hands with soap and water.",
             B: "Run out of the bathroom without washing.",
             C: "Wipe your hands on your pants.",
+            meaningA: "(Rửa tay bằng xà phòng và nước.)",
+            meaningB: "(Chạy ra khỏi nhà vệ sinh mà không rửa tay.)",
+            meaningC: "(Lau tay vào quần.)",
             feedbackA: "Great choice! Clean hands keep you healthy.",
             feedbackB: "Not washing can spread germs. Let’s wash next time.",
             feedbackC: "Pants don’t make hands clean. Soap and water do!",
@@ -137,15 +149,16 @@ export const Questions3 = () => {
                         key={index}
                         custom={direction}
                         variants={variants}
+                        style={{ maxHeight: "100vh", overflowY: "scroll" }}
                         initial="enter"
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+                        className="w-100 h-100 d-flex flex-column justify-content-start align-items-center"
                     >
                         <div className="d-flex flex-column gap-3" style={{ justifyContent: "center", alignItems: "center" }}>
-                            <h3 className="mb-4">{dataQuestions3[index].question}</h3>
-                            <img src={image[index]} style={{ maxWidth: "40vh" }} />
+                            <h3 className="mb-4" style={{ textAlign: "center", marginTop: "10px" }}>{dataQuestions3[index].question}<br></br>{dataQuestions3[index].meaningQ}</h3>
+                            <img src={image[index]} style={{ maxWidth: "35vw", maxHeight: "40vh" }} />
                         </div>
                         <div className="d-flex flex-column gap-3">
                             <ConfettiEffect run={runConfetti} duration={3000} onDone={() => setRunConfetti(false)} />
@@ -164,7 +177,7 @@ export const Questions3 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions3[index].A}
+                                {dataQuestions3[index].A}<br></br>{dataQuestions3[index].meaningA}
                             </button>
                             <button
                                 className={`btn mt-2 ${selected === "B"
@@ -181,7 +194,7 @@ export const Questions3 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions3[index].B}
+                                {dataQuestions3[index].B}<br></br>{dataQuestions3[index].meaningB}
                             </button>
                             <button
                                 className={`btn mt-2 ${selected === "C"
@@ -198,7 +211,7 @@ export const Questions3 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions3[index].C}
+                                {dataQuestions3[index].C}<br></br>{dataQuestions3[index].meaningC}
                             </button>
                         </div>
                         {waiting && (

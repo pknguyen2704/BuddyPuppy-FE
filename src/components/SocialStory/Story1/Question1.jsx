@@ -39,9 +39,13 @@ export const Questions1 = () => {
     const dataQuestions1 = [
         {
             question: "Your friend takes your toy without asking.",
+            meaningQ: "(Bạn của con lấy đồ chơi của con mà không xin phép.)",
             A: "Yell and hit your friend.",
             B: "Take a deep breath and count to 10.",
             C: "Tell your friend calmly, “I don’t like that. Please give it back.”",
+            meaningA: "(La hét và đánh bạn của con.)",
+            meaningB: "(Hít một hơi thật sâu và đếm đến 10.)",
+            meaningC: "(Nói với bạn một cách bình tĩnh: “Tớ không thích điều đó. Làm ơn trả lại cho tớ.”)",
             feedbackA: "Hitting hurts people. Let’s try another way to stay calm.",
             feedbackB: "Good job! Deep breaths help you stay calm.",
             feedbackC: "Well done! Talking calmly makes things better.",
@@ -51,9 +55,13 @@ export const Questions1 = () => {
         },
         {
             question: "You lose a game and feel very angry.",
+            meaningQ: "(Bạn thua một trò chơi và cảm thấy rất tức giận.)",
             A: "Throw the game pieces.",
             B: "Breathe slowly and relax your hands.",
             C: "Say, “I feel angry. Can we play again later?”",
+            meaningA: "(Ném các quân cờ/trò chơi đi.)",
+            meaningB: "(Hít thở chậm và thả lỏng tay.)",
+            meaningC: "(Nói: “Con cảm thấy tức giận. Chúng ta có thể chơi lại sau được không?”)",
             feedbackA: "Throwing things is not safe. Let’s choose a better way.",
             feedbackB: "Nice work! Breathing helps you feel better.",
             feedbackC: "Great choice! Using words is a good way to share your feelings.",
@@ -64,9 +72,13 @@ export const Questions1 = () => {
         {
             question:
                 "You feel your body is hot and your fists are tight. What should you do?",
+            meaningQ: "(Con cảm thấy cơ thể nóng lên và nắm tay thật chặt. Con nên làm gì?)",
             A: "Punch the wall.",
             B: "Count slowly to ten: 1…2…3…10 and breathe.",
             C: "Tell an adult, “I feel angry. I need help.”",
+            meaningA: "(Đấm vào tường.)",
+            meaningB: "(Đếm chậm đến mười: 1…2…3…10 và hít thở.)",
+            meaningC: "(Nói với người lớn: “Con cảm thấy tức giận. Con cần giúp đỡ.”)",
             feedbackA: "Punching can hurt you. Let’s try a safer way.",
             feedbackB:
                 "Good job! Counting and breathing help your body calm down.",
@@ -133,15 +145,16 @@ export const Questions1 = () => {
                         key={index}
                         custom={direction}
                         variants={variants}
+                        style={{ maxHeight: "100vh", overflowY: "scroll" }}
                         initial="enter"
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+                        className="w-100 h-100 d-flex flex-column justify-content-start align-items-center"
                     >
                         <div className="d-flex flex-column gap-3" style={{ justifyContent: "center", alignItems: "center" }}>
-                            <h3 className="mb-4">{dataQuestions1[index].question}</h3>
-                            <img src={image[index]} style={{ maxWidth: "40vw", maxHeight: "45vh" }} />
+                            <h3 className="mb-4" style={{ textAlign: "center", marginTop: "10px" }}>{dataQuestions1[index].question}<br></br>{dataQuestions1[index].meaningQ}</h3>
+                            <img src={image[index]} style={{ maxWidth: "35vw", maxHeight: "40vh" }} />
                         </div>
                         <div className="d-flex flex-column gap-3">
                             <ConfettiEffect run={runConfetti} duration={3000} onDone={() => setRunConfetti(false)} />
@@ -160,7 +173,7 @@ export const Questions1 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions1[index].A}
+                                {dataQuestions1[index].A}<br></br>{dataQuestions1[index].meaningA}
                             </button>
                             <button
                                 className={`btn mt-2 ${selected === "B"
@@ -177,7 +190,7 @@ export const Questions1 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions1[index].B}
+                                {dataQuestions1[index].B}<br></br>{dataQuestions1[index].meaningB}
                             </button>
                             <button
                                 className={`btn mt-2 ${selected === "C"
@@ -194,7 +207,7 @@ export const Questions1 = () => {
                                 }}
                                 disabled={waiting}
                             >
-                                {dataQuestions1[index].C}
+                                {dataQuestions1[index].C}<br></br>{dataQuestions1[index].meaningC}
                             </button>
                         </div>
                         {waiting && (
