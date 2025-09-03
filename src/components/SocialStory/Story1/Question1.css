@@ -13,7 +13,8 @@
 .btn-a {
     min-width: 350px;
     /* tất cả button đều rộng ít nhất 350px */
-    max-width: 90%;
+    width: auto;
+    height: auto;
     /* không vượt quá màn hình */
     white-space: normal;
     /* cho phép xuống dòng */
@@ -21,7 +22,7 @@
     /* ngắt chữ khi dài quá */
     text-align: left;
     /* căn chữ sang trái (đọc dễ hơn) */
-    font-size: 18px;
+    font-size: 16px;
     /* chữ to vừa */
     line-height: 1.4;
     /* giãn dòng để không dính */

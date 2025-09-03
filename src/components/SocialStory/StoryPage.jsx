@@ -25,12 +25,12 @@ export const StoryPage = () => {
                             <h1 className="st-util-title">CONTROL YOUR ANGER</h1>
                         </div>
                         <div className="util-container" onClick={() => navigate("/SocialStory2")}>
-                            <img src={story3} alt="Story1" className="st-util-image" />
+                            <img src={story2} alt="Story1" className="st-util-image" />
                             <h1 className="st-util-title">SAY HI AND GOODBYE</h1>
                         </div>
-                        
+
                         <div className="util-container" onClick={() => navigate("/SocialStory3")}>
-                            <img src={story2} alt="Story1" className="st-util-image" />
+                            <img src={story3} alt="Story1" className="st-util-image" />
                             <h1 className="st-util-title">POTTY-TRAINING</h1>
                         </div>
                     </div>
