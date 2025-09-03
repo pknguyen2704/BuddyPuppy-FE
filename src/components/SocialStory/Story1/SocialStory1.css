@@ -1,6 +1,7 @@
 .container-fluid {
   background-color: #ffd6ba !important;
 }
+
 .container-back {
   position: absolute;
   /* căn theo thẻ cha gần nhất có position: relative */
@@ -81,6 +82,11 @@
   background-color: #f8ec7d !important;
   border-color: #f8ec7d !important;
   color: #f36c21 !important;
+}
+
+.rounded {
+  max-width: 1080px;
+  max-height: 600px;
 }
 
 .s1div-1 button {
