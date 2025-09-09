@@ -123,8 +123,8 @@
 
 .s1div-5 .bt-1 {
   position: absolute !important;
-  top: -1.5% !important;
-  left: 41%;
+  top: -5% !important;
+  left: 43%;
   height: 60px !important;
   width: 60px !important;
 }
@@ -139,8 +139,8 @@
 
 .s1div-5 .bt-3 {
   position: absolute !important;
-  top: 49% !important;
-  left: 42%;
+  top: 47.5% !important;
+  left: 44%;
   height: 60px !important;
   width: 60px !important;
 }
@@ -148,15 +148,15 @@
 .s1div-5 .bt-4 {
   position: absolute !important;
   top: 49% !important;
-  left: 77%;
+  left: 78%;
   height: 60px !important;
   width: 60px !important;
 }
 
 .s1div-6 .bt-1 {
   position: absolute !important;
-  top: -1.5% !important;
-  left: 43%;
+  top: -2% !important;
+  left: 44%;
   height: 60px !important;
   width: 60px !important;
 }
@@ -171,8 +171,8 @@
 
 .s1div-6 .bt-3 {
   position: absolute !important;
-  top: 49% !important;
-  left: 42%;
+  top: 48% !important;
+  left: 45%;
   height: 60px !important;
   width: 60px !important;
 }
@@ -180,15 +180,15 @@
 .s1div-6 .bt-4 {
   position: absolute !important;
   top: 49% !important;
-  left: 77%;
+  left: 75%;
   height: 60px !important;
   width: 60px !important;
 }
 
 .s1div-7 button {
   position: absolute !important;
-  top: 15% !important;
-  left: 67%;
+  top: 8% !important;
+  left: 70%;
   height: 60px !important;
   width: 60px !important;
 }

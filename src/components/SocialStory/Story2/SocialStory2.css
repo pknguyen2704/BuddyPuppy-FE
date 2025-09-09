@@ -1,7 +1,7 @@
 .s2div-1 button {
   position: absolute !important;
-  top: 21% !important;
-  left: 62% !important;
+  top: 10% !important;
+  left: 70% !important;
   width: 60px !important;
   height: 60px !important;
 }
@@ -49,7 +49,7 @@
 .s2div-3 .bt-5 {
   position: absolute !important;
   top: 13% !important;
-  left: 60%;
+  left: 65%;
   width: 60px !important;
   height: 60px !important;
 }
@@ -89,15 +89,15 @@
 .s2div-4 .bt-5 {
   position: absolute !important;
   top: 13.5% !important;
-  left: 60% !important;
+  left: 65% !important;
   width: 60px !important;
   height: 60px !important;
 }
 
 .s2div-5 button {
   position: absolute !important;
-  top: 55% !important;
-  left: 55%;
+  top: 40% !important;
+  left: 60%;
   width: 60px !important;
   height: 60px !important;
 }
@@ -130,7 +130,7 @@
 .s2div-6 .bt-4 {
   position: absolute !important;
   top: 13% !important;
-  left: 60%;
+  left: 66%;
   width: 60px !important;
   height: 60px !important;
 }
@@ -138,7 +138,7 @@
 
 .s2div-7 button {
   position: absolute !important;
-  top: 44% !important;
+  top: 42% !important;
   left: 46%;
   width: 60px !important;
   height: 60px !important;
@@ -179,7 +179,7 @@
 .s2div-8 .bt-5 {
   position: absolute !important;
   top: 15% !important;
-  left: 50%;
+  left: 57%;
   width: 60px !important;
   height: 60px !important;
 }
