@@ -12,6 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # 1. Auth với GCP
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -22,17 +23,22 @@ jobs:
         with:
           project_id: ${{ secrets.PROJECT_ID }}
 
+      # 2. Auth Docker -> Artifact Registry
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker ${{ secrets.REGION }}-docker.pkg.dev --quiet
 
+      # 3. Build + Push image FE
       - name: Build and push Docker image
         run: |
           IMAGE="${{ secrets.REGION }}-docker.pkg.dev/${{ secrets.PROJECT_ID }}/buddypuppy/frontend:${{ github.sha }}"
-          echo "Build argument VITE_API_PRODUCTION_URL=${{ secrets.BE_URL }}"
-          docker build --build-arg VITE_API_PRODUCTION_URL="${{ secrets.BE_URL }}" -t $IMAGE .
+          echo "Building with VITE_API_PRODUCTION_URL=${{ secrets.BE_URL }}"
+          docker build \
+            --build-arg VITE_API_PRODUCTION_URL="${{ secrets.BE_URL }}" \
+            -t $IMAGE .
           docker push $IMAGE
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
+      # 4. Deploy FE lên Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy frontend-service \
