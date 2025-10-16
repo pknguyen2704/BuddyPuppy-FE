@@ -14,6 +14,18 @@ const theme = extendTheme({
     appContentBarHeight: APP_CONTENT_BAR_HEIGHT,
     appContentTableHeight: APP_CONTENT_TABLE_HEIGHT,
     appContentDashboardHeight: APP_CONTENT_DASHBOARD_HEIGHT,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          color: 'black',
+          fontWeight: '600',
+          fontFamily: 'Montserrat, sans-serif',
+        },
+      },
+    },
   }
 })
 

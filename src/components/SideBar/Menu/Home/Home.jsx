@@ -2,7 +2,7 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { useNavigate, useLocation } from 'react-router-dom'
-
+import HomeFilledIcon from '@mui/icons-material/HomeFilled';
 function Home() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -11,15 +11,21 @@ function Home() {
   }
   const isActive = location.pathname === '/home'
   return (
-    <Box>
+    <Box sx={{
+      display: 'flex',
+      width: '100%',
+    }}>
       <Button sx={{
-        color: isActive ? 'white' : 'black',
-        backgroundColor: isActive ? '#EE0033' : 'transparent',
-        '&:hover': { 
-          backgroundColor: isActive ? '#EE0033' : '#f5f6fa',
-          color: isActive ? 'white' : '#EE0033',
-        },
-      }} onClick={handleClick} variant="text">
+        color: isActive ? '#d35400' : 'black',
+        backgroundColor: isActive ? '#ffbe76' : 'transparent',
+        justifyContent: 'left',
+      }} 
+        onClick={handleClick} 
+        fullWidth
+        variant="text">
+        <HomeFilledIcon sx={{
+          mr: 1
+        }}/>
         Home
       </Button>
     </Box>

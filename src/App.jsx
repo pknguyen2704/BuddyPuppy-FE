@@ -30,6 +30,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home/>}/>
+      <Route path="/home" element={<Home/>}/>
       {/* <Route path="/" element={<Navigate to="/" />} /> */}
       {/* <Route path="/introduction" element={<Introduction />} /> */}
       {/* <Route path="/login" element={<LogIn />} />
