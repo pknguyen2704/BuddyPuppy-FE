@@ -1,10 +1,11 @@
 import React from 'react';
 
-const AppBar = () => {
+const Pecs = () => {
   return (
     <div>
+      
     </div>
   );
 }
 
-export default AppBar;
+export default Pecs;
