@@ -23,6 +23,7 @@ const theme = extendTheme({
           color: 'black',
           fontWeight: '600',
           fontFamily: 'Montserrat, sans-serif',
+          height: '40px'
         },
       },
     },

@@ -1,14 +1,18 @@
-import { Typography } from '@mui/material';
-import { Box } from 'lucide-react';
-import React from 'react';
+import { Box, Typography } from '@mui/material'
+import React from 'react'
 
 const Footer = () => {
   return (
-    <Box>
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'© '}
-        BuddyPuppy {new Date().getFullYear()}
-        {'.'}
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: (theme) => theme.BuddyPuppy.appFooterHeight
+    }}>
+      <Typography variant='body2' sx={{
+      
+      }}>
+        BuddyPuppy - 2025
       </Typography>
     </Box>
   );

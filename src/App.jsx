@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./protectedComponent.jsx"
 // import { SignUp } from "./components/signup/SignUp"
 import { HomeScreen } from "./components/homescreen/homescreen.jsx"
 import Home from "./pages/Home/Home.jsx"
+import SocialStory from "./pages/SocialStory/SocialStory.jsx"
 // import { StoryPage } from "./components/SocialStory/StoryPage.jsx"
 // import { SocialStory1 } from './components/SocialStory/Story1/SocialStory1'
 // import { Questions1 } from "./components/SocialStory/Story1/Question1.jsx"
@@ -31,6 +32,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/home" element={<Home/>}/>
+      <Route path="/social-story" element={<SocialStory />} />
       {/* <Route path="/" element={<Navigate to="/" />} /> */}
       {/* <Route path="/introduction" element={<Introduction />} /> */}
       {/* <Route path="/login" element={<LogIn />} />

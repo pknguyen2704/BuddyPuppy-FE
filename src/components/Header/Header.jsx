@@ -4,6 +4,7 @@ import { Button } from '@mui/material'
 import Avatar from '@mui/material/Avatar';
 import logo from '~/assets/logo.svg'
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import MenuIcon from '@mui/icons-material/Menu';
 const Header = () => {
   return (
     <Box sx={{
@@ -21,6 +22,7 @@ const Header = () => {
         alignItems: 'center',
         gap: 2
       }}>
+        <MenuIcon />
         <img src={logo} alt="BuddyPuppy Logo" style={{height: '40px', width: '40px'}} />
         <Box sx={{display: 'flex-column'}}>
           <Typography sx={{

@@ -5,19 +5,23 @@ import Home from './Menu/Home/Home';
 import Pecs from './Menu/Pecs/Pecs';
 import SocialStory from './Menu/SocialStory/SocialStory';
 
-
 const SideBar = () => {
   return (
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
+      justifyContent: 'space-between',
       p: 2,
-      gap: 2
     }}>
-      {/* Menu Items */}
-      <Home />
-      <Pecs />
-      <SocialStory />
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2
+      }}>
+        <Home />
+        <Pecs />
+        <SocialStory />
+      </Box>
     </Box>
   );
 }
