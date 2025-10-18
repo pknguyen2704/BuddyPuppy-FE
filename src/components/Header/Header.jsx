@@ -28,7 +28,6 @@ const Header = () => {
           <Typography sx={{
             color: '#e67e22',
             fontWeight: 'bold',
-            fontFamily: 'Montserrat, sans-serif',
             fontSize: '24px',
           }}>BuddyPuppy</Typography>
         </Box>

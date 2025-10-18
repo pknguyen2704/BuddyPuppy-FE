@@ -19,14 +19,30 @@ const theme = extendTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          borderRadius: '50px',
           textTransform: 'none',
-          color: 'black',
-          fontWeight: '600',
-          fontFamily: 'Montserrat, sans-serif',
-          height: '40px'
+          px: 4,
+          py: 1.5,
+          fontWeight: 600,
+          fontSize: '1rem',
+          backgroundColor: '#fff',
+          color: '#f0932b',
+          boxShadow: '0 6px 20px rgba(255, 255, 255, 0.3)',
+          '&:hover': {
+            backgroundColor: '#f0f0ff',
+            transform: 'scale(1.05)',
+            boxShadow: '0 8px 25px rgba(255, 255, 255, 0.4)',
+          },
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Montserrat, sans-serif',
+        }
+      }
+    }
   }
 })
 
