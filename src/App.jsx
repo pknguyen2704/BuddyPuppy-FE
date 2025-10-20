@@ -40,13 +40,9 @@ function App() {
       {/* <Route path="/login" element={<LogIn />} />
       <Route path="/signup" element={<SignUp />} />
 
-      <Route path="/" element={
-          <HomeScreen />
-      } />
-      {/* <Route path="/StoryPage" element={
-        <ProtectedRoute>
+
+      <Route path="/StoryPage" element={
           <StoryPage />
-        </ProtectedRoute>
       } />
       <Route path="/home" element={
         <ProtectedRoute>
@@ -54,10 +50,8 @@ function App() {
         </ProtectedRoute>
       } /> */}
 
-      {/* <Route path="/SocialStory1" element={
-        <ProtectedRoute>
+      <Route path="/SocialStory1" element={
           <SocialStory1 />
-        </ProtectedRoute>
       } />
       <Route path="/questionsStory1" element={
         <ProtectedRoute>
