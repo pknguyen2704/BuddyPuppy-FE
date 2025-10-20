@@ -141,7 +141,8 @@ const Login = () => {
             size="large"
             fullWidth
             sx={{
-              width: '50%',
+              borderRadius: '50px',
+              width: '100%',
               backgroundColor: '#f0932b',
               color: 'white',
               '&:hover': {
@@ -161,6 +162,7 @@ const Login = () => {
           <Typography
             component="span"
             sx={{
+              borderRadius: '50px',
               color: '#f0932b',
               fontWeight: 600,
               cursor: "pointer",

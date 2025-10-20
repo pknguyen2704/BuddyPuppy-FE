@@ -12,7 +12,7 @@ import story3 from '~/assets/SocialStory3/story3.png';
 
 const SocialStory = () => {
   const stories = [
-    {
+    { 
       id: 1,
       title: 'Control Your Anger',
       description: 'Learn how to stay calm and control your anger in tough situations.',
@@ -21,17 +21,17 @@ const SocialStory = () => {
     },
     {
       id: 2,
-      title: 'Be Kind to Others',
+      title: 'Potty training',
       description: 'Discover how kindness can make a difference in your life and others.',
       image: story2,
-      slug: 'be-kind-to-others'
+      slug: 'potty-training'
     },
     {
       id: 3,
-      title: 'Sharing is Caring',
+      title: 'Say hi and goodbye',
       description: 'Understand the importance of sharing and caring for friends.',
       image: story3,
-      slug: 'sharing-is-caring'
+      slug: 'say-hi-and-goodbye'
     }
   ];
 
@@ -45,19 +45,17 @@ const SocialStory = () => {
           height: (theme) => theme.BuddyPuppy.appContentHeight,
         }}
       >
-        {/* Sidebar */}
         <Box
           sx={{
             width: '10%',
             borderRight: '1px solid #e0e0e0',
             flexShrink: 0,
-            minWidth: '200px'
+            minWidth: '240px'
           }}
         >
           <SideBar />
         </Box>
 
-        {/* Main content */}
         <Box
           sx={{
             width: '90%',

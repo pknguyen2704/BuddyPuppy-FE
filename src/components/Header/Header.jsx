@@ -17,14 +17,15 @@ const Header = () => {
       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       backgroundColor: '#ffffff',
     }}>
-      <Box sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 2
-      }}>
+      <Box 
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2
+        }}>
         <MenuIcon />
-        <img src={logo} alt="BuddyPuppy Logo" style={{height: '40px', width: '40px'}} />
-        <Box sx={{display: 'flex-column'}}>
+        <Box sx={{display: 'flex'}}>
+          <img src={logo} alt="BuddyPuppy Logo" style={{height: '40px', width: '40px'}} />
           <Typography sx={{
             color: '#e67e22',
             fontWeight: 'bold',

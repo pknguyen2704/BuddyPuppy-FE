@@ -1,0 +1,467 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "lines": [
+        {
+          "text": "When my family members and friends see me,",
+          "x0": 292.43,
+          "y0": 664.89,
+          "x1": 1147.56,
+          "y1": 704.88,
+          "width": 855.13,
+          "height": 40.0,
+          "center_x": 720.0,
+          "center_y": 684.88
+        },
+        {
+          "text": "they say \"hi\", “hello”, or they wave.",
+          "x0": 394.47,
+          "y0": 609.39,
+          "x1": 1045.54,
+          "y1": 649.38,
+          "width": 651.07,
+          "height": 40.0,
+          "center_x": 720.0,
+          "center_y": 629.38
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "lines": [
+        {
+          "text": "When they say \"hi\"",
+          "x0": 381.48,
+          "y0": 586.71,
+          "x1": 758.83,
+          "y1": 628.98,
+          "width": 377.35,
+          "height": 42.27,
+          "center_x": 570.16,
+          "center_y": 607.84
+        },
+        {
+          "text": "or wave, I should say",
+          "x0": 364.2,
+          "y0": 528.06,
+          "x1": 776.12,
+          "y1": 570.33,
+          "width": 411.92,
+          "height": 42.27,
+          "center_x": 570.16,
+          "center_y": 549.19
+        },
+        {
+          "text": "\"hi\" or wave back.",
+          "x0": 389.55,
+          "y0": 469.41,
+          "x1": 738.13,
+          "y1": 511.67,
+          "width": 348.58,
+          "height": 42.27,
+          "center_x": 563.84,
+          "center_y": 490.54
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "lines": [
+        {
+          "text": "When I say “hi” to my friends, I can say ...",
+          "x0": 325.35,
+          "y0": 678.03,
+          "x1": 1114.65,
+          "y1": 718.03,
+          "width": 789.3,
+          "height": 40.0,
+          "center_x": 720.0,
+          "center_y": 698.03
+        },
+        {
+          "text": "Hey there!",
+          "x0": 397.85,
+          "y0": 509.61,
+          "x1": 597.76,
+          "y1": 549.6,
+          "width": 199.9,
+          "height": 40.0,
+          "center_x": 497.8,
+          "center_y": 529.61
+        },
+        {
+          "text": "Hi, buddy!",
+          "x0": 859.45,
+          "y0": 485.86,
+          "x1": 1046.25,
+          "y1": 525.85,
+          "width": 186.8,
+          "height": 40.0,
+          "center_x": 952.85,
+          "center_y": 505.86
+        },
+        {
+          "text": "How’s it",
+          "x0": 442.83,
+          "y0": 302.04,
+          "x1": 590.62,
+          "y1": 342.04,
+          "width": 147.8,
+          "height": 40.0,
+          "center_x": 516.72,
+          "center_y": 322.04
+        },
+        {
+          "text": "going?",
+          "x0": 452.45,
+          "y0": 246.54,
+          "x1": 569.04,
+          "y1": 286.54,
+          "width": 116.59,
+          "height": 40.0,
+          "center_x": 510.75,
+          "center_y": 266.54
+        },
+        {
+          "text": "What's up?",
+          "x0": 845.81,
+          "y0": 293.48,
+          "x1": 1059.89,
+          "y1": 333.48,
+          "width": 214.08,
+          "height": 40.0,
+          "center_x": 952.85,
+          "center_y": 313.48
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "lines": [
+        {
+          "text": "When I say “hi” to my family, I can say ...",
+          "x0": 337.25,
+          "y0": 677.86,
+          "x1": 1104.83,
+          "y1": 717.86,
+          "width": 767.58,
+          "height": 40.0,
+          "center_x": 721.04,
+          "center_y": 697.86
+        },
+        {
+          "text": "Hi Mom!",
+          "x0": 411.18,
+          "y0": 508.42,
+          "x1": 561.99,
+          "y1": 548.42,
+          "width": 150.81,
+          "height": 40.0,
+          "center_x": 486.58,
+          "center_y": 528.42
+        },
+        {
+          "text": "Hi Dad!",
+          "x0": 424.45,
+          "y0": 452.92,
+          "x1": 560.67,
+          "y1": 492.92,
+          "width": 136.22,
+          "height": 40.0,
+          "center_x": 492.56,
+          "center_y": 472.92
+        },
+        {
+          "text": "Hi, Grandma!",
+          "x0": 872.28,
+          "y0": 501.44,
+          "x1": 1109.58,
+          "y1": 541.43,
+          "width": 237.3,
+          "height": 40.0,
+          "center_x": 990.93,
+          "center_y": 521.43
+        },
+        {
+          "text": "Hi, Grandpa!",
+          "x0": 877.12,
+          "y0": 445.94,
+          "x1": 1104.74,
+          "y1": 485.93,
+          "width": 227.61,
+          "height": 40.0,
+          "center_x": 990.93,
+          "center_y": 465.93
+        },
+        {
+          "text": "Hello,",
+          "x0": 377.3,
+          "y0": 212.24,
+          "x1": 483.95,
+          "y1": 252.23,
+          "width": 106.65,
+          "height": 40.0,
+          "center_x": 430.63,
+          "center_y": 232.24
+        },
+        {
+          "text": "everyone!",
+          "x0": 342.28,
+          "y0": 156.74,
+          "x1": 518.98,
+          "y1": 196.73,
+          "width": 176.7,
+          "height": 40.0,
+          "center_x": 430.63,
+          "center_y": 176.74
+        },
+        {
+          "text": "Hi, brother!",
+          "x0": 880.02,
+          "y0": 249.82,
+          "x1": 1101.54,
+          "y1": 289.81,
+          "width": 221.52,
+          "height": 40.0,
+          "center_x": 990.78,
+          "center_y": 269.81
+        },
+        {
+          "text": "Hi, sister!",
+          "x0": 898.49,
+          "y0": 194.32,
+          "x1": 1083.08,
+          "y1": 234.31,
+          "width": 184.59,
+          "height": 40.0,
+          "center_x": 990.78,
+          "center_y": 214.31
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "lines": [
+        {
+          "text": "When I say “hi” to an adult, I can say ...",
+          "x0": 351.59,
+          "y0": 677.86,
+          "x1": 1088.39,
+          "y1": 717.86,
+          "width": 736.8,
+          "height": 40.0,
+          "center_x": 719.99,
+          "center_y": 697.86
+        },
+        {
+          "text": "Hello,",
+          "x0": 649.06,
+          "y0": 540.27,
+          "x1": 755.71,
+          "y1": 580.27,
+          "width": 106.65,
+          "height": 40.0,
+          "center_x": 702.38,
+          "center_y": 560.27
+        },
+        {
+          "text": "Sir/Ma’am",
+          "x0": 605.81,
+          "y0": 484.77,
+          "x1": 798.96,
+          "y1": 524.77,
+          "width": 193.15,
+          "height": 40.0,
+          "center_x": 702.39,
+          "center_y": 504.77
+        },
+        {
+          "text": "Nice to",
+          "x0": 890.46,
+          "y0": 441.76,
+          "x1": 1027.83,
+          "y1": 481.75,
+          "width": 137.37,
+          "height": 40.0,
+          "center_x": 959.14,
+          "center_y": 461.75
+        },
+        {
+          "text": "meet you",
+          "x0": 874.97,
+          "y0": 386.26,
+          "x1": 1043.32,
+          "y1": 426.25,
+          "width": 168.34,
+          "height": 40.0,
+          "center_x": 959.15,
+          "center_y": 406.25
+        },
+        {
+          "text": "Good",
+          "x0": 434.46,
+          "y0": 409.41,
+          "x1": 527.21,
+          "y1": 449.41,
+          "width": 92.75,
+          "height": 40.0,
+          "center_x": 480.84,
+          "center_y": 429.41
+        },
+        {
+          "text": "morning!",
+          "x0": 403.27,
+          "y0": 353.91,
+          "x1": 558.41,
+          "y1": 393.91,
+          "width": 155.14,
+          "height": 40.0,
+          "center_x": 480.84,
+          "center_y": 373.91
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "lines": [
+        {
+          "text": "When they are leaving,",
+          "x0": 506.55,
+          "y0": 405.36,
+          "x1": 933.45,
+          "y1": 445.36,
+          "width": 426.89,
+          "height": 40.0,
+          "center_x": 720.0,
+          "center_y": 425.36
+        },
+        {
+          "text": "they say \"bye\", or wave.",
+          "x0": 497.94,
+          "y0": 349.86,
+          "x1": 942.06,
+          "y1": 389.86,
+          "width": 444.12,
+          "height": 40.0,
+          "center_x": 720.0,
+          "center_y": 369.86
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "lines": [
+        {
+          "text": "When they say \"bye\"",
+          "x0": 358.52,
+          "y0": 582.46,
+          "x1": 782.11,
+          "y1": 625.99,
+          "width": 423.6,
+          "height": 43.53,
+          "center_x": 570.32,
+          "center_y": 604.23
+        },
+        {
+          "text": "or way, I should say",
+          "x0": 369.39,
+          "y0": 522.06,
+          "x1": 771.24,
+          "y1": 565.59,
+          "width": 401.85,
+          "height": 43.53,
+          "center_x": 570.32,
+          "center_y": 543.82
+        },
+        {
+          "text": "\"bye\" or wave back",
+          "x0": 378.75,
+          "y0": 461.66,
+          "x1": 761.88,
+          "y1": 505.19,
+          "width": 383.13,
+          "height": 43.53,
+          "center_x": 570.32,
+          "center_y": 483.42
+        }
+      ]
+    },
+    {
+      "page": 8,
+      "lines": [
+        {
+          "text": "I can say ...",
+          "x0": 614.85,
+          "y0": 664.71,
+          "x1": 825.14,
+          "y1": 704.71,
+          "width": 210.29,
+          "height": 40.0,
+          "center_x": 720.0,
+          "center_y": 684.71
+        },
+        {
+          "text": "Goodbye!",
+          "x0": 421.02,
+          "y0": 466.31,
+          "x1": 589.73,
+          "y1": 506.31,
+          "width": 168.71,
+          "height": 40.0,
+          "center_x": 505.38,
+          "center_y": 486.31
+        },
+        {
+          "text": "See you!",
+          "x0": 834.53,
+          "y0": 484.48,
+          "x1": 990.2,
+          "y1": 524.48,
+          "width": 155.67,
+          "height": 40.0,
+          "center_x": 912.36,
+          "center_y": 504.48
+        },
+        {
+          "text": "So long!",
+          "x0": 476.9,
+          "y0": 238.5,
+          "x1": 621.29,
+          "y1": 278.5,
+          "width": 144.38,
+          "height": 40.0,
+          "center_x": 549.09,
+          "center_y": 258.5
+        },
+        {
+          "text": "Later!",
+          "x0": 878.62,
+          "y0": 286.25,
+          "x1": 990.6,
+          "y1": 326.24,
+          "width": 111.98,
+          "height": 40.0,
+          "center_x": 934.61,
+          "center_y": 306.24
+        }
+      ]
+    },
+    {
+      "page": 9,
+      "lines": [
+        {
+          "text": "Now I know how to say “hi” and “goodbye” to people.",
+          "x0": 235.73,
+          "y0": 620.8,
+          "x1": 1204.27,
+          "y1": 660.79,
+          "width": 968.54,
+          "height": 40.0,
+          "center_x": 720.0,
+          "center_y": 640.8
+        }
+      ]
+    }
+  ]
+}

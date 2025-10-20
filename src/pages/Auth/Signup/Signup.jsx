@@ -358,6 +358,7 @@ const Signup = () => {
               size="large"
               fullWidth
               sx={{
+                borderRadius: '50px',
                 width: '50%',
                 backgroundColor: '#f0932b',
                 color: 'white',

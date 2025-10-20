@@ -1,0 +1,226 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "lines": [
+        {
+          "text": "Sometimes I get angry. That's okay.",
+          "x0": 295.68,
+          "y0": 624.67,
+          "x1": 1144.32,
+          "y1": 674.67,
+          "width": 848.65,
+          "height": 50.0,
+          "center_x": 720.0,
+          "center_y": 649.67
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "lines": [
+        {
+          "text": "But I have to",
+          "x0": 767.48,
+          "y0": 566.96,
+          "x1": 1014.86,
+          "y1": 606.95,
+          "width": 247.38,
+          "height": 40.0,
+          "center_x": 891.17,
+          "center_y": 586.95
+        },
+        {
+          "text": "learn how to",
+          "x0": 776.79,
+          "y0": 511.46,
+          "x1": 1005.55,
+          "y1": 551.45,
+          "width": 228.77,
+          "height": 40.0,
+          "center_x": 891.17,
+          "center_y": 531.45
+        },
+        {
+          "text": "control it !",
+          "x0": 793.15,
+          "y0": 455.96,
+          "x1": 989.19,
+          "y1": 495.95,
+          "width": 196.04,
+          "height": 40.0,
+          "center_x": 891.17,
+          "center_y": 475.95
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "lines": [
+        {
+          "text": "When I get too angry, my engine",
+          "x0": 402.22,
+          "y0": 646.35,
+          "x1": 1009.97,
+          "y1": 686.35,
+          "width": 607.75,
+          "height": 40.0,
+          "center_x": 706.1,
+          "center_y": 666.35
+        },
+        {
+          "text": "runs really high !",
+          "x0": 551.72,
+          "y0": 590.85,
+          "x1": 860.48,
+          "y1": 630.85,
+          "width": 308.76,
+          "height": 40.0,
+          "center_x": 706.1,
+          "center_y": 610.85
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "lines": [
+        {
+          "text": "To bring my engine down to be right,",
+          "x0": 385.07,
+          "y0": 664.89,
+          "x1": 1066.32,
+          "y1": 704.88,
+          "width": 681.24,
+          "height": 40.0,
+          "center_x": 725.7,
+          "center_y": 684.88
+        },
+        {
+          "text": "I can ...",
+          "x0": 656.9,
+          "y0": 609.39,
+          "x1": 794.49,
+          "y1": 649.38,
+          "width": 137.58,
+          "height": 40.0,
+          "center_x": 725.69,
+          "center_y": 629.38
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "lines": [
+        {
+          "text": "I can take deep breaths",
+          "x0": 133.8,
+          "y0": 746.67,
+          "x1": 583.68,
+          "y1": 786.66,
+          "width": 449.88,
+          "height": 40.0,
+          "center_x": 358.74,
+          "center_y": 766.67
+        },
+        {
+          "text": "I can count to ten",
+          "x0": 913.74,
+          "y0": 738.98,
+          "x1": 1249.08,
+          "y1": 778.98,
+          "width": 335.34,
+          "height": 40.0,
+          "center_x": 1081.41,
+          "center_y": 758.98
+        },
+        {
+          "text": "I can ask for space",
+          "x0": 179.99,
+          "y0": 342.33,
+          "x1": 537.5,
+          "y1": 382.32,
+          "width": 357.5,
+          "height": 40.0,
+          "center_x": 358.74,
+          "center_y": 362.32
+        },
+        {
+          "text": "I can take a walk",
+          "x0": 923.77,
+          "y0": 340.09,
+          "x1": 1239.05,
+          "y1": 380.08,
+          "width": 315.28,
+          "height": 40.0,
+          "center_x": 1081.41,
+          "center_y": 360.09
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "lines": [
+        {
+          "text": "I can ask for help",
+          "x0": 193.2,
+          "y0": 746.67,
+          "x1": 524.29,
+          "y1": 786.66,
+          "width": 331.08,
+          "height": 40.0,
+          "center_x": 358.74,
+          "center_y": 766.67
+        },
+        {
+          "text": "I can ask for hugs",
+          "x0": 912.25,
+          "y0": 738.98,
+          "x1": 1250.57,
+          "y1": 778.98,
+          "width": 338.33,
+          "height": 40.0,
+          "center_x": 1081.41,
+          "center_y": 758.98
+        },
+        {
+          "text": "I can do what I enjoy",
+          "x0": 158.47,
+          "y0": 342.33,
+          "x1": 559.02,
+          "y1": 382.32,
+          "width": 400.55,
+          "height": 40.0,
+          "center_x": 358.75,
+          "center_y": 362.32
+        },
+        {
+          "text": "I can talk with someone",
+          "x0": 860.73,
+          "y0": 340.09,
+          "x1": 1302.09,
+          "y1": 380.08,
+          "width": 441.36,
+          "height": 40.0,
+          "center_x": 1081.41,
+          "center_y": 360.09
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "lines": [
+        {
+          "text": "I did it ! Now I feel better.",
+          "x0": 398.19,
+          "y0": 630.63,
+          "x1": 1041.81,
+          "y1": 680.63,
+          "width": 643.63,
+          "height": 50.0,
+          "center_x": 720.0,
+          "center_y": 655.63
+        }
+      ]
+    }
+  ]
+}
