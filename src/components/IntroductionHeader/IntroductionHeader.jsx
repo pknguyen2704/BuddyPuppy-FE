@@ -1,8 +1,16 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Button } from '@mui/material'
-import logo from '~/assets/logo.svg'
+import { useNavigate } from 'react-router-dom';
+
 const IntroductionHeader = () => {
+  const navigate = useNavigate()
+  const handleLoginClick = () => {
+    navigate('/login')
+  }
+  const handleSignupClick = () => {
+    navigate('/signup')
+  }
   return (
     <Box sx={{
       display: 'flex',
@@ -26,22 +34,30 @@ const IntroductionHeader = () => {
           }}>BuddyPuppy</Typography>
         </Box>
       </Box>
-      {/* Login, Register */}
+      {/* Login, Signup */}
       <Box sx={{
         display: 'flex', 
         alignItems: 'center',
         gap: 2
         }}>
-          <Button sx={{
-            background: 'white',
-            borderRadius: '50px',
-            width: '100px'
-            }}>Login</Button>
-          <Button sx={{
-            background: 'white',
-            borderRadius: '50px',
-            width: '100px'
-          }}>Register</Button>
+          <Button 
+            sx={{
+              background: 'white',
+              borderRadius: '50px',
+              width: '120px',
+              textTransform: 'uppercase'
+            }}
+            onClick={handleLoginClick} 
+            >Login</Button>
+          <Button 
+            sx={{
+              background: 'white',
+              borderRadius: '50px',
+              width: '120px',
+              textTransform: 'uppercase'
+            }}
+            onClick={handleSignupClick} 
+          >Signup</Button>
       </Box>
     </Box>
   );

@@ -1,9 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import { ProtectedRoute } from "./protectedComponent.jsx"
 // import { Home } from "./components/home/Home"
-// import { LogIn } from "./components/login/LogIn"
-// import { SignUp } from "./components/signup/SignUp"
-import { HomeScreen } from "./components/homescreen/homescreen.jsx"
+import Login from "./pages/Auth/Login/Login.jsx"
+import Signup from "./pages/Auth/Signup/Signup.jsx"
 import Home from "./pages/Home/Home.jsx"
 import SocialStory from "./pages/SocialStory/SocialStory.jsx"
 import Introduction from "./pages/Introduction/Introduction.jsx"
@@ -37,9 +36,9 @@ function App() {
       <Route path="/introduction" element={<Introduction/>} />
       {/* <Route path="/" element={<Navigate to="/" />} /> */}
       {/* <Route path="/introduction" element={<Introduction />} /> */}
-      {/* <Route path="/login" element={<LogIn />} />
-      <Route path="/signup" element={<SignUp />} />
-
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+{/* 
 
       <Route path="/StoryPage" element={
           <StoryPage />
@@ -48,8 +47,9 @@ function App() {
         <ProtectedRoute>
           <Home />
         </ProtectedRoute>
-      } /> */}
-
+      } />
+       */}
+{/* 
       <Route path="/SocialStory1" element={
           <SocialStory1 />
       } />
@@ -143,7 +143,8 @@ function App() {
         <ProtectedRoute>
           <Phase6p3 />
         </ProtectedRoute>
-      } /> */}
+      } />
+       */}
     </Routes>
   )
 }

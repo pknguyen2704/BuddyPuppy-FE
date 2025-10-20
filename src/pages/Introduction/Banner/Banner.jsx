@@ -1,8 +1,12 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import StudyWithBuddyPuppy from '~/assets/Introduction/StudyWithBuddyPuppy.svg';
-
+import { useNavigate } from 'react-router-dom';
 const Banner = () => {
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/login')
+  }
   return (
     <Box
       sx={{
@@ -13,7 +17,7 @@ const Banner = () => {
         alignItems: 'center',
         pt: 10,
         // justifyContent: 'center',
-        minHeight: { xs: '80vh', md: '80vh' },
+        minHeight: { xs: '96vh', md: '96vh' },
         color: '#fff',
         textAlign: 'center',
         px: 2,
@@ -34,7 +38,7 @@ const Banner = () => {
         }}
       >
         <path
-          fill="#ffffff"
+          fill="#fffaf3"
           fillOpacity="1"
           d="M0,160L48,138.7C96,117,192,75,288,80C384,85,480,139,576,165.3C672,192,768,192,864,181.3C960,171,1056,149,1152,122.7C1248,96,1344,64,1392,48L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
         />
@@ -75,6 +79,7 @@ const Banner = () => {
       <Button
         variant="contained"
         size="large"
+        onClick={handleClick}
         sx={{
           zIndex: 2,
         }}

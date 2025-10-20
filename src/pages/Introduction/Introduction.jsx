@@ -16,8 +16,8 @@ const Introduction = () => {
       <Box>
         <Banner />
         <Mission />
-        <OurApproach />
         <OurStory />
+        <OurApproach />
         <OurTeam />
         <Contact />
       </Box>

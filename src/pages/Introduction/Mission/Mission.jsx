@@ -10,7 +10,8 @@ const Mission = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        py: 6,
+        backgroundColor: '#fffaf3',
+        py: 2,
         px: 2,
         gap: 3,
       }}
@@ -44,6 +45,9 @@ const Mission = () => {
           sx={{
             flexBasis: { xs: '100%', md: '60%' },
             p: 2,
+            backgroundColor: 'white',
+            borderRadius: '10px',
+            boxShadow: '0 8px 25px rgba(0,0,0,0.05)',
           }}
         >
           <Typography
@@ -55,7 +59,7 @@ const Mission = () => {
             }}
           >
             <strong>Buddy Puppy</strong> được tạo ra với một sứ mệnh giản dị nhưng đầy ý nghĩa:
-            mang lại cơ hội học tiếng Anh công bằng và nhân văn cho trẻ em rối loạn phổ tự kỷ (RLPTK).
+            mang lại cơ hội học tiếng Anh công bằng và nhân văn cho trẻ em rối loạn phổ tự kỷ.
             <br /><br />
             Chúng tôi tin rằng mỗi bạn trẻ đều có khả năng tỏa sáng nếu được học theo cách phù hợp với mình.
             <strong> Buddy Puppy</strong> không chỉ là một ứng dụng học ngoại ngữ – mà còn là người bạn đồng hành,
