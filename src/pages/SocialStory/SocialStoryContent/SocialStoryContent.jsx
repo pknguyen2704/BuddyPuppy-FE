@@ -1,69 +1,70 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, Typography, IconButton, Container } from '@mui/material';
-import { Document, Page, pdfjs } from 'react-pdf';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowBackIos, ArrowForwardIos, VolumeUp } from '@mui/icons-material';
-import Header from '~/components/Header/Header';
-import Footer from '~/components/Footer/Footer';
-import SideBar from '~/components/SideBar/SideBar';
-
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
-
+import React, { useEffect, useState, useRef } from 'react'
+import { useParams } from 'react-router-dom'
+import { Box, Typography, IconButton, Container } from '@mui/material'
+import { Document, Page, pdfjs } from 'react-pdf'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowBackIos, ArrowForwardIos, VolumeUp } from '@mui/icons-material'
+import Header from '~/components/Header/Header'
+import Footer from '~/components/Footer/Footer'
+import SideBar from '~/components/SideBar/SideBar'
+import {Button} from '@mui/material'
+import 'react-pdf/dist/Page/AnnotationLayer.css'
+import 'react-pdf/dist/Page/TextLayer.css'
+import { useNavigate } from 'react-router-dom'
 // PDF + JSON data
-import pdf1 from '~/assets/SocialStory/SocialStory1/story1.pdf';
-import pdf2 from '~/assets/SocialStory/SocialStory2/story2.pdf';
-import pdf3 from '~/assets/SocialStory/SocialStory3/story3.pdf';
+import pdf1 from '~/assets/SocialStory/SocialStory1/story1.pdf'
+import pdf2 from '~/assets/SocialStory/SocialStory2/story2.pdf'
+import pdf3 from '~/assets/SocialStory/SocialStory3/story3.pdf'
 
-import json1 from '~/assets/SocialStory/SocialStory1/story1.json';
-import json2 from '~/assets/SocialStory/SocialStory2/story2.json';
-import json3 from '~/assets/SocialStory/SocialStory3/story3.json';
+import json1 from '~/assets/SocialStory/SocialStory1/story1.json'
+import json2 from '~/assets/SocialStory/SocialStory2/story2.json'
+import json3 from '~/assets/SocialStory/SocialStory3/story3.json'
 
 const pdfMap = {
   'control-your-anger': { pdf: pdf1, json: json1 },
   'potty-training': { pdf: pdf2, json: json2 },
   'say-hi-and-goodbye': { pdf: pdf3, json: json3 }
-};
+}
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
 
 const SocialStoryContent = () => {
-  const { slug } = useParams();
-  const [pageNumber, setPageNumber] = useState(1);
-  const [numPages, setNumPages] = useState(null);
-  const [pageData, setPageData] = useState([]);
-  const [playingIndex, setPlayingIndex] = useState(null);
-  const containerRef = useRef(null);
+  const { slug } = useParams()
+  const navigate = useNavigate()
+  const [pageNumber, setPageNumber] = useState(1)
+  const [numPages, setNumPages] = useState(null)
+  const [pageData, setPageData] = useState([])
+  const [playingIndex, setPlayingIndex] = useState(null)
+  const containerRef = useRef(null)
 
-  const storyData = pdfMap[slug];
-  const pdfFile = storyData?.pdf;
-  const jsonData = storyData?.json;
+  const storyData = pdfMap[slug]
+  const pdfFile = storyData?.pdf
+  const jsonData = storyData?.json
 
-  const onDocumentLoadSuccess = ({ numPages }) => setNumPages(numPages);
+  const onDocumentLoadSuccess = ({ numPages }) => setNumPages(numPages)
 
   useEffect(() => {
-    if (jsonData) setPageData(jsonData.pages || []);
-    setPageNumber(1);
-  }, [jsonData]);
+    if (jsonData) setPageData(jsonData.pages || [])
+    setPageNumber(1)
+  }, [jsonData])
 
-  const nextPage = () => setPageNumber((p) => Math.min(p + 1, numPages));
-  const prevPage = () => setPageNumber((p) => Math.max(p - 1, 1));
+  const nextPage = () => setPageNumber((p) => Math.min(p + 1, numPages))
+  const prevPage = () => setPageNumber((p) => Math.max(p - 1, 1))
 
   const playAudio = (text, idx) => {
-    setPlayingIndex(idx);
-    console.log(`🎵 Play audio for: ${text}`);
-    // const audio = new Audio(`/audio/${slug}/${pageNumber}/${text}.mp3`);
-    // audio.play();
-    // audio.onended = () => setPlayingIndex(null);
-    setTimeout(() => setPlayingIndex(null), 1500); // demo effect
-  };
+    setPlayingIndex(idx)
+    console.log(`🎵 Play audio for: ${text}`)
+    // const audio = new Audio(`/audio/${slug}/${pageNumber}/${text}.mp3`)
+    // audio.play()
+    // audio.onended = () => setPlayingIndex(null)
+    setTimeout(() => setPlayingIndex(null), 1500) // demo effect
+  }
 
-  const currentPage = pageData.find((p) => p.page === pageNumber);
+  const currentPage = pageData.find((p) => p.page === pageNumber)
 
   // Gốc PDF (16:9)
-  const BASE_WIDTH = 1600;
-  const BASE_HEIGHT = 900;
+  const BASE_WIDTH = 1600
+  const BASE_HEIGHT = 900
 
   return (
     <Container
@@ -166,6 +167,38 @@ const SocialStoryContent = () => {
               </AnimatePresence>
             </Document>
 
+            {/* Hiển thị nút Exam khi đến trang cuối */}
+            {pageNumber === numPages && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 16,
+                  right: 16,
+                  zIndex: 4
+                }}
+              >
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: '#f0932b',
+                    color: 'white',
+                    // backgroundColor: '#22a6b3',
+                    // color: '#fff',
+                    '&:hover': { backgroundColor: '#f0932b', color: 'white'},
+                    boxShadow: 3,
+                    // borderRadius: '8px',
+                    // px: 2,
+                    // py: 1,
+                    // fontSize: '0.9rem',
+                    // textTransform: 'none'
+                  }}
+                  onClick={() => navigate(`/exam/${slug}`)}
+                >
+                  Exam
+                </Button>
+              </Box>
+            )}
+
             {currentPage?.lines?.map((line, idx) => (
               <motion.div
                 key={idx}
@@ -233,7 +266,7 @@ const SocialStoryContent = () => {
 
       <Footer />
     </Container>
-  );
-};
+  )
+}
 
-export default SocialStoryContent;
+export default SocialStoryContent

@@ -1,0 +1,55 @@
+{
+  "questions": [
+    {
+      "question": "Your friend takes your toy without asking.",
+      "meaningQ": "(Bạn của con lấy đồ chơi của con mà không xin phép.)",
+      "A": "Yell and hit your friend.",
+      "B": "Take a deep breath and count to 10.",
+      "C": "Tell your friend calmly, “I don’t like that. Please give it back.”",
+      "meaningA": "(La hét và đánh bạn của con.)",
+      "meaningB": "(Hít một hơi thật sâu và đếm đến 10.)",
+      "meaningC": "(Nói với bạn một cách bình tĩnh: “Tớ không thích điều đó. Làm ơn trả lại cho tớ.”)",
+      "feedbackA": "Hitting hurts people. Let’s try another way to stay calm.",
+      "feedbackB": "Good job! Deep breaths help you stay calm.",
+      "feedbackC": "Well done! Talking calmly makes things better.",
+      "ansA": false,
+      "ansB": true,
+      "ansC": true,
+      "image": "q1s1.png"
+    },
+    {
+      "question": "You lose a game and feel very angry.",
+      "meaningQ": "(Bạn thua một trò chơi và cảm thấy rất tức giận.)",
+      "A": "Throw the game pieces.",
+      "B": "Breathe slowly and relax your hands.",
+      "C": "Say, “I feel angry. Can we play again later?”",
+      "meaningA": "(Ném các quân cờ/trò chơi đi.)",
+      "meaningB": "(Hít thở chậm và thả lỏng tay.)",
+      "meaningC": "(Nói: “Con cảm thấy tức giận. Chúng ta có thể chơi lại sau được không?”)",
+      "feedbackA": "Throwing things is not safe. Let’s choose a better way.",
+      "feedbackB": "Nice work! Breathing helps you feel better.",
+      "feedbackC": "Great choice! Using words is a good way to share your feelings.",
+      "ansA": false,
+      "ansB": true,
+      "ansC": true,
+      "image": "q2s1.png"
+    },
+    {
+      "question": "You feel your body is hot and your fists are tight. What should you do?",
+      "meaningQ": "(Con cảm thấy cơ thể nóng lên và nắm tay thật chặt. Con nên làm gì?)",
+      "A": "Punch the wall.",
+      "B": "Count slowly to ten: 1…2…3…10 and breathe.",
+      "C": "Tell an adult, “I feel angry. I need help.”",
+      "meaningA": "(Đấm vào tường.)",
+      "meaningB": "(Đếm chậm đến mười: 1…2…3…10 và hít thở.)",
+      "meaningC": "(Nói với người lớn: “Con cảm thấy tức giận. Con cần giúp đỡ.”)",
+      "feedbackA": "Punching can hurt you. Let’s try a safer way.",
+      "feedbackB": "Good job! Counting and breathing help your body calm down.",
+      "feedbackC": "Well done! Asking for help is a smart way.",
+      "ansA": false,
+      "ansB": true,
+      "ansC": true,
+      "image": "q3s1.png"
+    }
+  ]
+}

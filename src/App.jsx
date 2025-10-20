@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home.jsx"
 import SocialStory from "./pages/SocialStory/SocialStory.jsx"
 import Introduction from "./pages/Introduction/Introduction.jsx"
 import SocialStoryContent from "./pages/SocialStory/SocialStoryContent/SocialStoryContent.jsx"
+import StoryQuestion from "./pages/SocialStory/StoryQuestion/StoryQuestion.jsx"
 // import { StoryPage } from "./components/SocialStory/StoryPage.jsx"
 // import { SocialStory1 } from './components/SocialStory/Story1/SocialStory1'
 // import { Questions1 } from "./components/SocialStory/Story1/Question1.jsx"
@@ -36,6 +37,7 @@ function App() {
       <Route path="/introduction" element={<Introduction/>} />
       <Route path="/social-story" element={<SocialStory />} />
       <Route path="/social-story/:slug" element={<SocialStoryContent />} />
+      <Route path="/exam/:slug" element={<StoryQuestion/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 {/* 

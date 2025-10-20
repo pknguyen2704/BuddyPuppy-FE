@@ -4,11 +4,11 @@ import { Typography } from '@mui/material';
 import { Container, Box } from '@mui/material';
 import Footer from '~/components/Footer/Footer';
 import SideBar from '~/components/SideBar/SideBar';
-import StoryCard from './SocialStoryContent/StoryCard/StoryCard';
+import StoryCard from './StoryCard/StoryCard';
 
-import story1 from '~/assets/SocialStory1/story1.png';
-import story2 from '~/assets/SocialStory2/story2.png';
-import story3 from '~/assets/SocialStory3/story3.png';
+import story1 from '~/assets/SocialStory/SocialStory1/story1.png';
+import story2 from '~/assets/SocialStory/SocialStory2/story2.png';
+import story3 from '~/assets/SocialStory/SocialStory3/story3.png';
 
 const SocialStory = () => {
   const stories = [

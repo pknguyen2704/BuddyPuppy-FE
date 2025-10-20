@@ -8,7 +8,7 @@ import q1s3 from "~/assets/SocialStory3/q1s3.png"
 import q2s3 from "~/assets/SocialStory3/q2s3.png"
 import q3s3 from "~/assets/SocialStory3/q3s3.png"
 import "../Story1/Question1.css"
-import { ConfettiEffect } from "../Confetti";
+import { ConfettiEffect } from "../../Confetti";
 export const Questions3 = () => {
     const [index, setIndex] = useState(0);
     const [grade, setGrade] = useState(0);
