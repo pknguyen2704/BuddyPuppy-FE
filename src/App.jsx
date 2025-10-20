@@ -37,9 +37,7 @@ function App() {
 
 
       <Route path="/StoryPage" element={
-        <ProtectedRoute>
           <StoryPage />
-        </ProtectedRoute>
       } />
 
 
@@ -50,9 +48,7 @@ function App() {
       } />
 
       <Route path="/SocialStory1" element={
-        <ProtectedRoute>
           <SocialStory1 />
-        </ProtectedRoute>
       } />
       <Route path="/questionsStory1" element={
         <ProtectedRoute>
