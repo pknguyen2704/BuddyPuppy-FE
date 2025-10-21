@@ -5,12 +5,15 @@ import { Container, Box } from '@mui/material';
 import Footer from '~/components/Footer/Footer';
 import SideBar from '~/components/SideBar/SideBar';
 import StoryCard from './StoryCard/StoryCard';
-
+import { useState } from 'react';
 import story1 from '~/assets/SocialStory/SocialStory1/story1.png';
 import story2 from '~/assets/SocialStory/SocialStory2/story2.png';
 import story3 from '~/assets/SocialStory/SocialStory3/story3.png';
 
 const SocialStory = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const stories = [
     { 
       id: 1,
@@ -37,7 +40,7 @@ const SocialStory = () => {
 
   return (
     <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
-      <Header />
+      <Header onMenuClick={toggleSidebar} />
       <Box
         sx={{
           display: 'flex',
@@ -47,10 +50,12 @@ const SocialStory = () => {
       >
         <Box
           sx={{
-            width: '10%',
+            width: isSidebarOpen ? { xs: '200px', md: '250px' } : 0,
+            // minWidth: isSidebarOpen ? '200px' : 0,
             borderRight: '1px solid #e0e0e0',
-            flexShrink: 0,
-            minWidth: '240px'
+            overflow: 'hidden',
+            transition: 'width 0.3s ease, opacity 0.3s ease',
+            opacity: isSidebarOpen ? 1 : 0,
           }}
         >
           <SideBar />
@@ -58,7 +63,7 @@ const SocialStory = () => {
 
         <Box
           sx={{
-            width: '90%',
+            flexGrow: 1,
             backgroundColor: '#f5f6fa',
           }}
         >
