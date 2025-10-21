@@ -37,7 +37,7 @@ const Login = () => {
     try {
       const response = await login(username, password);
       toast.success("Login successful!");
-      navigate("/homescreen");
+      navigate("/home");
     } catch (error) {
       console.error("Login failed:", error);
       if (error.response?.data?.message) {

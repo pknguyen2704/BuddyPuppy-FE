@@ -1,70 +1,112 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
-import { Box, Typography, IconButton, Container } from '@mui/material'
-import { Document, Page, pdfjs } from 'react-pdf'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowBackIos, ArrowForwardIos, VolumeUp } from '@mui/icons-material'
-import Header from '~/components/Header/Header'
-import Footer from '~/components/Footer/Footer'
-import SideBar from '~/components/SideBar/SideBar'
-import {Button} from '@mui/material'
-import 'react-pdf/dist/Page/AnnotationLayer.css'
-import 'react-pdf/dist/Page/TextLayer.css'
-import { useNavigate } from 'react-router-dom'
-// PDF + JSON data
-import pdf1 from '~/assets/SocialStory/SocialStory1/story1.pdf'
-import pdf2 from '~/assets/SocialStory/SocialStory2/story2.pdf'
-import pdf3 from '~/assets/SocialStory/SocialStory3/story3.pdf'
+// src/pages/SocialStory/SocialStoryContent.jsx
+import React, { useEffect, useState, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Box, Typography, IconButton, Container, Button } from '@mui/material';
+import { Document, Page, pdfjs } from 'react-pdf';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowBackIos, ArrowForwardIos, VolumeUp } from '@mui/icons-material';
 
-import json1 from '~/assets/SocialStory/SocialStory1/story1.json'
-import json2 from '~/assets/SocialStory/SocialStory2/story2.json'
-import json3 from '~/assets/SocialStory/SocialStory3/story3.json'
+import Header from '~/components/Header/Header';
+import Footer from '~/components/Footer/Footer';
+import SideBar from '~/components/SideBar/SideBar';
+import { selectActiveSocialStories } from '~/redux/slices/activeSocialStoriesSlice';
+import { ttsFunction } from '~/service/ttsService'; // 🔥 import service TTS
 
-const pdfMap = {
-  'control-your-anger': { pdf: pdf1, json: json1 },
-  'potty-training': { pdf: pdf2, json: json2 },
-  'say-hi-and-goodbye': { pdf: pdf3, json: json3 }
-}
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const SocialStoryContent = () => {
-  const { slug } = useParams()
-  const navigate = useNavigate()
-  const [pageNumber, setPageNumber] = useState(1)
-  const [numPages, setNumPages] = useState(null)
-  const [pageData, setPageData] = useState([])
-  const [playingIndex, setPlayingIndex] = useState(null)
-  const containerRef = useRef(null)
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const containerRef = useRef(null);
+  const audioRef = useRef(null); // 🎧 lưu audio hiện tại
 
-  const storyData = pdfMap[slug]
-  const pdfFile = storyData?.pdf
-  const jsonData = storyData?.json
+  const stories = useSelector(selectActiveSocialStories);
+  const story = stories.find((s) => s.slug === slug);
 
-  const onDocumentLoadSuccess = ({ numPages }) => setNumPages(numPages)
+  const [pageNumber, setPageNumber] = useState(1);
+  const [numPages, setNumPages] = useState(null);
+  const [pageData, setPageData] = useState([]);
+  const [playingIndex, setPlayingIndex] = useState(null);
 
-  useEffect(() => {
-    if (jsonData) setPageData(jsonData.pages || [])
-    setPageNumber(1)
-  }, [jsonData])
-
-  const nextPage = () => setPageNumber((p) => Math.min(p + 1, numPages))
-  const prevPage = () => setPageNumber((p) => Math.max(p - 1, 1))
-
-  const playAudio = (text, idx) => {
-    setPlayingIndex(idx)
-    console.log(`🎵 Play audio for: ${text}`)
-    // const audio = new Audio(`/audio/${slug}/${pageNumber}/${text}.mp3`)
-    // audio.play()
-    // audio.onended = () => setPlayingIndex(null)
-    setTimeout(() => setPlayingIndex(null), 1500) // demo effect
+  if (!story) {
+    return (
+      <Container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh'
+        }}
+      >
+        <Typography variant="h6">Loading story...</Typography>
+      </Container>
+    );
   }
 
-  const currentPage = pageData.find((p) => p.page === pageNumber)
+  const { title, pdf, ['text-index']: textIndexUrl } = story;
 
-  // Gốc PDF (16:9)
-  const BASE_WIDTH = 1600
-  const BASE_HEIGHT = 900
+  const onDocumentLoadSuccess = ({ numPages }) => setNumPages(numPages);
+
+  // 🧠 Load JSON text-index
+  useEffect(() => {
+    const fetchJson = async () => {
+      if (textIndexUrl) {
+        try {
+          const res = await fetch(textIndexUrl);
+          const json = await res.json();
+          setPageData(json.pages || []);
+        } catch (err) {
+          console.error('❌ Lỗi tải JSON text-index:', err);
+        }
+      }
+    };
+    fetchJson();
+  }, [textIndexUrl]);
+
+  const nextPage = () => setPageNumber((p) => Math.min(p + 1, numPages));
+  const prevPage = () => setPageNumber((p) => Math.max(p - 1, 1));
+
+  // 🎧 Hàm phát âm thanh thật sự
+  const playAudio = async (text, idx) => {
+    try {
+      setPlayingIndex(idx);
+      console.log(`🎵 Đang tạo âm thanh cho: ${text}`);
+
+      // 🗣️ Gọi API backend TTS
+      const audioBuffer = await ttsFunction({ text });
+
+      // 🔊 Tạo blob từ buffer và phát
+      const blob = new Blob([audioBuffer], { type: 'audio/mpeg' });
+      const audioUrl = URL.createObjectURL(blob);
+
+      // Nếu đang phát âm thanh cũ → dừng lại
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
+
+      audio.play();
+
+      audio.onended = () => {
+        setPlayingIndex(null);
+        URL.revokeObjectURL(audioUrl);
+      };
+    } catch (err) {
+      console.error('❌ Lỗi phát âm thanh:', err);
+      setPlayingIndex(null);
+    }
+  };
+
+  const currentPage = pageData.find((p) => p.page === pageNumber);
+  const BASE_WIDTH = 1600;
+  const BASE_HEIGHT = 900;
 
   return (
     <Container
@@ -101,11 +143,8 @@ const SocialStoryContent = () => {
             py: 4
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{ mb: 2, fontWeight: 'bold', textTransform: 'capitalize' }}
-          >
-            {slug.replace(/-/g, ' ')}
+          <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold', textTransform: 'capitalize' }}>
+            {title}
           </Typography>
 
           <Box
@@ -124,7 +163,7 @@ const SocialStoryContent = () => {
               alignItems: 'center'
             }}
           >
-            {/* Nút Prev */}
+            {/* Prev */}
             <IconButton
               onClick={prevPage}
               disabled={pageNumber <= 1}
@@ -140,8 +179,8 @@ const SocialStoryContent = () => {
               <ArrowBackIos />
             </IconButton>
 
-            {/* PDF Viewer */}
-            <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
+            {/* PDF */}
+            <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={pageNumber}
@@ -167,30 +206,16 @@ const SocialStoryContent = () => {
               </AnimatePresence>
             </Document>
 
-            {/* Hiển thị nút Exam khi đến trang cuối */}
+            {/* Nút Exam */}
             {pageNumber === numPages && (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: 16,
-                  right: 16,
-                  zIndex: 4
-                }}
-              >
+              <Box sx={{ position: 'absolute', top: 16, right: 16, zIndex: 4 }}>
                 <Button
                   variant="contained"
                   sx={{
                     backgroundColor: '#f0932b',
                     color: 'white',
-                    // backgroundColor: '#22a6b3',
-                    // color: '#fff',
-                    '&:hover': { backgroundColor: '#f0932b', color: 'white'},
-                    boxShadow: 3,
-                    // borderRadius: '8px',
-                    // px: 2,
-                    // py: 1,
-                    // fontSize: '0.9rem',
-                    // textTransform: 'none'
+                    '&:hover': { backgroundColor: '#f0932b', color: 'white' },
+                    boxShadow: 3
                   }}
                   onClick={() => navigate(`/exam/${slug}`)}
                 >
@@ -199,6 +224,7 @@ const SocialStoryContent = () => {
               </Box>
             )}
 
+            {/* 🔊 Icon âm thanh */}
             {currentPage?.lines?.map((line, idx) => (
               <motion.div
                 key={idx}
@@ -228,7 +254,7 @@ const SocialStoryContent = () => {
               </motion.div>
             ))}
 
-            {/* Nút Next */}
+            {/* Next */}
             <IconButton
               onClick={nextPage}
               disabled={pageNumber >= numPages}
@@ -266,7 +292,7 @@ const SocialStoryContent = () => {
 
       <Footer />
     </Container>
-  )
-}
+  );
+};
 
-export default SocialStoryContent
+export default SocialStoryContent;

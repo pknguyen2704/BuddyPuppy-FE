@@ -7,9 +7,9 @@ function SocialStory() {
   const navigate = useNavigate()
   const location = useLocation()
   const handleClick = () => {
-    navigate('/social-story')
+    navigate('/social-stories')
   }
-  const isActive = location.pathname === '/social-story'
+  const isActive = location.pathname === '/social-stories'
   return (
     <Box sx={{
       display: 'flex',

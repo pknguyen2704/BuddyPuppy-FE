@@ -1,57 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSocialStories } from '~/redux/slices/activeSocialStoriesSlice';
 import Header from '~/components/Header/Header';
-import { Typography } from '@mui/material';
-import { Container, Box } from '@mui/material';
 import Footer from '~/components/Footer/Footer';
 import SideBar from '~/components/SideBar/SideBar';
 import StoryCard from './StoryCard/StoryCard';
-import { useState } from 'react';
-import story1 from '~/assets/SocialStory/SocialStory1/story1.png';
-import story2 from '~/assets/SocialStory/SocialStory2/story2.png';
-import story3 from '~/assets/SocialStory/SocialStory3/story3.png';
+import { Container, Box, Typography, CircularProgress } from '@mui/material';
 
 const SocialStory = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  const stories = [
-    { 
-      id: 1,
-      title: 'Control Your Anger',
-      description: 'Learn how to stay calm and control your anger in tough situations.',
-      image: story1,
-      slug: 'control-your-anger'
-    },
-    {
-      id: 2,
-      title: 'Potty training',
-      description: 'Discover how kindness can make a difference in your life and others.',
-      image: story2,
-      slug: 'potty-training'
-    },
-    {
-      id: 3,
-      title: 'Say hi and goodbye',
-      description: 'Understand the importance of sharing and caring for friends.',
-      image: story3,
-      slug: 'say-hi-and-goodbye'
+  const dispatch = useDispatch();
+  const { stories, status, error } = useSelector((state) => state.activeSocialStories);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchSocialStories());
     }
-  ];
+  }, [status, dispatch]);
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
+    <Container disableGutters maxWidth={false} sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Header */}
       <Header onMenuClick={toggleSidebar} />
+
+      {/* Main content */}
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'row',
-          height: (theme) => theme.BuddyPuppy.appContentHeight,
+          flex: 1,
+          minHeight: (theme) => theme.BuddyPuppy.appContentHeight,
         }}
       >
+        {/* Sidebar */}
         <Box
           sx={{
             width: isSidebarOpen ? { xs: '200px', md: '250px' } : 0,
-            // minWidth: isSidebarOpen ? '200px' : 0,
             borderRight: '1px solid #e0e0e0',
             overflow: 'hidden',
             transition: 'width 0.3s ease, opacity 0.3s ease',
@@ -61,64 +46,84 @@ const SocialStory = () => {
           <SideBar />
         </Box>
 
+        {/* Content Area */}
         <Box
           sx={{
             flexGrow: 1,
             backgroundColor: '#f5f6fa',
+            p: { xs: 2, md: 5 },
+            overflowY: 'auto',
           }}
         >
+          {/* Title Section */}
           <Box
             sx={{
+              width: '100%',
               display: 'flex',
               flexDirection: 'column',
-              py: 2,
-              px: 10,
+              borderBottom: '1px solid #e0e0e0',
+              mb: 3,
             }}
           >
-            {/* Header section */}
-            <Box
+            <Typography
+              variant="h5"
               sx={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 2,
-                borderBottom: '1px solid #e0e0e0',
-                py: 2
+                fontWeight: 'bold',
+                fontFamily: 'Montserrat, sans-serif',
+                mb: 0.5,
               }}
             >
-              <Box>
-                <Typography
-                  variant="h6"
-                  component="h1"
-                  sx={{
-                    fontWeight: 'bold',
-                    fontFamily: 'Montserrat, sans-serif',
-                  }}
-                >
-                  Social Story
-                </Typography>
-                <Typography variant="body2">
-                  Reading this
-                </Typography>
-              </Box>
-            </Box>
+              Social Story
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Discover fun and meaningful stories
+            </Typography>
+          </Box>
 
-            {/* Story cards */}
+          {/* Loading State */}
+          {status === 'loading' && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
+              <CircularProgress />
+            </Box>
+          )}
+
+          {/* Error State */}
+          {status === 'failed' && (
+            <Typography color="error" sx={{ textAlign: 'center', mt: 4 }}>
+              {typeof error === 'string' ? error : error?.message || 'Đã có lỗi xảy ra khi tải dữ liệu'}
+            </Typography>
+          )}
+
+          {/* Story Cards */}
+          {status === 'succeeded' && stories.length > 0 && (
             <Box
               sx={{
-                mt: 2,
-                display: 'flex',
-                gap: 2,
-                flexWrap: 'wrap',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+                gap: 3,
+                alignItems: 'stretch', // 🔥 các card cao bằng nhau
               }}
             >
               {stories.map((story) => (
-                <StoryCard key={story.id} story={story} />
+                <StoryCard key={story._id || story.id} story={story} />
               ))}
             </Box>
-          </Box>
+          )}
+
+          {/* Empty State */}
+          {status === 'succeeded' && stories.length === 0 && (
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{ textAlign: 'center', mt: 5 }}
+            >
+              Không có story nào được tìm thấy.
+            </Typography>
+          )}
         </Box>
       </Box>
+
+      {/* Footer */}
       <Footer />
     </Container>
   );

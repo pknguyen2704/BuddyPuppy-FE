@@ -25,11 +25,15 @@ import StoryQuestion from "./pages/SocialStory/StoryQuestion/StoryQuestion.jsx"
 function App() {
   return (
     <Routes>
-      <Route path="/home" element={<Home/>}/>
       <Route path="/" element={<Navigate to="/introduction"/>} />
+      <Route path="/home" element={
+        <ProtectedRoute>
+          <Home/>
+        </ProtectedRoute>
+      }/>
       <Route path="/introduction" element={<Introduction/>} />
-      <Route path="/social-story" element={<SocialStory />} />
-      <Route path="/social-story/:slug" element={<SocialStoryContent />} />
+      <Route path="/social-stories" element={<SocialStory />} />
+      <Route path="/social-stories/:slug" element={<SocialStoryContent />} />
       <Route path="/exam/:slug" element={<StoryQuestion/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
